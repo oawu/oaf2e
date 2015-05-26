@@ -1,5 +1,5 @@
 === commit
-git add -A && git commit -m 'Fix html code.' && git push master
+git add -A && git commit -m 'Fix html code.' && git push origin master
 
 === no npm installed
 
