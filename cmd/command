@@ -1,3 +1,6 @@
+=== commit
+git add -A && git commit -m 'Fix html code.' && git push master
+
 === no npm installed
 
 Push gh-pages(first)
