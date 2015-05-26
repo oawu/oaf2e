@@ -18,7 +18,7 @@ OA 個人常用的前端工具總集合！
 
 * 作品名稱 - OA's F2E Framework
 
-* 最新版本 - 1.0.1
+* 最新版本 - 1.2
 
 * GitHub - [OA's F2E Framework](https://github.com/comdan66/f2e/)
 
