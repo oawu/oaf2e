@@ -26,23 +26,9 @@ gulp.task ('reload', function () {
 // ===================================================
 
 gulp.task ('minify', function () {
-  console.info ('\n== Start minify.. =================================================\n');
-
-  console.info ('\n== Run js-uglify.. ================================================\n');
   gulp.run ('js-uglify');
-
-  console.info ('\n== Run minify-html.. ==============================================\n');
   gulp.run ('minify-html');
-
-  console.info ('\n== Run image-min.. ================================================\n');
   gulp.run ('image-min');
-
-  console.info ('\n== Finish minify! =================================================\n');
-});
-gulp.task ('gh-pages', function () {
-  console.info ('\n== Start gh-pages.. ===============================================\n');
-  del (['./root']);
-  console.info ('\n== Finish gh-pages! ===============================================\n');
 });
 gulp.task ('js-uglify', function () {
   gulp.src ('./root/js/**/*.js')
@@ -62,4 +48,10 @@ gulp.task ('image-min', function () {
         use: [pngquant ()]
       }))
       .pipe(gulp.dest ('./root/img/'));
+});
+
+// ===================================================
+
+gulp.task ('gh-pages', function () {
+  del (['./root']);
 });
