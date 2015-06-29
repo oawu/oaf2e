@@ -11,7 +11,6 @@
     "gulp-html-minifier": "^0.1.6",
     "del": "^0.1.0",
     "gulp-imagemin": "^2.2.1",
-    "imagemin-pngquant": "^4.1.0",
-    // "imagemin-jpegtran": "^4.1.0"
+    "imagemin-pngquant": "^4.1.0"
   }
 }
