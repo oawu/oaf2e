@@ -12,7 +12,6 @@
 @import "functions/_oa-textarea";
 @import "functions/_oa-paper";
 @import "functions/_oa-checkbox";
-@import "functions/_oa-icon";
 
 @mixin font-smoothing ($val: antialiased) {
   -moz-osx-font-smoothing: $val;
