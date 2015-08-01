@@ -20,6 +20,6 @@ OA 個人常用的前端工具總集合！
 
 * 最新版本 - 1.2
 
-* GitHub - [OA's F2E Framework](https://github.com/comdan66/f2e/)
+* GitHub - [OA's F2E Framework](https://github.com/comdan66/oaf2e/)
 
 * 更新日期 - 2015/05/26
