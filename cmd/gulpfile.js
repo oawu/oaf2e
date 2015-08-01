@@ -2,8 +2,6 @@ var gulp       = require ('gulp'),
     livereload = require('gulp-livereload'),
     uglifyJS   = require ('gulp-uglify'),
     htmlmin    = require('gulp-html-minifier'),
-    imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant'),
     del        = require('del');
 
 // ===================================================
@@ -28,7 +26,6 @@ gulp.task ('reload', function () {
 gulp.task ('minify', function () {
   gulp.run ('js-uglify');
   gulp.run ('minify-html');
-  gulp.run ('image-min');
 });
 gulp.task ('js-uglify', function () {
   gulp.src ('./root/js/**/*.js')
@@ -39,15 +36,6 @@ gulp.task ('minify-html', function () {
   gulp.src ('./root/*.html')
       .pipe (htmlmin ({collapseWhitespace: true}))
       .pipe (gulp.dest ('./root/'));
-});
-gulp.task ('image-min', function () {
-  gulp.src ('./root/img/**/*.+(png|jpg|gif)')
-      .pipe (imagemin ({
-        progressive: true,
-        svgoPlugins: [{removeViewBox: false}],
-        use: [pngquant ()]
-      }))
-      .pipe(gulp.dest ('./root/img/'));
 });
 
 // ===================================================
