@@ -243,6 +243,7 @@
           padding-left: $bodyCellPadding + $titleWidth;
           word-break: break-all;
           width: 100%;
+          min-height: 30px;
 
           &:not(:last-child) {
             border-bottom: 0;
