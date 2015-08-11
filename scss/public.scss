@@ -5,7 +5,7 @@
 
 @import "_oa";
 
-@include font-face("Monaco", font-files("/resource/font/monaco/monaco.ttf", "/resource/font/monaco/monaco.otf"));
+@include font-face("Monaco", font-files("monaco/monaco.ttf", "monaco/monaco.otf"));
 // @include font-face("icomoon", font-files("icomoon/icomoon.eot", "icomoon/icomoon.woff", "icomoon/icomoon.ttf", "icomoon/icomoon.svg"));
 // [class^="icon-"], [class*=" icon-"] {
 //   font-family: 'icomoon';
