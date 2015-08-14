@@ -44,7 +44,7 @@ html {
     color: rgba(50, 50, 50, 0.8);
 
     @include font-smoothing(antialiased);
-    
+
     #container {
       position: relative;
       display: block;
@@ -56,6 +56,120 @@ html {
       @media screen and (min-width: #{$mainWidth}) {
         padding: 0;
       }
+    }
+  }
+}
+
+$count: 60;
+$radius: 300px;
+$wh: 20px;
+$bwh: 40px;
+$swh: 50px;
+
+$btns: (
+  'red':  (244, 67, 54, 1),
+  'pink':  (233, 30, 99, 1),
+  'orange': (255, 152, 0),
+  'deep-orange': (255, 87, 34),
+  'yellow': (255, 235, 59),
+  'amber': (255, 193, 7),
+  'light-green': (139, 195, 74),
+  'green': (76, 175, 80),
+  'lime': (205, 220, 57),
+  'teal': (0, 150, 136),
+  'blue': (33, 150, 243),
+  'light-blue': (3, 169, 244),
+  'cyan': (0, 188, 212),
+  'indigo': (63, 81, 181),
+  'purple': (156, 39, 176),
+  'deep-purple': (103, 58, 183),
+  'brown': (121, 85, 72),
+  'gray': (158, 158, 158),
+  'blue-gray': (96, 125, 139),
+  'white': (200, 200, 200)
+) !global;
+
+.boxs {
+  position: fixed;
+  bottom: 50%;
+  right: 50%;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  @include clearfix();
+  @include border-radius(50%);
+  border: 1px solid rgba(255, 0, 0, .3);
+  background-color: white;
+
+  // &:hover {
+
+  //   .box {
+  //     @for $i from 1 through 20 {
+  //       @debug sin(90deg * $i);
+  //       &:nth-child(#{$i}) {
+  //         top: calc(50% + #{sin(360deg / 8 * $i) * 80px} - 25px);
+  //         left: calc(50% + #{cos(360deg / 8 * $i) * 80px} - 25px);
+  //       }
+  //     }
+  //   }
+  // }
+
+  &:after, .box {
+    position: absolute;
+    display: inline-block;
+    @include transition(all .5s cubic-bezier(0.375, -0.600, 0.000, 1.520));
+    @include border-radius(50%);
+
+
+    @for $i from 1 through 60 {
+      &:nth-child(#{$i}) {
+        @if($i % 5 == 1) {
+          width: $bwh;
+          height: $bwh;
+          top: calc(50% + #{0 - cos(360deg / $count * ($i - 1)) * $radius - $bwh / 2});
+          left: calc(50% + #{sin(360deg / $count * ($i - 1)) * $radius - $bwh / 2});
+          font-size: 15px;
+          line-height: $bwh - 2px;
+        } @else {
+          width: $wh;
+          height: $wh;
+          top: calc(50% + #{0 - cos(360deg / $count * ($i - 1)) * $radius - $wh / 2});
+          left: calc(50% + #{sin(360deg / $count * ($i - 1)) * $radius - $wh / 2});
+          font-size: 10px;
+          line-height: $wh - 2px;
+        }
+
+        $name: nth($btns, $i % 20 + 1);
+        $value: nth($name, 2);
+        @if($value){
+          background: rgba(nth($value, 1), nth($value, 2), nth($value, 3), .2);
+          border: 1px solid rgba(nth($value, 1), nth($value, 2), nth($value, 3), .5);
+          &:hover {
+            background: rgba(nth($value, 1) - 10, nth($value, 2) - 10,nth($value, 3) - 10, 1);
+          }
+        }
+      }
+    }
+  }
+  &:after {
+    width: $swh;
+    height: $swh;
+    top: calc(50% - #{cos(360deg / $count * (1 - 1)) * $radius + $swh / 2});
+    left: calc(50% - #{sin(360deg / $count * (1 - 1)) * $radius + $swh / 2});
+    font-size: 10px;
+    line-height: $swh - 2px;
+    border: 5px solid rgba(39, 40, 34, .4);
+
+    background-color: rgba(39, 40, 34, .1);
+    @include animation (run 60s infinite);
+  }
+}
+
+@include keyframes(run) {
+  @for $i from 1 through 60 {
+    #{(100 / 60) * ($i - 1)}% {
+      top: calc(50% + #{0 - cos(360deg / $count * ($i - 1)) * $radius - $swh / 2});
+      left: calc(50% + #{sin(360deg / $count * ($i - 1)) * $radius - $swh / 2});
     }
   }
 }
