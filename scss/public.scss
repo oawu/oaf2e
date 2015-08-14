@@ -94,11 +94,10 @@ $btns: (
   bottom: 50%;
   right: 50%;
   display: inline-block;
-  width: 100px;
-  height: 100px;
+  width: 0;
+  height: 0;
   @include clearfix();
   @include border-radius(50%);
-  border: 1px solid rgba(255, 0, 0, .3);
   background-color: white;
 
   // &:hover {
