@@ -9,7 +9,7 @@
   color: $color;
   font-weight: normal;
   text-decoration: none;
-  padding: 2px;
+  padding: 0 2px;
   padding-bottom: $underLineHeight;
   @include transition(all .3s);
 
