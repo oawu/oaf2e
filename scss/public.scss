@@ -145,7 +145,7 @@ html {
 }
 #direction_panel {
   position: absolute;
-  right: 0;
+  right: -250px;
   top: 0;
   display: inline-block;
   width: 250px;
@@ -155,9 +155,12 @@ html {
   background-color: rgba(255, 255, 255, .85);
   overflow: auto;
   text-align: left;
-
   padding: 5px;
-
+  @include transition(all .3s);
+  
+  &.s {
+    right: 0;
+  }
   .adp-summary {
     font-weight: bold;
     background-color: rgba(255, 239, 239, 1);

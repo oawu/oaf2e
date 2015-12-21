@@ -43,6 +43,8 @@ console.error ($travelMode.filter (':checked').val ());
     for (var i = 0; i < myroute.legs.length; i++)
       time += myroute.legs[i].duration.text;
     $summary.text ('總時間約：' + time);
+
+    if (!$directionPanel.hasClass ('s')) $directionPanel.addClass ('s');
   }
   function initialize () {
     _map = new google.maps.Map ($map.get (0), {
@@ -72,7 +74,7 @@ console.error ($travelMode.filter (':checked').val ());
     });
 
     google.maps.event.addListener(_directionsDisplay, 'directions_changed', function() {
-      computeTotalDistance(_directionsDisplay.directions);
+      computeTotalDistance (_directionsDisplay.directions);
     });
     _trafficLayer = new google.maps.TrafficLayer ();
     // 
