@@ -11,32 +11,32 @@
 
     <meta name="author" content="吳政賢(OA Wu)" />
 
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
-
-    <meta property="fb:admins" content="100000100541088" />
-    <meta property="fb:app_id" content="640377126095413" />
-
-    <meta property="og:locale" content="zh_TW" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta property="og:type" content="city" />
-    <meta property="og:image" content="" alt="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
     <link href="css/public.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&language=zh-TW" language="javascript" type="text/javascript" ></script>
     <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
     <script src="js/public.js" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw">
 
+    <div class='map'>
+      <i></i><i></i><i></i><i></i>
+      <div id='map'></div>
+      <div id='control'>
+        <input type='text' id='form' placeholder='起始點..' value='台南火車站' />
+        <input type='text' id='to' placeholder='目的地..' value='701台南市東區大學路22巷16-1號' />
+        <div class='travelMode'>
+          <div><input type='radio' id='driving' name='travel_mode' value='DRIVING' checked><span></span><label for='driving'>開車</label></div>
+          <div><input type='radio' id='transit' name='travel_mode' value='TRANSIT'><span></span><label for='transit'>大眾運輸</label></div>
+          <div><input type='radio' id='walking' name='travel_mode' value='WALKING'><span></span><label for='walking'>走路</label></div>
+        </div>
+        <div class='summary'>
+          <div id='summary'></div>
+          <button type='button' id='direction'>規劃</button>
+        </div>
+      </div>
+      <div id='direction_panel'></div>
+    </div>
   </body>
 </html>
