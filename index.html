@@ -26,11 +26,15 @@
       <div id='control'>
         <input type='text' id='form' placeholder='起始點..' value='台南火車站' />
         <input type='text' id='to' placeholder='目的地..' value='701台南市東區大學路22巷16-1號' />
-        <div class='travelMode'>
-          <div><input type='radio' id='driving' name='travel_mode' value='DRIVING' checked><span></span><label for='driving'>開車</label></div>
-          <div><input type='radio' id='transit' name='travel_mode' value='TRANSIT'><span></span><label for='transit'>大眾運輸</label></div>
-          <div><input type='radio' id='walking' name='travel_mode' value='WALKING'><span></span><label for='walking'>走路</label></div>
+        <div class='group'>
+          <div r><input type='radio' id='driving' name='travel_mode' value='DRIVING' checked><span></span><label for='driving'>開車</label></div>
+          <div r><input type='radio' id='transit' name='travel_mode' value='TRANSIT'><span></span><label for='transit'>大眾運輸</label></div>
+          <div r><input type='radio' id='walking' name='travel_mode' value='WALKING'><span></span><label for='walking'>走路</label></div>
         </div>
+        <div class='group'>
+          <div s><input type='checkbox' id='switch'><span></span><label for='switch'> 交通狀況(關閉)</label></div>
+        </div>
+
         <div class='summary'>
           <div id='summary'></div>
           <button type='button' id='direction'>規劃</button>

@@ -6,17 +6,20 @@
 $(function () {
 
   var $map = $('#map');
+  var $switch = $('#switch');
   var $summary = $('#summary');
   var $direction = $('#direction');
   var $directionPanel = $('#direction_panel');
   var $travelMode = $('input[type="radio"][name="travel_mode"]');
   var _map = null;
+  var _trafficLayer = null;
   var _directionsDisplay = null;
 
   function calcRoute () {
     var start = $('#form').val ();
     var end = $('#to').val ();
-    console.error ($travelMode.filter (':checked').val ());
+    
+console.error ($travelMode.filter (':checked').val ());
     
     var request = {
       origin: start,
@@ -71,11 +74,20 @@ $(function () {
     google.maps.event.addListener(_directionsDisplay, 'directions_changed', function() {
       computeTotalDistance(_directionsDisplay.directions);
     });
-    // var trafficLayer = new google.maps.TrafficLayer ();
-    // trafficLayer.setMap (_map);
+    _trafficLayer = new google.maps.TrafficLayer ();
+    // 
 
     $direction.click (calcRoute);
     $travelMode.change (calcRoute);
+    $switch.change (function () {
+      if ($(this).prop ('checked') === true) {
+        $(this).nextAll ('label').text ('交通狀況(開啟)');
+        _trafficLayer.setMap (_map);
+      } else {
+        $(this).nextAll ('label').text ('交通狀況(關閉)');
+        _trafficLayer.setMap (null);
+      }
+    });
   }
   google.maps.event.addDomListener (window, 'load', initialize);
 });

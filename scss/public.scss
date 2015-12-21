@@ -100,12 +100,17 @@ html {
   @include border-radius(2px);
   @include box-shadow(-1px 0 3px rgba(61, 67, 73, .5));
 
-  .travelMode {
+  .group {
     margin-top: 5px;
     @include clearfix();
     
     div {
-      @include radio;
+      &[r] {
+        @include radio;
+      }
+      &[s] {
+        @include switch(true);
+      }
       float: left;
 
       + div {
