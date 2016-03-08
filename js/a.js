@@ -1,0 +1,13 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+$(function () {
+  var $box = $('.box');
+
+  for (var i = 0; i < 12 * 12; i++)
+    $('<div />', {
+      class: 'dot'
+    }).appendTo ($box);
+});
