@@ -59,3 +59,7 @@ html {
     }
   }
 }
+
+.ssa {
+  @include border-radius(3px);
+}
