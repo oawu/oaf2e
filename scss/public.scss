@@ -59,3 +59,65 @@ html {
     }
   }
 }
+$w: 20px;
+$m: 5px;
+$n-count: 20;
+$t-ani: 1s;
+$n-offset: -2;
+
+
+@keyframes wave-scale {
+  0%   {transform: translate(-50%, -50%) scale(.9); }
+  100% {transform: translate(-50%, -50%) scale(.1); }
+}
+
+.box {
+  display: inline-block;
+  width: ($w + $m * 2) * $n-count;
+  margin: auto;
+  @include clearfix();
+  // background-color: rgba(0, 0, 255, 0.2);
+  
+  .dot {
+    position: relative;
+    width: $w;
+    height: $w;
+    margin: $m;
+    float: left;
+    border-radius: 50%;
+    // background-color: rgba(255, 255, 255, 1);
+    animation: wave-rotate $t-ani linear infinite;
+    // @include box-shadow(inset 0 0 1px rgba(39, 40, 34, .5));
+    // border: 1px solid rgba(255, 0, 0, .3);
+
+    @keyframes wave-rotate {
+      from { transform: rotate(0turn);}
+      to   { transform: rotate(1turn);}
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(39, 40, 34, 1);
+      border-radius: 50%;
+      transform: translate(-50%, -70%) scale(.5);
+      color: #f00;
+    }
+
+    @for $i from 1 through ($n-count*$n-count) {
+      &:nth-of-type(#{$i}) {
+        animation-delay: $i * (-1 * $t-ani / ($n-count  + $n-offset));
+      }
+    }
+  }
+  // &:hover .dot {
+  //   animation-play-state: paused;
+  // }
+  // &:active .dot {
+  //   animation-play-state: running;
+  // }
+}

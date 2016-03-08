@@ -4,5 +4,10 @@
  */
 
 $(function () {
+  var $box = $('.box');
 
+  for (var i = 0; i < 20 * 20; i++)
+    $('<div />', {
+      class: 'dot'
+    }).appendTo ($box);
 });
