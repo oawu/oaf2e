@@ -4,58 +4,70 @@
  */
 
 @import "_oa";
+body {
+  border: 1px solid red;
+  background-color: rgba(39, 40, 34, 1.00);
 
-@include font-face("Monaco", font-files("monaco/monaco.ttf", "monaco/monaco.otf"));
-// @include font-face("icomoon", font-files("icomoon/icomoon.eot", "icomoon/icomoon.woff", "icomoon/icomoon.ttf", "icomoon/icomoon.svg"));
-// [class^="icon-"], [class*=" icon-"] {
-//   font-family: 'icomoon', Monaco, "微軟正黑體", "Microsoft JhengHei";
-//   speak: none;
-//   font-style: normal;
-//   font-weight: normal;
-//   font-variant: normal;
-//   text-transform: none;
-//   line-height: 1;
-
-//   @include font-smoothing(antialiased);
-// }
-
-* {
-  &, &:after, &:before {
-    vertical-align: top;
-    @include box-sizing(border-box);
-    @include selection(rgba(150, 200, 255, 1), rgba(255, 255, 255, 1));
-    @include font-smoothing(antialiased);
-  }
 }
 
-html {
-  height: 100%;
+#timeline_holder {
+  background-color: rgba(39, 40, 34, 1.00);
+}
+.day_bg .div_inner {
+  /*width: 1px;*/
+  background: transparent;
+  border-left: 1px dashed rgba(100, 100, 100, .800);
+}
+.block_bg.day_start .bottom_start{
+  left: 8px !important;
+  bottom: 0;
+  background: transparent;
+  color: rgba(100, 100, 100, 1.00) !important;
+}
+.block_bg:not(.day_start) {
+  @include opacity(0);
+}
+#time_show {
+  margin-top: 0;
+  background-color: transparent;
+  @include border-radius(0);
+}
+#bottom_line {
+  height: 1px;
+  background-color: rgba(100, 100, 100, 1.00);
+}
+#dashboard_holder {
+  background-color: rgba(39, 40, 34, 1.00);
+}
+#dynamic_logo {
+  @include opacity(0);
+}
+.p_img {
+  overflow: hidden;
+  border-width: 0 !important;
+  @include border-radius(50%);
+  @include box-shadow(0 0 1px rgba(255, 255, 255, 1.00));
+}
+.qualifier {
+  color: rgba(255, 255, 255, .800);
+  background: transparent !important;
+}
+div[id^="plurk_cnt_"] {
+  padding: 0 !important;
+  @include box-shadow(none);
+  background: transparent !important;
 
-  body {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    font-size: medium;
-    font-family: Monaco, "微軟正黑體", "Microsoft JhengHei";
-    background: $mainBackgroundColor $mainBackgroundImage;
-    color: rgba(50, 50, 50, 0.8);
+  .td_cnt {
+    padding: 5px;
+    background: rgba(88, 88, 87, 1.00);
 
-    @include font-smoothing(antialiased);
-    
-    #container {
-      position: relative;
-      display: block;
-      margin: 0 auto;
-      max-width: $mainWidth;
-
-      padding: 0 10px;
-
-      @media screen and (min-width: #{$mainWidth}) {
-        padding: 0;
-      }
+    .text_holder {
+      color: rgba(255, 255, 255, .800);
+    }
+  }
+  .td_qual {
+    .name {
+      color: rgba(255, 255, 255, .800) !important;
     }
   }
 }
