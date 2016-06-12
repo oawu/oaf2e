@@ -1,15 +1,19 @@
 
-
 ◎ Commit
 ================================================================================
 git add -A && git commit -m 'Fix html code.' && git push origin master
 
 
 
-◎ S3 Command
+◎ Put S3 Command
 ================================================================================
-➜ Don't minify
-cd cmd && php put.php -b {bucket} -a {access} -s {secret} && cd ..
+git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} && cd ..
+
+
+
+◎ Put S3 Command and Need minify
+================================================================================
+➜ 
 
 
 
