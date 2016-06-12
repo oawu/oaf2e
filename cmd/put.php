@@ -46,11 +46,16 @@ echo str_repeat ('-', 80) . "\n";
 // // ========================================================================
 
 echo ' ➜ ' . color ('列出 S3 上所有檔案', 'g');
-$s3_files = array_filter (S3::getBucket ($bucket), function ($s3_file) {
-  return preg_match ('/^' . NAME . '\//', $s3_file['name']);
-});
-echo color ('(' . ($c = count ($s3_files)) . ')', 'g') . ' - 100% - ' . color ('取得檔案成功！', 'C') . "\n";
-echo str_repeat ('-', 80) . "\n";
+try {
+  $s3_files = array_filter (S3::getBucket ($bucket), function ($s3_file) {
+    return preg_match ('/^' . NAME . '\//', $s3_file['name']);
+  });
+  echo color ('(' . ($c = count ($s3_files)) . ')', 'g') . ' - 100% - ' . color ('取得檔案成功！', 'C') . "\n";
+  echo str_repeat ('-', 80) . "\n";
+} catch (Exception $e) {
+  echo ' - ' . color ('取得檔案失敗！', 'R') . "\n";
+  exit ();
+}
 
 // // ========================================================================
 // // ========================================================================
@@ -117,7 +122,11 @@ echo sprintf ("\r" . ' ➜ ' . color ('上傳檔案', 'g') . color ('(' . ($c = 
 $i = 0;
 if (array_filter (array_map (function ($file) use ($bucket, &$i, $c) {
   echo sprintf ("\r" . ' ➜ ' . color ('上傳檔案', 'g') . color ('(' . $c . ')', 'g') . " - % 3d%% ", ceil ((++$i * 100) / $c));
-  return !S3::putFile ($file['path'], $bucket, NAME . DIRECTORY_SEPARATOR . $file['uri']);
+  try {
+    return !S3::putFile ($file['path'], $bucket, NAME . DIRECTORY_SEPARATOR . $file['uri']);
+  } catch (Exception $e) {
+    return true;
+  }
 }, $upload_files))) {
   echo '- ' . color ('上傳發生錯誤！', 'r') . "\n";
   echo str_repeat ('=', 80) . "\n";
@@ -151,6 +160,11 @@ $i = 0;
 echo '- ' . (array_filter (array_map (function ($file) use ($bucket, &$i, $c) {
   echo sprintf ("\r" . ' ➜ ' . color ('刪除 S3 上需要刪除的檔案(' . $c . ')', 'g') . " - % 3d%% ", ceil ((++$i * 100) / $c));
   return !S3::deleteObject ($bucket, $file['name']);
+  try {
+    return !S3::deleteObject ($bucket, $file['name']);
+  } catch (Exception $e) {
+    return true;
+  }
 }, $delete_files)) ? color ('刪除 S3 上需要刪除的檔案失敗！', 'r') : color ('刪除 S3 上需要刪除的檔案成功！', 'C')) . "\n";
 echo str_repeat ('-', 80) . "\n";
 

@@ -6,20 +6,27 @@ git add -A && git commit -m 'Fix html code.' && git push origin master
 
 
 
+◎ S3 Command
+================================================================================
+➜ Don't minify
+cd cmd && php put.php -b {bucket} -a {access} -s {secret} && cd ..
+
+
+
 ◎ No installed npm
 ================================================================================
-➜ No gh-pages
+➜ No gh-pages branch
 git branch -v gh-pages && git checkout gh-pages && cd cmd && sudo npm install .  && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 
-➜ Has gh-pages
+➜ Has gh-pages branch
 git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && sudo npm install . && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 
 
 
 ◎ Has installed npm
 ================================================================================
-➜ No gh-pages
+➜ No gh-pages branch
 git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 
-➜ Has gh-pages
+➜ Has gh-pages branch
 git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
