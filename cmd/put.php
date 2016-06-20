@@ -7,6 +7,31 @@
 
 include_once 'libs/functions.php';
 
+$prevs = array (
+  array (
+      'path' => '..',
+      'formats' => array ('html', 'txt'),
+      'list' => true,
+    ),
+  array (
+      'path' => '../css',
+      'formats' => array ('css'),
+    ),
+  array (
+      'path' => '../js',
+      'formats' => array ('js'),
+    ),
+  array (
+      'path' => '../font',
+      'formats' => array ('eot', 'svg', 'ttf', 'woff'),
+    ),
+  array (
+      'path' => '../img',
+      'formats' => array ('png', 'jpg', 'jpeg', 'gif', 'svg')
+    ),
+);
+
+
 define ('PROTOCOL', "http://");
 define ('FCPATH', implode (DIRECTORY_SEPARATOR, explode (DIRECTORY_SEPARATOR, dirname (str_replace (pathinfo (__FILE__, PATHINFO_BASENAME), '', __FILE__)))) . '/');
 define ('NAME', ($temps = array_filter (explode (DIRECTORY_SEPARATOR, FCPATH))) ? end ($temps) : '');
@@ -47,7 +72,7 @@ echo str_repeat ('-', 80) . "\n";
 
 echo ' ➜ ' . color ('列出 S3 上所有檔案', 'g');
 try {
-  $s3_files = array_filter (S3::getBucket ($bucket), function ($s3_file) {
+  $s3_files = array_filter (S3::getBucket ($bucket, NAME), function ($s3_file) {
     return preg_match ('/^' . NAME . '\//', $s3_file['name']);
   });
   echo color ('(' . ($c = count ($s3_files)) . ')', 'g') . ' - 100% - ' . color ('取得檔案成功！', 'C') . "\n";
@@ -62,39 +87,18 @@ try {
 // // ========================================================================
 
 $i = 0;
-$c = 5;
 $local_files = array ();
+$c = count ($prevs);
 echo ' ➜ ' . color ('列出即將上傳所有檔案', 'g');
 
-$files = array ();
-merge_array_recursive (directory_list ('..'), $files, '..');
-$files = array_filter ($files, function ($file) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), array ('html', 'txt')); });
-$files = array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
-echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($local_files = array_merge ($local_files, $files)) . ')', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
-
-$files = array ();
-merge_array_recursive (directory_map ('../css'), $files, '../css');
-$files = array_filter ($files, function ($file) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), array ('css')); });
-$files = array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
-echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($local_files = array_merge ($local_files, $files)) . ')', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
-
-$files = array ();
-merge_array_recursive (directory_map ('../js'), $files, '../js');
-$files = array_filter ($files, function ($file) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), array ('js')); });
-$files = array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
-echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($local_files = array_merge ($local_files, $files)) . ')', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
-
-$files = array ();
-merge_array_recursive (directory_map ('../font'), $files, '../font');
-$files = array_filter ($files, function ($file) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), array ('eot', 'svg', 'ttf', 'woff')); });
-$files = array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
-echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($local_files = array_merge ($local_files, $files)) . ')', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
-
-$files = array ();
-merge_array_recursive (directory_map ('../img'), $files, '../img');
-$files = array_filter ($files, function ($file) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), array ('png', 'jpg', 'jpeg', 'gif', 'svg')); });
-$files = array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
-echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($local_files = array_merge ($local_files, $files)) . ')', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
+$local_files = array_2d_to_1d (array_map (function ($prev) use ($c, &$i) {
+    $files = array ();
+    $func = isset ($prev['list']) && $prev['list'] ? 'directory_list' : 'directory_map';
+    merge_array_recursive ($func ($prev['path']), $files, $prev['path']);
+    $files = array_filter ($files, function ($file) use ($prev) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), $prev['formats']); });
+    echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
+    return array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
+ }, $prevs));
 
 // // ========================================================================
 // // ========================================================================
