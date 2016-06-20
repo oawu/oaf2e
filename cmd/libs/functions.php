@@ -5,6 +5,15 @@
  * @copyright   Copyright (c) 2016 OA Wu Design
  */
 
+if (!function_exists ('array_2d_to_1d')) {
+  function array_2d_to_1d ($array) {
+    $messages = array ();
+    foreach ($array as $key => $value)
+      if (is_array ($value)) $messages = array_merge ($messages, $value);
+      else array_push ($messages, $value);
+    return $messages;
+  }
+}
 if (!function_exists ('color')) {
   function color ($string, $foreground_color = null, $background_color = null, $is_print = false) {
     if (!strlen ($string)) return "";
