@@ -4,7 +4,54 @@
  */
 
 @import "_oa";
-.ii {
+body {
+  padding-right: 510px;
+}
+.print {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  @include button;
+}
+.panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+
+  &.s {
+    display: inline-block;
+  }
+
+  >div {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px - 2px;
+    cursor: pointer;
+    border: 1px solid rgba(39, 40, 34, .300);
+    background-color: white;
+    @include border-radius(3px);
+  }
+  >pre {
+    border: 1px solid rgba(39, 40, 34, .1500);
+    display: inline-block;
+    width: calc(100% - 10px * 2);
+    height: calc(100% - 10px * 2);
+    margin: 10px;
+    text-align: left;
+    padding: 5px;
+    overflow: auto;
+    @include border-radius(3px);
+  }
+}
+[class^="icon-"] {
   float: left;
   display: inline-block;
   width: 45px;
@@ -35,6 +82,7 @@
   
 }
 .icons1 {
+  margin-top: 30px;
   display: inline-block;
   width: 100%;
   > div {
