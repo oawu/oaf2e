@@ -1,0 +1,71 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+.ii {
+  float: left;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  font-size: 40px;
+  border: 1px solid rgba(39, 40, 34, .200);
+  margin: 2px;
+  background: white;
+  @include border-radius(2px);
+  cursor: move;
+}
+.icons2 {
+  position: fixed;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  width: 510px;
+  // height: 500px;
+  background-color: white;
+  border: 1px solid rgba(39, 40, 34, .200);
+  border-right: 0;
+  border-top: 0;
+  padding: 2px;
+  @include border-bottom-left-radius(2px);
+  @include box-shadow(0 0 10px rgba(39, 40, 34, .100));
+  @include clearfix();
+  // overflow: auto;
+  
+}
+.icons1 {
+  display: inline-block;
+  width: 100%;
+  > div {
+    display: inline-block;
+    width: 100%;
+    min-height: 50px;
+    @include clearfix();
+
+    + div {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(39, 40, 34, .100);;
+    }
+    
+    > div {
+      float: left;
+      display: inline-block;
+      width: 128px;
+      min-height: 128px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+      }
+      &:last-child {
+        width: calc(100% - 128px);
+        border: 1px solid rgba(39, 40, 34, .200);
+        background-color: rgba(255, 255, 255, 1.00);
+        padding: 2px;
+        @include clearfix();
+      }
+    }
+  }
+}

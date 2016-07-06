@@ -4,5 +4,7 @@
  */
 
 $(function () {
-
+  $( ".icons, .icons2" ).sortable({
+    connectWith: ".icons"
+  }).disableSelection();
 });
