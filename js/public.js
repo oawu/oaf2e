@@ -14,24 +14,52 @@ $(function () {
   old = old ? old : [];
   var $icons1 = $('.icons1');
   var $icons2 = $('.icons2');
+  var $icons3 = $('.icons3');
   var oldIcons = [];
+  var remove = getStorage ('oaf2e_weather_remove');
+  remove = remove ? remove : [];
 
   $icons1.append (weathers.map (function (t) {
     var is = [];
     if (old.length) is = $.grep (old, function(e) { return e.weather == t; })[0].icons;
     oldIcons = oldIcons.concat (is);
-    return $('<div />').append ($('<div />').append ($('<img />').data ('name', t).attr ('src', 'img/weathers/' + t))).append ($('<div />').addClass ('icons').append (is.map (function (u) {
+
+    return $('<div />').append ($('<div />').append ($('<img />').data ('name', t).attr ('src', 'img/weathers/' + t))).append ($('<div />').addClass ('icons').addClass ('item').append (is.map (function (u) {
       return $('<div />').data ('name', u).addClass (u);
     })));
   }));
   
   $icons2.append (icons.map (function (t) {
-    return $.inArray (t, oldIcons) == -1 ? $('<div />').data ('name', t).addClass (t) : null;
+    return $.inArray (t, remove) == -1 && $.inArray (t, oldIcons) == -1 ? $('<div />').data ('name', t).addClass (t) : null;
+  }));
+  $icons3.append (remove.map (function (t) {
+    return $('<div />').data ('name', t).addClass (t);
   }));
 
-  $('.icons, .icons2').sortable({
-    connectWith: ".icons"
-  }).disableSelection();
+  $('[class^="icon-"]').dblclick (function () {
+    var $that = $(this).clone (true);
+    $('.icons .' + $(this).data ('name')).remove ();
+    $('.icons3').append ($that);
+  });
+  // .mousedown (function (e) {
+  //   if(e.button == 2) {
+  //     $(this).remove ();
+  //     return false;
+  //   }
+  //   return true;
+  // });
+  $('.item').sortable ({
+    connectWith: ".icons",
+    remove: function (event, ui) {
+        ui.item.clone (true).appendTo (ui.item.parent ());
+        $(this).sortable ('cancel');
+      }
+  }).disableSelection ();
+
+  $('.icons2, .icons3').sortable ({
+    connectWith: ".icons",
+  }).disableSelection ();
+
 
   $('.panel > div').click (function () { $('.panel').toggleClass ('s'); });
   $('.print').click (function () {
@@ -44,6 +72,10 @@ $(function () {
       };
     }).toArray ();
     setStorage ('oaf2e_weather', set);
+    setStorage ('oaf2e_weather_remove', $('.icons3 > div').map (function () {
+      return $(this).data ('name');
+    }).toArray ());
+    
 
     var str = "";
     str = "array (" + "\n";

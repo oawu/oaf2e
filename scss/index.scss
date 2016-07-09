@@ -5,7 +5,7 @@
 
 @import "_oa";
 body {
-  padding-right: 510px;
+  padding-right: 210px * 2 - 1px;
 }
 .print {
   position: fixed;
@@ -63,13 +63,13 @@ body {
   @include border-radius(2px);
   cursor: move;
 }
-.icons2 {
+.icons2, .icons3 {
   position: fixed;
-  right: 0;
+  right: 210px;
   top: 0;
   display: inline-block;
-  width: 510px;
-  // height: 500px;
+  width: 210px;
+  min-height: 100px;
   background-color: white;
   border: 1px solid rgba(39, 40, 34, .200);
   border-right: 0;
@@ -78,8 +78,18 @@ body {
   @include border-bottom-left-radius(2px);
   @include box-shadow(0 0 10px rgba(39, 40, 34, .100));
   @include clearfix();
-  // overflow: auto;
-  
+  // overflow-y: scroll;
+  // overflow-x: visible;
+  [class^="icon-"] {
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    z-index: 10;
+  }
+  z-index: 9;
+}
+.icons3 {
+  right: 0;
 }
 .icons1 {
   margin-top: 30px;
@@ -100,18 +110,19 @@ body {
     > div {
       float: left;
       display: inline-block;
-      width: 128px;
-      min-height: 128px;
-      overflow: hidden;
+      width: 70px;
+      min-height: 70px;
+      // overflow: hidden;
       
       img {
         width: 100%;
       }
       &:last-child {
-        width: calc(100% - 128px);
+        width: calc(100% - 70px);
         border: 1px solid rgba(39, 40, 34, .200);
         background-color: rgba(255, 255, 255, 1.00);
         padding: 2px;
+        // overflow: visible;
         @include clearfix();
       }
     }
