@@ -99,7 +99,7 @@ $local_files = array_2d_to_1d (array_map (function ($prev) use ($c, &$i) {
     echo "\r ➜ " . color ('列出即將上傳所有檔案', 'g') . ' - ' . sprintf ('% 3d%% ', (100 / $c) * ++$i);
     return array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(\.\.\/)/', '', $file)); }, $files);
  }, $prevs));
-echo sprintf ("\r" . ' ➜ ' . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($c) . ')', 'g') . " - % 3d%% ", 100);
+echo sprintf ("\r" . ' ➜ ' . color ('列出即將上傳所有檔案', 'g') . color ('(' . count ($local_files) . ')', 'g') . " - % 3d%% ", 100);
 echo '- ' . color ('列出即將上傳所有檔案成功！', 'C') . "\n";
 echo str_repeat ('-', 80) . "\n";
 
