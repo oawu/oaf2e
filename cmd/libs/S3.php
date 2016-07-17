@@ -21,6 +21,7 @@ class S3 {
   public static function init ($access_key, $secret_key) {
     self::$__access_key = $access_key;
     self::$__secret_key = $secret_key;
+    return true;
   }
 
   public static function listBuckets ($detailed = false) {

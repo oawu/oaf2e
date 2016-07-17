@@ -35,9 +35,10 @@ if (!function_exists ('color')) {
 
 if (!function_exists ('merge_array_recursive')) {
   function merge_array_recursive ($files, &$a, $k = null) {
+    if (!($files && is_array ($files))) return false;
     foreach ($files as $key => $file)
-      if (is_array ($file)) $key . merge_array_recursive ($file, $a, ($k ? $k . DIRECTORY_SEPARATOR : '') . $key);
-      else array_push ($a, ($k ? $k . DIRECTORY_SEPARATOR : '') . $file);
+      if (is_array ($file)) $key . merge_array_recursive ($file, $a, ($k ? rtrim ($k, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR : '') . $key);
+      else array_push ($a, ($k ? rtrim ($k, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR : '') . $file);
   }
 }
 
@@ -90,7 +91,7 @@ if (!function_exists ('directory_map')) {
       $source_dir = rtrim ($source_dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
       while (false !== ($file = readdir ($fp))) {
-        if (!trim ($file, '.') || (($hidden == false) && ($file[0] == '.')))
+        if (!trim ($file, '.') || (($hidden == false) && ($file[0] == '.')) || is_link ($file) || ($file == 'cmd'))
           continue;
 
         if ((($directory_depth < 1) || ($new_depth > 0)) && @is_dir ($source_dir . $file))
