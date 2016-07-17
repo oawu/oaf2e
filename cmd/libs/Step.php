@@ -94,12 +94,23 @@ class Step {
         Step::mergeArrayRecursive (Step::directoryMap ($uploadDir['path']), $files, $uploadDir['path']);
         $files = array_filter ($files, function ($file) use ($uploadDir) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), $uploadDir['formats']); });
         Step::progress ('列出即將上傳所有檔案');
-        return array_map (function ($file) { return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(' . preg_replace ('/\//', '\/', PATH) . ')/', '', $file)); }, $files);
+        return array_map (function ($file) {
+          
+          if (MINIFY) {
+            $bom = pack ('H*','EFBBBF');
+            switch (pathinfo ($file, PATHINFO_EXTENSION)) {
+              case 'html': Step::writeFile ($file, preg_replace ("/^$bom/", '', HTMLMin::minify (Step::readFile ($file)))); break;
+              case 'css': Step::writeFile ($file, preg_replace ("/^$bom/", '', CSSMin::minify (Step::readFile ($file)))); break;
+              case 'js': Step::writeFile ($file, preg_replace ("/^$bom/", '', JSMin::minify (Step::readFile ($file)))); break;
+            }
+          }
+
+          return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => preg_replace ('/^(' . preg_replace ('/\//', '\/', PATH) . ')/', '', $file));
+        }, $files);
       }, $uploadDirs));
 
     Step::progress ('列出即將上傳所有檔案', '完成！');
   }
-
   public static function listS3Files () {
     Step::newLine ('-', '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET, NAME)));
 
@@ -249,5 +260,28 @@ class Step {
       if (is_array ($value)) $messages = array_merge ($messages, $value);
       else array_push ($messages, $value);
     return $messages;
+  }
+  public static function readFile ($file) {
+    if (!file_exists ($file)) return false;
+    if (function_exists ('file_get_contents')) return file_get_contents ($file);
+    if (!$fp = @fopen ($file, 'rb')) return false;
+
+    $data = '';
+    flock ($fp, LOCK_SH);
+    if (filesize ($file) > 0) $data =& fread ($fp, filesize ($file));
+    flock ($fp, LOCK_UN);
+    fclose ($fp);
+
+    return $data;
+  }
+  public static function writeFile ($path, $data, $mode = 'wb') {
+    if (!$fp = @fopen ($path, $mode)) return false;
+
+    flock($fp, LOCK_EX);
+    fwrite($fp, $data);
+    flock($fp, LOCK_UN);
+    fclose($fp);
+
+    return true;
   }
 }

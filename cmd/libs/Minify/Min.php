@@ -16,12 +16,14 @@ class Min {
     $format = array_shift ($list);
     $asset_path = PATH_ASSET;
 
+    if (!MINIFY) return self::$list[$key] = $list;
+
     if (!(in_array ($format, array ('css', 'js')) && file_exists ($asset_path) && is_writable ($asset_path) && (count ($list) == count (array_filter ($list, function ($t) { return is_readable (PATH . $t); })))))
       return self::$list[$key] = $list;
 
     $content = "\xEF\xBB\xBF" . implode ("\n", array_map (function ($t) {
         $bom = pack ('H*','EFBBBF');
-        return preg_replace ("/^$bom/", '', read_file (PATH . $t));
+        return preg_replace ("/^$bom/", '', Min::readFile (PATH . $t));
       }, $list));
 
     $class = $format == 'js' ? 'JSMin' : 'CSSMin';
@@ -40,7 +42,19 @@ class Min {
     $list = array_filter (func_get_args ());
     return call_user_func_array ('self::asset', array_merge (array ('js'), $list));
   }
+  public static function readFile ($file) {
+    if (!file_exists ($file)) return false;
+    if (function_exists ('file_get_contents')) return file_get_contents ($file);
+    if (!$fp = @fopen ($file, 'rb')) return false;
 
+    $data = '';
+    flock ($fp, LOCK_SH);
+    if (filesize ($file) > 0) $data =& fread ($fp, filesize ($file));
+    flock ($fp, LOCK_UN);
+    fclose ($fp);
+
+    return $data;
+  }
 }
 
 include_once 'CSSMin.php';
