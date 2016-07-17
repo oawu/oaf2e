@@ -80,8 +80,11 @@ class Step {
   }
   public static function initS3 ($access, $secret) {
     Step::newLine ('-', '初始化 S3 工具');
-
-    if (!S3::init ($access, $secret)) Step::error ();
+    
+    try {
+      if (!S3::init ($access, $secret)) throw new Exception ('初始化失敗！');
+    } catch (Exception $e) { Step::error (array (' ' . $e->getMessage ())); }
+    
     Step::progress ('初始化 S3 工具', '完成！');
   }
   public static function listLocalFiles () {
@@ -112,16 +115,13 @@ class Step {
     Step::progress ('列出即將上傳所有檔案', '完成！');
   }
   public static function listS3Files () {
-    Step::newLine ('-', '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET, NAME)));
-
     try {
+      Step::newLine ('-', '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET, NAME)));
       Step::$s3Files = array_filter ($list, function ($file) {
         Step::progress ('列出 S3 上所有檔案');
         return preg_match ('/^' . NAME . '\//', $file['name']);
       });
-    } catch (Exception $e) {
-      Step::error ($errors);
-    }
+    } catch (Exception $e) { Step::error (array (' ' . $e->getMessage ())); }
 
     Step::progress ('列出 S3 上所有檔案', '完成！');
   }
