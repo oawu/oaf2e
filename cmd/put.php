@@ -59,8 +59,7 @@ include_once PATH_CMD_LIBS . 'S3' . PHP;
 
 Step::initS3 (ACCESS, SECRET);
 Step::listLocalFiles ();
-// Step::listS3Files ();
-// ---------------
+Step::listS3Files ();
 // ---------------
 
 $files = Step::filterLocalFiles ();
