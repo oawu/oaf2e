@@ -14,15 +14,14 @@ define ('PATH_CMD', PATH . 'cmd' . DIRECTORY_SEPARATOR);
 define ('PATH_CMD_LIBS', PATH_CMD . 'libs' . DIRECTORY_SEPARATOR);
 
 include_once PATH_CMD_LIBS . 'defines' . PHP;
-include_once PATH_CMD_LIBS . 'functions' . PHP;
 include_once PATH_CMD_LIBS . 'Step' . PHP;
 include_once PATH_CMD_LIBS . 'Minify' . DIRECTORY_SEPARATOR . 'Min' . PHP;
 
 Step::start ();
 
 $file = array_shift ($argv);
-$argv = params ($argv, array (array ('-b', '-bucket'), array ('-a', '-access'), array ('-s', '-secret'), array ('-u', '-upload'), array ('-m', '-minify')));
-if ((isset ($argv['-b'][0]) && ($bucket = trim ($argv['-b'][0], '/')) && isset ($argv['-a'][0]) && ($access = $argv['-a'][0]) && isset ($argv['-s'][0]) && ($secret = $argv['-s'][0]))) {
+$argv = Step::params ($argv, array (array ('-b', '-bucket'), array ('-a', '-access'), array ('-s', '-secret'), array ('-u', '-upload'), array ('-m', '-minify')));
+if (!(isset ($argv['-b'][0]) && ($bucket = trim ($argv['-b'][0], '/')) && isset ($argv['-a'][0]) && ($access = $argv['-a'][0]) && isset ($argv['-s'][0]) && ($secret = $argv['-s'][0]))) {
   echo str_repeat ('=', 80) . "\n";
   echo ' ' . color ('◎', 'R') . ' ' . color ('錯誤囉！', 'r') . color ('請確認參數是否正確，分別需要', 'p') . ' ' . color ('-b', 'W') . '、' . color ('-a', 'W') . '、' . color ('-s', 'W') . color (' 的參數！', 'p') . ' ' . color ('◎', 'R');
   echo "\n" . str_repeat ('=', 80) . "\n\n";
@@ -32,8 +31,8 @@ if ((isset ($argv['-b'][0]) && ($bucket = trim ($argv['-b'][0], '/')) && isset (
 define ('BUCKET', $bucket);
 define ('ACCESS', $access);
 define ('SECRET', $secret);
-define ('UPLOAD', isset ($argv['-u'][0]) && is_numeric ($upload = $argv['-u'][0]) && $upload ? true : false);
-define ('MINIFY', isset ($argv['-m'][0]) && is_numeric ($upload = $argv['-m'][0]) ? $upload ? true : false : true);
+define ('UPLOAD', isset ($argv['-u'][0]) && is_numeric ($tmp = $argv['-u'][0]) ? $tmp ? true : false : true);
+define ('MINIFY', isset ($argv['-m'][0]) && is_numeric ($tmp = $argv['-m'][0]) ? $tmp ? true : false : true);
 
 // 開始執行
 Step::init ();
