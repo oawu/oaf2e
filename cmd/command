@@ -8,17 +8,10 @@ git add -A && git commit -m 'Fix html code.' && git push origin master
 ◎ Put S3 Command
 =======================
 ➜ Don't minify
-git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} && cd ..
+git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} -m 0 && cd .. && git checkout .
 
 ➜ Need minify
-➜ No installed npm
------------------------
-git add -A && git commit -m 'Fix code.' && cd cmd && sudo npm install . && gulp minify && php put.php -b {bucket} -a {access} -s {secret} && cd .. && git checkout .
-
-➜ Need minify
-➜ Has installed npm
------------------------
-git add -A && git commit -m 'Fix code.' && cd cmd && gulp minify && php put.php -b {bucket} -a {access} -s {secret} && cd .. && git checkout .
+git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} && cd .. && git checkout .
 
 
 
