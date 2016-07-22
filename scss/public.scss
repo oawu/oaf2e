@@ -169,6 +169,7 @@ $selectWidth: 3px;
       #left_side {
         width: $leftSideWidthMin2;
         overflow: hidden;
+        @include opacity(0);
 
         &:after {
           @include opacity(0);
@@ -179,6 +180,7 @@ $selectWidth: 3px;
       }
 
       #main_menu {
+        @include opacity(0);
         width: $leftSideWidthMin2;
         span, a {
           width: $leftSideWidthMin2;
