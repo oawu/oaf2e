@@ -1,42 +1,319 @@
 <!DOCTYPE html>
-<html lang="tw">
+<html lang="zh">
   <head>
-    <meta http-equiv="Content-Language" content="zh-tw" />
+    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
 
+
     <title></title>
 
-    <meta name="robots" content="index,follow" />
 
-    <meta name="author" content="吳政賢(OA Wu)" />
-
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
-
-    <meta property="fb:admins" content="100000100541088" />
-    <meta property="fb:app_id" content="640377126095413" />
-
-    <meta property="og:locale" content="zh_TW" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta property="og:type" content="city" />
-    <meta property="og:image" content="" alt="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" rel="stylesheet" type="text/css" />
     <link href="css/public.css" rel="stylesheet" type="text/css" />
-
-    <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
     <script src="js/public.js" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw">
+    <?php echo isset ($hidden_list) ? $hidden_list : ''; ?>
+
+    <div id='container' class=''>
+      <div id='main_row'>
+        <div id='left_side'>
+          
+          <header>
+            <a href=''>Ｚ</a>
+            <span>Zeus Design Studio!</span>
+          </header>
+
+          <div id='login_user'>
+            <figure class='_i'>
+              <img src="https://colorlib.com/polygon/gentelella/images/picture.jpg">
+            </figure>
+            <div>
+              <span>Hi, 您好!</span>
+              <span>Teresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa ChuTeresa Chu</span>
+            </div>
+          </div>
+
+          <ul id='main_menu'>
+            <li>
+              <label>
+                <input type='checkbox' checked />
+                <span class='icon-m'>asdsadasdsadasdsadasdsadasdsadasdsadasdsadasdsadasdsadasdsad</span>
+                <ul>
+                  <li><a href="" class='icon-m active'>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</a></li>
+                  <li><a href="" class='icon-u'>asdasdasd</a></li>
+                  <li><a href="">asdasdasd</a></li>
+                </ul>
+              </label>
+            </li>
+
+            <li>
+              <label>
+                <input type='checkbox' />
+                <span class='icon-u'>asdsad</span>
+                <ul>
+                  <li><a href="">asdasdasd</a></li>
+                  <li><a href="">asdasdasd</a></li>
+                  <li><a href="">asdasdasd</a></li>
+                </ul>
+              </label>
+            </li>
+
+            <li>
+              <label>
+                <input type='checkbox' />
+                <span class='icon-m'>asdsad</span>
+                <ul>
+                  <li><a href="">asdasdasd</a></li>
+                  <li><a href="">asdasdasd</a></li>
+                  <li><a href="">asdasdasd</a></li>
+                </ul>
+              </label>
+            </li>
+          </ul>
+
+        </div>
+        <div id='right_side'>
+          <div id='top_side'>
+            <button type='button' id='hamburger' class='icon-m'></button>
+          </div>
+          <div id='main'>
+            
+            <header>
+              <div class='title'>
+                <h1>列表</h1>
+                <p>商品列表修改</p>
+              </div>
+
+              <form class='select'>
+                <button type='submit'>尋找</button>
+
+                <label>
+                  <input />
+                  <i class='icon-s'></i>
+                </label>
+
+
+                <select>
+                  <option>選項 1</option>
+                  <option>選項 2</option>
+                  <option>選項 3</option>
+                </select>
+
+              </form>
+            </header>
+
+            <div class='panel'>
+              <header>
+                <h2>餐品列表</h2>
+                <button type='button' class='icon-p'></button>
+              </header>
+              <div class='content'>
+
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>asd</th>
+                      <th>asd</th>
+                      <th>子項/檢視/修改/刪除</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#</td>
+                      <td>
+                        <figure class='_i' href='https://colorlib.com/polygon/gentelella/images/picture.jpg'>
+                          <img src='https://colorlib.com/polygon/gentelella/images/picture.jpg' />
+                        </figure>
+                      </td>
+                      <td>
+                        <label class='checkbox'>
+                          <input type='checkbox' />
+                          <span></span>
+                        </label>
+                      </td>
+                      <td>
+                        <a class='icon-i' href=""></a>
+                        <a class='icon-y' href=""></a>
+                        <a class='icon-e' href=""></a>
+                        <a class='icon-t' href=""></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>
+                        <figure class='_i'>
+                          <img src='https://colorlib.com/polygon/gentelella/images/picture.jpg' />
+                        </figure>
+                      </td>
+                      <td>#</td>
+                      <td>sad</td>
+                    </tr>
+                    <tr>
+                      <td>sad</td>
+                      <td>sad</td>
+                      <td>sad</td>
+                      <td>sad</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+
+
+              </div>
+            </div>
+
+
+
+            <div class='panel'>
+              <header>
+                <h2>餐品列表</h2>
+                <button type='button' class='icon-p'></button>
+              </header>
+              <div class='content'>
+
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>asd</th>
+                      <th>asd</th>
+                      <th>子項/檢視/修改/刪除</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#</td>
+                      <td>
+                        <figure class='_i' href='https://colorlib.com/polygon/gentelella/images/picture.jpg'>
+                          <img src='https://colorlib.com/polygon/gentelella/images/picture.jpg' />
+                        </figure>
+                      </td>
+                      <td>
+                        <label class='checkbox'>
+                          <input type='checkbox' />
+                          <span></span>
+                        </label>
+                      </td>
+                      <td>
+                        <a class='icon-i' href=""></a>
+                        <a class='icon-y' href=""></a>
+                        <a class='icon-e' href=""></a>
+                        <a class='icon-t' href=""></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>
+                        <figure class='_i'>
+                          <img src='https://colorlib.com/polygon/gentelella/images/picture.jpg' />
+                        </figure>
+                      </td>
+                      <td>#</td>
+                      <td>sad</td>
+                    </tr>
+                    <tr>
+                      <td>sad</td>
+                      <td>sad</td>
+                      <td>sad</td>
+                      <td>sad</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+
+
+              </div>
+            </div>
+
+
+
+            <div class='panel'>
+              <header>
+                <h2>餐品列表</h2>
+                <button type='button' class='icon-p'></button>
+              </header>
+              <div class='content'>
+
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>asd</th>
+                      <th>asd</th>
+                      <th>子項/檢視/修改/刪除</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#</td>
+                      <td>
+                        <figure class='_i' href='https://colorlib.com/polygon/gentelella/images/picture.jpg'>
+                          <img src='https://colorlib.com/polygon/gentelella/images/picture.jpg' />
+                        </figure>
+                      </td>
+                      <td>
+                        <label class='checkbox'>
+                          <input type='checkbox' />
+                          <span></span>
+                        </label>
+                      </td>
+                      <td>
+                        <a class='icon-i' href=""></a>
+                        <a class='icon-y' href=""></a>
+                        <a class='icon-e' href=""></a>
+                        <a class='icon-t' href=""></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>
+                        <figure class='_i'>
+                          <img src='https://colorlib.com/polygon/gentelella/images/picture.jpg' />
+                        </figure>
+                      </td>
+                      <td>#</td>
+                      <td>sad</td>
+                    </tr>
+                    <tr>
+                      <td>sad</td>
+                      <td>sad</td>
+                      <td>sad</td>
+                      <td>sad</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+
+
+              </div>
+            </div>
+
+
+
+
+
+
+          </div>
+          <div id='bottom_side'>
+            後台版型設計 by 宙斯 <a href='http://www.ioa.tw/' target='_blank'>OA Wu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   </body>
 </html>
