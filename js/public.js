@@ -20,5 +20,12 @@ $(function () {
       $(this).prop ('checked', $(this).prop ('checked'));
     }.bind ($(this)), 1000);
   });
+  $('div.radios input').change (function () {
+    $(this).prop ('disabled', true).parents ('.radios').addClass ('loading');
+
+    setTimeout (function () {
+      $(this).prop ('disabled', false).parents ('.radios').removeClass ('loading');
+    }.bind ($(this)), 1000);
+  });
 
 });
