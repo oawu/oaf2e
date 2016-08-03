@@ -48,6 +48,7 @@ if (!UPLOAD) {
 }
 // ---------------
 
+// 設定好要上傳的資料夾位置 與 檔案類型
 Step::setUploadDirs (array (
     'js' => array ('js'),
     'css' => array ('css'),
@@ -55,6 +56,8 @@ Step::setUploadDirs (array (
     'img' => array ('png', 'jpg', 'jpeg', 'gif', 'svg'),
     '' => array ('html', 'txt')
   ));
+
+
 // ---------------
 include_once PATH_CMD_LIBS . 'S3' . PHP;
 
