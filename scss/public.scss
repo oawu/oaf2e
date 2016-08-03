@@ -39,7 +39,7 @@ html {
     width: 100%;
     height: 100%;
     font-size: medium;
-    font-family: Monaco, "微軟正黑體", "Microsoft JhengHei";
+    font-family: "微軟正黑體","Open sans", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
     background: $mainBackgroundColor $mainBackgroundImage;
     color: rgba(50, 50, 50, 0.8);
 
@@ -57,5 +57,47 @@ html {
         padding: 0;
       }
     }
+  }
+}
+
+
+
+.card {
+  position: relative;
+  display: inline-block;
+  width: 255px * 1.5;
+  height: 153px * 1.5;
+  background-color: white;
+  border: 1px solid rgba(39, 40, 34, .2);
+  margin-top: 50px;
+  &.ni {
+    background-color: rgba(39, 40, 34, 1.00);
+    > * {
+      color: rgba(230, 230, 230, 1.00);
+    }
+  }
+  > * {
+    display: inline-block;
+    position: absolute;
+    width: 300px;
+    left: calc((100% - 300px) / 2);
+  }
+  .ename {
+    top: 25%;
+    font-size: 25px;
+    letter-spacing: 2px;
+  }
+  .cname {
+    top: calc(25% + 33px);
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+  .site {
+    bottom: 30%;
+    font-size: 14px;
+  }
+  .mail {
+    bottom: calc(30% - 22px);
+    font-size: 14px;
   }
 }
