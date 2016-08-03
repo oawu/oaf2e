@@ -47,7 +47,7 @@ if (!UPLOAD) {
   exit ();
 }
 // ---------------
-// 裡面要判斷是否地回 ln 的狀態
+
 Step::setUploadDirs (array (
     'js' => array ('js'),
     'css' => array ('css'),
