@@ -2,19 +2,29 @@ var gulp       = require ('gulp'),
     livereload = require('gulp-livereload'),
     uglifyJS   = require ('gulp-uglify'),
     htmlmin    = require('gulp-html-minifier'),
-    del        = require('del');
+    del        = require('del'),
+    shell      = require('gulp-shell');
 
 // ===================================================
+gulp.task ('xcode', shell.task ('osascript ../autoclick.applescript'));
 
-gulp.task ('default', function () {
-
-  livereload.listen ();
-
-  ['./root/*.html', './root/css/**/*.css', './root/js/**/*.js'].forEach (function (t) {
-    gulp.watch (t).on ('change', function () {
-      gulp.run ('reload');
+gulp.task ('updatexcode', function () {
+    gulp.watch ('./root/app/pokemonLocation.gpx').on ('change', function () {
+      gulp.run ('xcode');
     });
-  });
+
+});
+gulp.task ('default', function () {
+    gulp.watch ('./root/app/pokemonLocation.gpx').on ('change', function () {
+      gulp.run ('xcode');
+    });
+  // livereload.listen ();
+
+  // ['./root/*.html', './root/*.php', './root/css/**/*.css', './root/js/**/*.js'].forEach (function (t) {
+  //   gulp.watch (t).on ('change', function () {
+  //     gulp.run ('reload');
+  //   });
+  // });
 });
 gulp.task ('reload', function () {
   livereload.changed ();

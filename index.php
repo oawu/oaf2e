@@ -32,11 +32,12 @@
 
     <link href="css/public.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW" language="javascript" type="text/javascript" ></script>
     <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
     <script src="js/public.js" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw">
-
+    <div id='maps'></div>
   </body>
 </html>
