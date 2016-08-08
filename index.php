@@ -6,30 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
 
     <title></title>
-
-    <meta name="robots" content="index,follow" />
-
-    <meta name="author" content="吳政賢(OA Wu)" />
-
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
-
-    <meta property="fb:admins" content="100000100541088" />
-    <meta property="fb:app_id" content="640377126095413" />
-
-    <meta property="og:locale" content="zh_TW" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta property="og:type" content="city" />
-    <meta property="og:image" content="" alt="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
     <link href="css/public.css" rel="stylesheet" type="text/css" />
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW" language="javascript" type="text/javascript" ></script>
@@ -38,6 +14,47 @@
 
   </head>
   <body lang="zh-tw">
+    <?php 
+    include 'core.php';
+    $stores = Store::find ('all', array ('conditions' => array ('status = 1')));
+    ?>
     <div id='maps'></div>
+    <div id='form'>
+        <span></span>
+
+        <div class='radios'>
+            <label>
+              <input type='radio' name='pokemon' value='1' />
+              <span></span>
+              Store
+            </label>
+            <label>
+              <input type='radio' name='pokemon' value='2' />
+              <span></span>
+              Gym
+            </label>
+            <label>
+              <input type='radio' name='pokemon' value='3' />
+              <span></span>
+              Sakura
+            </label>
+        </div>
+
+    </div>
+
+    <div id='menus'>
+        <?php
+        foreach ($stores as $store) { ?>
+            <a data-id='<?php echo $store->id;?>' data-info='<?php echo json_encode (array (
+                            'id' => $store->id,
+                            'name' => $store->name,
+                            'lat' => $store->latitude,
+                            'lng' => $store->longitude,
+                            'pokemon' => $store->pokemon ? $store->pokemon : 0
+                        ));?>'><?php echo $store->name;?></a>
+        <?php
+        }
+        ?>
+    </div>
   </body>
 </html>

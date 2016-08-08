@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?7arywf');
+  src:  url('fonts/icomoon.eot?7arywf#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?7arywf') format('truetype'),
+    url('fonts/icomoon.woff?7arywf') format('woff'),
+    url('fonts/icomoon.svg?7arywf#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-d:before {
+  content: "\e904";
+}
+.icon-b:before {
+  content: "\e907";
+}
+.icon-g:before {
+  content: "\e908";
+}
+.icon-e:before {
+  content: "\e906";
+}
+.icon-im:before {
+  content: "\e90d";
+}
+.icon-ims:before {
+  content: "\e90e";
+}
+.icon-s:before {
+  content: "\e986";
+}
+.icon-se:before {
+  content: "\e994";
+}
+.icon-t:before {
+  content: "\e9ac";
+}
+.icon-y:before {
+  content: "\e901";
+}
+.icon-ta:before {
+  content: "\e905";
+}
+.icon-bo:before {
+  content: "\e90c";
+}
+.icon-u:before {
+  content: "\e900";
+}
+.icon-i:before {
+  content: "\e23e";
+}
+.icon-p:before {
+  content: "\e8ad";
+}
+.icon-a:before {
+  content: "\e03b";
+}
+.icon-cl:before {
+  content: "\e014";
+}
+.icon-r:before {
+  content: "\e114";
+}
+.icon-x:before {
+  content: "\e117";
+}
+.icon-m:before {
+  content: "\e120";
+}
+.icon-fa:before {
+  content: "\e125";
+}
+.icon-c:before {
+  content: "\f00c";
+}
+.icon-o:before {
+  content: "\f011";
+}
+.icon-ca:before {
+  content: "\f073";
+}
+.icon-si:before {
+  content: "\f090";
+}
+.icon-f:before {
+  content: "\f0f6";
+}
+.icon-ti:before {
+  content: "\f145";
+}
+.icon-fb:before {
+  content: "\f230";
+}
+.icon-ua:before {
+  content: "\f234";
+}
+.icon-al:before {
+  content: "\e902";
+}
+.icon-ar:before {
+  content: "\e903";
+}
+.icon-td:before {
+  content: "\e909";
+}
+.icon-tu:before {
+  content: "\e90a";
+}
+.icon-ma:before {
+  content: "\e90b";
+}
+
