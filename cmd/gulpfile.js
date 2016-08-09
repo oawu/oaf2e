@@ -9,15 +9,33 @@ var gulp       = require ('gulp'),
 gulp.task ('xcode', shell.task ('osascript ../autoclick.applescript'));
 
 gulp.task ('updatexcode', function () {
-    gulp.watch ('./root/app/pokemonLocation.gpx').on ('change', function () {
-      gulp.run ('xcode');
-    });
+  var timer = false;
+  gulp.watch ('./root/app/pokemonLocation.gpx').on ('change', function () {
+    if (timer) return;
+    timer = true;
+    gulp.run ('xcode');
+    console.log ('Update!');
+    timer = false;
+  });
+  
 
 });
 gulp.task ('default', function () {
-    gulp.watch ('./root/app/pokemonLocation.gpx').on ('change', function () {
-      gulp.run ('xcode');
-    });
+  var timer = false;
+  gulp.watch ('./root/app/pokemonLocation.gpx').on ('change', function () {
+    if (timer) return;
+    timer = true;
+    gulp.run ('xcode');
+    timer = false;
+  });
+
+  setInterval (function () {
+    if (timer) return;
+    timer = true;
+    gulp.run ('xcode');
+    timer = false;
+  }, 3000);
+
   // livereload.listen ();
 
   // ['./root/*.html', './root/*.php', './root/css/**/*.css', './root/js/**/*.js'].forEach (function (t) {
