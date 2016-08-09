@@ -20,24 +20,26 @@
     ?>
     <div id='maps'></div>
     <div id='form'>
-        <span></span>
+        <span class='name'></span>
 
-        <div class='radios'>
-            <label>
-              <input type='radio' name='pokemon' value='1' />
-              <span></span>
-              Store
-            </label>
-            <label>
-              <input type='radio' name='pokemon' value='2' />
-              <span></span>
-              Gym
-            </label>
-            <label>
-              <input type='radio' name='pokemon' value='3' />
-              <span></span>
-              Sakura
-            </label>
+        <div class='store'>
+            <span>Store:</span>
+            <a class='sub'>-</a>
+            <input type='number' value='0'>
+            <a class='add'>+</a>
+        </div>
+
+        <div class='gym'>
+            <span>Gym:</span>
+            <a class='sub'>-</a>
+            <input type='number' value='0'>
+            <a class='add'>+</a>
+        </div>
+
+        <div class='button'>
+            <button class='prev'>上一個</button>
+            <div class='tip'>讀取中..</div>
+            <button class='next'>下一個</button>
         </div>
 
     </div>
@@ -50,7 +52,8 @@
                             'name' => $store->name,
                             'lat' => $store->latitude,
                             'lng' => $store->longitude,
-                            'pokemon' => $store->pokemon ? $store->pokemon : 0
+                            'store' => $store->pokemon_store,
+                            'gym' => $store->pokemon_gym,
                         ));?>'><?php echo $store->name;?></a>
         <?php
         }

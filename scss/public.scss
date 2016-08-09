@@ -193,6 +193,7 @@ html {
     display: inline-block;
     width: 100%;
     padding: 10px;
+    height: 45px;
     text-align: left;
     cursor: pointer;
     @include opacity(.8);
@@ -215,334 +216,334 @@ html {
   }
 }
 
-label.switch {
-  $w: 20px;
-  $l: 40px;
-  $lw: 4px;
-  position: relative;
-  display: inline-block;
-  width: $l;
-  height: $w;
-  cursor: pointer;
+// label.switch {
+//   $w: 20px;
+//   $l: 40px;
+//   $lw: 4px;
+//   position: relative;
+//   display: inline-block;
+//   width: $l;
+//   height: $w;
+//   cursor: pointer;
   
-  // @include box-shadow(inset 0 0 1px rgba(150, 150, 150, 1.00));
-  &:not(.loading) {
-    input {
-      &:checked {
-        ~ span {
-          &:before {
-            background-color: rgba(37, 184, 153, 1.00);
-            border-color: rgb(38, 185, 154);
-            @include box-shadow(inset 0px 0px 0px 11px rgba(38, 185, 154, 1));
-          }
-          &:after {
-            left: $l + 1px - $w;
-          }
-        }
-      }
-    }
-  }
-  &.loading {
-    cursor: not-allowed;
+//   // @include box-shadow(inset 0 0 1px rgba(150, 150, 150, 1.00));
+//   &:not(.loading) {
+//     input {
+//       &:checked {
+//         ~ span {
+//           &:before {
+//             background-color: rgba(37, 184, 153, 1.00);
+//             border-color: rgb(38, 185, 154);
+//             @include box-shadow(inset 0px 0px 0px 11px rgba(38, 185, 154, 1));
+//           }
+//           &:after {
+//             left: $l + 1px - $w;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   &.loading {
+//     cursor: not-allowed;
 
-    span {
-      width: $w;
-      height: $w;
+//     span {
+//       width: $w;
+//       height: $w;
 
-      &:before {
-        border-width: 0;
-        @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .15));
-        @include border-radius(50%);
-        @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
-        @include animation(rotate 1s linear infinite);
-        z-index: 1;
-      }
-      &:after {
-        left: $lw;
-        top: $lw;
-        background-color: rgba(255, 255, 255, 1.00);
-        width: calc(100% - #{$lw} * 2);
-        height: calc(100% - #{$lw} * 2);
-        @include border-radius(50%);
-        @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
-        // @include transition(none);
-        z-index: 2;
-      }
-    }
-  }
-  span {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    width: $l;
-    height: $w;
-    overflow: hidden;
-    @include border-radius($w / 2);
+//       &:before {
+//         border-width: 0;
+//         @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .15));
+//         @include border-radius(50%);
+//         @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
+//         @include animation(rotate 1s linear infinite);
+//         z-index: 1;
+//       }
+//       &:after {
+//         left: $lw;
+//         top: $lw;
+//         background-color: rgba(255, 255, 255, 1.00);
+//         width: calc(100% - #{$lw} * 2);
+//         height: calc(100% - #{$lw} * 2);
+//         @include border-radius(50%);
+//         @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
+//         // @include transition(none);
+//         z-index: 2;
+//       }
+//     }
+//   }
+//   span {
+//     position: relative;
+//     display: inline-block;
+//     width: 100%;
+//     height: 100%;
+//     width: $l;
+//     height: $w;
+//     overflow: hidden;
+//     @include border-radius($w / 2);
 
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      border: 1px solid rgba(223, 223, 223, 1.00);
-      @include border-radius($w / 2);
-      @include box-shadow(inset 0px 0px 0px 0px rgba(223, 223, 223, 1));
-      @include transition(box-shadow 0.4s, background-color .2s);
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      left: 1px;
-      top: 1px;
-      display: inline-block;
-      width: $w - 1px * 2;
-      height: $w - 1px * 2;
-      @include border-radius(50%);
-      @include transition(background-color 0.4s, left 0.2s);
-      @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
-      background-color: rgba(255, 255, 255, 1.00);  
-    }
-  }
-  input {
-    position: absolute;
-    @include opacity(0);
-  }
-}
+//     &:before {
+//       content: '';
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//       display: inline-block;
+//       width: 100%;
+//       height: 100%;
+//       border: 1px solid rgba(223, 223, 223, 1.00);
+//       @include border-radius($w / 2);
+//       @include box-shadow(inset 0px 0px 0px 0px rgba(223, 223, 223, 1));
+//       @include transition(box-shadow 0.4s, background-color .2s);
+//     }
+//     &:after {
+//       content: '';
+//       position: absolute;
+//       left: 1px;
+//       top: 1px;
+//       display: inline-block;
+//       width: $w - 1px * 2;
+//       height: $w - 1px * 2;
+//       @include border-radius(50%);
+//       @include transition(background-color 0.4s, left 0.2s);
+//       @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+//       background-color: rgba(255, 255, 255, 1.00);  
+//     }
+//   }
+//   input {
+//     position: absolute;
+//     @include opacity(0);
+//   }
+// }
 
-label.checkbox {
-  $w: 4px;
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 13px;
-  width: 19px;
-  height: 19px;
+// label.checkbox {
+//   $w: 4px;
+//   position: relative;
+//   display: inline-block;
+//   cursor: pointer;
+//   font-size: 13px;
+//   width: 19px;
+//   height: 19px;
 
-  &.loading {
-    span {
-      &:before {
-        @include border-radius(50%);
-        @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
-        @include animation(rotate 1s linear infinite);
-      }
-      &:after {
-        left: $w;
-        top: $w;
-        width: calc(100% - #{$w} * 2);
-        height: calc(100% - #{$w} * 2);
-        @include border-radius(50%);
-      }
-    }
-  }
-  > * {
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: inline-block;
-  }
-  input {
-    @include opacity(0);
-    z-index: 2;
-    cursor: pointer;
-    &[disabled] {
-      cursor: not-allowed;
-    }
-    &:not([disabled]) {
-      &:checked {
-        ~ span {
-          &:after {
-            @include icomoon-font('icomoon') {
-              content: "\f00c";
-              background-color: rgba(127, 151, 162, 1.00);
-              color: rgba(255, 255, 255, 1.00);
-              padding-top: 1px;
-              @include text-shadow(0 0 2px rgba(0, 0, 0, .3));
-              @include box-shadow(none);
-            };
-          }
-        }
-      }
-    }
-  }
-  span {
-    width: 19px;
-    height: 19px;
-    // border: 1px solid rgba(255, 0, 0, .3);
-    background-color: rgba(255, 255, 255, 1.00);
-    z-index: 1;
-    // @include border-radius(2px);
+//   &.loading {
+//     span {
+//       &:before {
+//         @include border-radius(50%);
+//         @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
+//         @include animation(rotate 1s linear infinite);
+//       }
+//       &:after {
+//         left: $w;
+//         top: $w;
+//         width: calc(100% - #{$w} * 2);
+//         height: calc(100% - #{$w} * 2);
+//         @include border-radius(50%);
+//       }
+//     }
+//   }
+//   > * {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     display: inline-block;
+//   }
+//   input {
+//     @include opacity(0);
+//     z-index: 2;
+//     cursor: pointer;
+//     &[disabled] {
+//       cursor: not-allowed;
+//     }
+//     &:not([disabled]) {
+//       &:checked {
+//         ~ span {
+//           &:after {
+//             @include icomoon-font('icomoon') {
+//               content: "\f00c";
+//               background-color: rgba(127, 151, 162, 1.00);
+//               color: rgba(255, 255, 255, 1.00);
+//               padding-top: 1px;
+//               @include text-shadow(0 0 2px rgba(0, 0, 0, .3));
+//               @include box-shadow(none);
+//             };
+//           }
+//         }
+//       }
+//     }
+//   }
+//   span {
+//     width: 19px;
+//     height: 19px;
+//     // border: 1px solid rgba(255, 0, 0, .3);
+//     background-color: rgba(255, 255, 255, 1.00);
+//     z-index: 1;
+//     // @include border-radius(2px);
 
-    &:before, &:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      display: inline-block;
-      @include border-radius(2px);
-      background-color: rgba(127, 151, 162, 1.00);
-      z-index: 1;
-      @include transition(border-radius .3s);
-    }
-    &:before {
-      @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .1));
-    }
-    &:after {
-      left: 2px;
-      top: 2px;
+//     &:before, &:after {
+//       content: '';
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//       width: 100%;
+//       height: 100%;
+//       display: inline-block;
+//       @include border-radius(2px);
+//       background-color: rgba(127, 151, 162, 1.00);
+//       z-index: 1;
+//       @include transition(border-radius .3s);
+//     }
+//     &:before {
+//       @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .1));
+//     }
+//     &:after {
+//       left: 2px;
+//       top: 2px;
 
-      width: calc(100% - #{2px} * 2);
-      height: calc(100% - #{2px} * 2);
-      line-height: 12px;
-      background-color: rgba(255, 255, 255, 1.00);
-      background-image: none;
-      z-index: 2;
-      text-align: center;
-      @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
-    }
-  }
-  &.blue {
-    input {
-      &:not([disabled]) {
-        &:checked {
-          ~ span {
-            &:after {
-              background-color: rgba(104, 157, 246, 1.00);
-            }
-          }
-        }
-      }
-    }
-    span {
-      &:before {
-        background-color: rgba(104, 157, 246, 1.00);
-      }
-    }
-  }
-}
+//       width: calc(100% - #{2px} * 2);
+//       height: calc(100% - #{2px} * 2);
+//       line-height: 12px;
+//       background-color: rgba(255, 255, 255, 1.00);
+//       background-image: none;
+//       z-index: 2;
+//       text-align: center;
+//       @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
+//     }
+//   }
+//   &.blue {
+//     input {
+//       &:not([disabled]) {
+//         &:checked {
+//           ~ span {
+//             &:after {
+//               background-color: rgba(104, 157, 246, 1.00);
+//             }
+//           }
+//         }
+//       }
+//     }
+//     span {
+//       &:before {
+//         background-color: rgba(104, 157, 246, 1.00);
+//       }
+//     }
+//   }
+// }
 
-div.radios {
-  $w: 20px;
-  $lw: 4px;
-  width: 100%;
-  margin-top: 15px;
-  position: relative;
-  display: inline-block;
-  @include clearfix();
+// div.radios {
+//   $w: 20px;
+//   $lw: 4px;
+//   width: 100%;
+//   margin-top: 15px;
+//   position: relative;
+//   display: inline-block;
+//   @include clearfix();
 
-  &.loading {
-    &:before, &:after {
-      display: inline-block;
-    }
-    &:before {
-      @include animation(rotate 1s linear infinite);
-    }
-    label {
-      @include opacity(0);
-      cursor: default;
-    }
-  }
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    left: calc(50% - #{$w} / 2);
-    top: 0;
-    width: $w;
-    height: $w;
-    display: none;
-    z-index: 4;
-    @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
-    @include transition(border-radius .3s);
-    @include border-radius(50%);
-  }
-  &:before {
-    @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .1));
-  }
-  &:after {
-    left: calc(50% - #{$w} / 2 + #{$lw});
-    top: $lw;
+//   &.loading {
+//     &:before, &:after {
+//       display: inline-block;
+//     }
+//     &:before {
+//       @include animation(rotate 1s linear infinite);
+//     }
+//     label {
+//       @include opacity(0);
+//       cursor: default;
+//     }
+//   }
+//   &:before, &:after {
+//     content: '';
+//     position: absolute;
+//     left: calc(50% - #{$w} / 2);
+//     top: 0;
+//     width: $w;
+//     height: $w;
+//     display: none;
+//     z-index: 4;
+//     @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
+//     @include transition(border-radius .3s);
+//     @include border-radius(50%);
+//   }
+//   &:before {
+//     @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .1));
+//   }
+//   &:after {
+//     left: calc(50% - #{$w} / 2 + #{$lw});
+//     top: $lw;
 
-    width: $w - $lw * 2;
-    height: $w - $lw * 2;
-    line-height: 12px;
-    background-color: rgba(255, 255, 255, 1.00);
-    background-image: none;
-    z-index: 5;
-    text-align: center;
-    @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
-  }
+//     width: $w - $lw * 2;
+//     height: $w - $lw * 2;
+//     line-height: 12px;
+//     background-color: rgba(255, 255, 255, 1.00);
+//     background-image: none;
+//     z-index: 5;
+//     text-align: center;
+//     @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
+//   }
 
-  label {
-    float: left;
-    position: relative;
-    display: inline-block;
-    margin: 0 5px;
-    cursor: pointer;
-    z-index: 3;
-    line-height: $w - 2px;
-    @include transition(opacity .3s);
+//   label {
+//     float: left;
+//     position: relative;
+//     display: inline-block;
+//     margin: 0 5px;
+//     cursor: pointer;
+//     z-index: 3;
+//     line-height: $w - 2px;
+//     @include transition(opacity .3s);
 
-    > * {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-  }
+//     > * {
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//     }
+//   }
 
-  input {
-    z-index: 1;
-    @include opacity(0);
-    &:checked {
-      ~ span {
-        &:before {
-          background-color: rgba(59, 153, 252, 1.00);
-        }
-        &:after {
-          @include scale(1);
+//   input {
+//     z-index: 1;
+//     @include opacity(0);
+//     &:checked {
+//       ~ span {
+//         &:before {
+//           background-color: rgba(59, 153, 252, 1.00);
+//         }
+//         &:after {
+//           @include scale(1);
 
-        }
-      }
-    }
-  }
-  span {
-    position: relative;
-    display: inline-block;
-    width: $w;
-    height: $w;
-    z-index: 2;
-    margin-right: 3px;
+//         }
+//       }
+//     }
+//   }
+//   span {
+//     position: relative;
+//     display: inline-block;
+//     width: $w;
+//     height: $w;
+//     z-index: 2;
+//     margin-right: 3px;
     
-    &:before, &:after {
-      content: '';
-      position: absolute;
-      @include border-radius(50%);
-    } 
-    &:before {
-      left: 0;
-      top: 0;
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      @include box-shadow(inset 1px 1px 1px rgba(0, 0, 0, .1), inset 0 0 1px rgba(0, 0, 0, .3));
-      @include transition(background-color .3s);
-    }
-    &:after {
-      top: 6px;
-      left: 6px;
-      width: calc(100% - 6px * 2);
-      height: calc(100% - 6px * 2);
-      background-color: rgba(255, 255, 255, 1.00);
-      @include scale(0);
-      @include box-shadow(1px 1px 1px rgba(0, 0, 0, .1), 0 0 1px rgba(0, 0, 0, .3));
-      @include transition(transform .3s);
-    }
-  }
-}
+//     &:before, &:after {
+//       content: '';
+//       position: absolute;
+//       @include border-radius(50%);
+//     } 
+//     &:before {
+//       left: 0;
+//       top: 0;
+//       display: inline-block;
+//       width: 100%;
+//       height: 100%;
+//       @include box-shadow(inset 1px 1px 1px rgba(0, 0, 0, .1), inset 0 0 1px rgba(0, 0, 0, .3));
+//       @include transition(background-color .3s);
+//     }
+//     &:after {
+//       top: 6px;
+//       left: 6px;
+//       width: calc(100% - 6px * 2);
+//       height: calc(100% - 6px * 2);
+//       background-color: rgba(255, 255, 255, 1.00);
+//       @include scale(0);
+//       @include box-shadow(1px 1px 1px rgba(0, 0, 0, .1), 0 0 1px rgba(0, 0, 0, .3));
+//       @include transition(transform .3s);
+//     }
+//   }
+// }
 
 #form {
   position: fixed;
@@ -557,7 +558,7 @@ div.radios {
   @include opacity(0);
   @include transition(opacity .3s, top .3s);
   
-  > span {
+  .name {
     display: inline-block;
     width: 100%;
     padding: 10px;
@@ -569,18 +570,101 @@ div.radios {
     top: 0;
     @include opacity(1);
   }
+  .button {
+    padding: 0 10px;
+
+    button {
+      @include button('blue', false);
+      width: 65px;
+      padding: 5px 10px;
+
+      &:last-child {
+        float: right;
+      }
+    }
+    .tip {
+      width: calc(100% - 65px * 2 - 10px);
+      font-size: 13px;
+      margin-left: 5px;
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      @include overflow-docx3();
+
+      &.r {
+        background-color: rgba(197, 88, 77, 1.00);
+        color: rgba(255, 255, 255, 1.00);
+        @include border-radius(3px);
+      }
+    }
+  }
+  .store, .gym, .button {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    border-top: 1px dashed rgba(220, 221, 219, 1.00);
+    padding-top: 10px;
+
+    @include clearfix();
+    
+    > * {
+      display: inline-block;
+      float: left;
+    }
+    span {
+      width: 120px;
+      padding: 5px;
+      + a {
+        line-height: 21px;
+      }
+    }
+    a {
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      @include border-radius(50%);
+      margin-top: 2px;
+      font-size: 20px;
+      line-height: 20px;
+      background-color: rgba(252, 189, 183, 1.00);
+      color: rgba(92, 20, 16, 1.00);
+      cursor: pointer;
+      border: 1px solid rgba(255, 0, 0, .3);
+      @include transition(background-color .3s, opacity .3s);
+      
+      &[disabled] {
+        @include opacity(.4);
+        cursor: not-allowed;
+      }
+      &:not([disabled]) {
+        &:active {
+          @include opacity(.8);
+        }
+        &:active, &:hover {
+          background-color: rgba(187, 70, 59, 1.00);
+        }
+      }
+    }
+    input {
+      @include input;
+      width: calc(100% - 120px - 25px * 2 - 10px);
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
 }
-label.checkbox {
-  text-align: left;
-  padding-left: 25px;
-  width: 100%;
-  margin-top: 15px;
-  margin-left: 5px;
-}
-div.radios {
-  width: 100%;
-  text-align: left;
-  border-top: 1px solid rgba(39, 40, 34, .200);
-  margin-top: 5px;
-  padding-top: 10px;
-}
+
+// label.checkbox {
+//   text-align: left;
+//   padding-left: 25px;
+//   width: 100%;
+//   margin-top: 15px;
+//   margin-left: 5px;
+// }
+// div.radios {
+//   width: 100%;
+//   text-align: left;
+//   border-top: 1px solid rgba(39, 40, 34, .200);
+//   margin-top: 5px;
+//   padding-top: 10px;
+// }

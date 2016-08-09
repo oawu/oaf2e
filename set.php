@@ -49,5 +49,6 @@ echo json_encode (array (
     'name' => $store->name,
     'lat' => $store->latitude,
     'lng' => $store->longitude,
-    'pokemon' => $store->pokemon ? $store->pokemon : 0
+    'store' => $store->pokemon_store,
+    'gym' => $store->pokemon_gym,
   ));

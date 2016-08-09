@@ -15,13 +15,96 @@ function setStorage (key, data) { if (typeof (Storage) !== 'undefined') { localS
 $(function () {
   window.vars = {};
   window.vars.$maps = $('#maps');
+  window.vars.$menus = $('#menus');
+  window.vars.$form = $('#form').each (function () {
+    var $that = $(this);
+    var $sub = $that.find ('.sub');
+    var $add = $that.find ('.add');
+    var $input = $that.find ('input');
+    var $prev = $that.find ('.prev');
+    var $next = $that.find ('.next');
+
+    $prev.click (function () { window.vars.$a.filter ('.a').prev ().click (); });
+    $next.click (function () { window.vars.$a.filter ('.a').next ().click (); });
+
+    $sub.click (function () {
+      var $input = $(this).next ();
+      var val = parseInt ($input.val (), 10) - 1;
+      if (val < 0) return false;
+      if (val == 0) $(this).attr ('disabled', 'disabled');
+      $input.val (val);
+
+      window.funs.updateVal ($that, $(this).parent ().attr ('class'), $input.val ());
+    });
+    $add.click (function () {
+      var $input = $(this).prev ();
+      var $s = $input.prev ();
+      $input.val (parseInt ($input.val (), 10) + 1);
+      if ($input.val () > 0) $s.removeAttr ('disabled');
+
+      window.funs.updateVal ($that, $(this).parent ().attr ('class'), $input.val ());
+    });
+    $input.change (function () {
+      window.funs.updateVal ($that, $(this).parent ().attr ('class'), $(this).val ());
+    });
+  });
+
+  window.vars.$a = $('#menus a').click (function () {
+
+    window.funs.formReset ();
+    $(this).addClass ('a').siblings ().removeClass ('a');
+    
+    window.vars.$menus.stop ().animate ({scrollTop: $(this).index () * 45});
+    
+    var info = $(this).data ('info');
+    window.funs.setLocation (info.id, new google.maps.LatLng (info.lat, info.lng), function (store) {
+      window.funs.formInit (store, $(this));
+    });
+  });
+
   window.vars.marker = null;
 
   window.funs = {};
   window.funs.ajaxError = function (result) { console.error (result.responseText); };
+  window.funs.formInit = function (store, $a) {
+    window.vars.$form.data ('info', store);
+    window.vars.$form.find ('.name').text (store.name);
+    window.vars.$form.find ('.store input').val (store.store);
+    window.vars.$form.find ('.gym input').val (store.gym);
+    window.vars.$form.find (".tip").text ('').removeClass ('r');
+
+    if (!window.vars.$a.filter ('.a').prev ().length) window.vars.$form.find (".prev").attr ('disabled', 'disabled');
+    else window.vars.$form.find (".prev").removeAttr ('disabled');
+    if (!window.vars.$a.filter ('.a').next ().length) window.vars.$form.find (".next").attr ('disabled', 'disabled');
+    else window.vars.$form.find (".next").removeAttr ('disabled');
+
+    window.vars.$form.addClass ('s');
+    if (store.store > 0) window.vars.$form.find (".store .sub").removeAttr ('disabled');
+    if (store.gym > 0) window.vars.$form.find (".gym .sub").removeAttr ('disabled');
+  }
+  window.funs.updateVal = function ($form, type, val, callback) {
+    var $tip = $form.find ('.tip').removeClass ('r');
+    $.ajax ({ url: 'update.php?t=' + new Date ().getTime (),
+      data: {
+        id: $form.data ('info').id,
+        type: type,
+        val: val,
+      }, async: true, cache: false, dataType: 'json', type: 'POST',
+      beforeSend: function () { $tip.text ('讀取中..').removeClass ('r'); }
+    })
+    .done (function (result) {  $tip.text ('更新成功').removeClass ('r'); })
+    .fail (function (result) {  $tip.text ('更新失敗！').addClass ('r'); });
+  }
+  window.funs.formReset = function () {
+    window.vars.$form.data ('info', {}).removeClass ('s').find ('.name').text ('');
+    window.vars.$form.find ("input").val (0);
+    window.vars.$form.find (".tip").text ('讀取中..').removeClass ('r');
+    window.vars.$form.find (".sub").attr ('disabled', 'disabled');
+  }
+
   window.funs.setLocation = function (id, latLng, callback) {
     $.ajax ({
-      url: 'set.php',
+      url: 'set.php?t=' + new Date ().getTime (),
       data: {
         id: id,
         lat: latLng.lat (),
@@ -29,6 +112,10 @@ $(function () {
       },
       async: true, cache: false, dataType: 'json', type: 'post',
       beforeSend: function () {
+        window.funs.formReset ();
+        window.vars.marker.setMap (window.vars.maps);
+        window.vars.marker.setPosition (latLng);
+        window.vars.maps.setCenter (latLng);
       }
     })
     .done (function (result) {
@@ -38,141 +125,24 @@ $(function () {
     .complete (function (result) {});
   }
 
-  window.storages = {};
-  window.storages.lastMaps = {
-    storageKey: 'pokemon.last.maps',
-    get: function () {
-      var last = getStorage (this.storageKey);
-
-      var zoom = last && last.zoom && !isNaN (last.zoom) ? last.zoom : 12;
-      var lat  = last && last.lat &&  !isNaN (last.lat)  ? last.lat :  25.056678157775092;
-      var lng  = last && last.lng &&  !isNaN (last.lng)  ? last.lng :  121.53488159179688;
-    
-      return {
-        zoom: zoom,
-        lat: lat,
-        lng: lng,
-      };
-    },
-    set: function (key, val) {
-      var last = this.get ();
-      if (!isNaN (val)) last[key] = val;
-      setStorage (this.storageKey, last);
-      return this;
-    }
-  };
-  window.storages.updated = {
-    storageKey: 'pokemon.updateds',
-    get: function () {
-      var viewedTowns = getStorage (this.storageKey);
-      return viewedTowns ? viewedTowns : [];
-    },
-    set: function (viewedTowns) {
-      setStorage (this.storageKey, viewedTowns);
-    },
-    has: function (id) {
-      var setStorage = this.get ();
-      setStorage = setStorage.filter (function (u) { return u == id });
-      return setStorage.length ? true : false;
-    },
-    add: function (id) {
-      var setStorage = this.get ();
-      setStorage.push (id);
-      setStorage = $.unique (setStorage);
-      this.set (setStorage);
-    },
-    del: function (id) {
-      var setStorage = this.get ();
-      setStorage = setStorage.filter (function (u) { return u != id });
-      setStorage = $.unique (setStorage);
-      this.set (setStorage);
-    }
-  };
-
-
   google.maps.event.addDomListener (window, 'load', function () {
-
-    var lastMaps = window.storages.lastMaps.get ();
+    var lastMaps = {
+      zoom: 16,
+      lat: 25.056678157775092,
+      lng: 121.53488159179688,
+    };
 
     window.vars.maps = new google.maps.Map (window.vars.$maps.get (0), {
       zoom: lastMaps.zoom, zoomControl: true, scrollwheel: true, scaleControl: true, mapTypeControl: false, navigationControl: true, streetViewControl: false, disableDoubleClickZoom: true,
       center: new google.maps.LatLng (lastMaps.lat, lastMaps.lng)}
       );
 
-    window.vars.maps.mapTypes.set ('map_style', new google.maps.StyledMapType ([
-      // {stylers: [{gamma: 0}, {weight: 1}] },
-      {featureType: 'all', stylers: [{ visibility: 'on' }]},
-      {featureType: 'administrative', stylers: [{ visibility: 'simplified' }]},
-      {featureType: 'landscape', stylers: [{ visibility: 'simplified' }]},
-      {featureType: 'poi', stylers: [{ visibility: 'simplified' }]},
-      {featureType: 'road', stylers: [{ visibility: 'simplified' }]},
-      {featureType: 'road.arterial', stylers: [{ visibility: 'simplified' }]},
-      {featureType: 'transit', stylers: [{ visibility: 'simplified' }]},
-      {featureType: 'water', stylers: [{ color: '#b3d1ff', visibility: 'simplified' }]},
-      {elementType: "labels.icon", stylers:[{ visibility: 'off' }]}
-      ]));
+    window.vars.maps.mapTypes.set ('map_style', new google.maps.StyledMapType ([{featureType: 'all', stylers: [{ visibility: 'on' }]}, {featureType: 'administrative', stylers: [{ visibility: 'simplified' }]}, {featureType: 'landscape', stylers: [{ visibility: 'simplified' }]}, {featureType: 'poi', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road.arterial', stylers: [{ visibility: 'simplified' }]}, {featureType: 'transit', stylers: [{ visibility: 'simplified' }]}, {featureType: 'water', stylers: [{ color: '#b3d1ff', visibility: 'simplified' }]}, {elementType: "labels.icon", stylers:[{ visibility: 'off' }]}]));
     window.vars.maps.setMapTypeId ('map_style');
     window.vars.marker = new MarkerWithLabel ({
-      map: window.vars.maps,
-      position: new google.maps.LatLng (lastMaps.lat, lastMaps.lng),
       draggable: false,
       raiseOnDrag: false,
       clickable: false,
-    });
-
-    google.maps.event.addListener (window.vars.maps, 'idle', function () {
-      window.storages.lastMaps.set ('zoom', window.vars.maps.zoom)
-                          .set ('lat', window.vars.maps.center.lat ())
-                          .set ('lng', window.vars.maps.center.lng ());
-    });
-
-    var $form = $('#form');
-
-    var $a = $('#menus a').click (function () {
-      $form.removeClass ('s').find ('>span').text ('');
-      $form.find ("input").prop ('checked', false);
-
-      $(this).addClass ('a').siblings ().removeClass ('a');
-      
-      var info = $(this).data ('info');
-      window.vars.marker.setPosition (new google.maps.LatLng (info.lat, info.lng));
-      window.funs.setLocation (info.id, new google.maps.LatLng (info.lat, info.lng), function (store) {
-        $form.data ('id', info.id).find ('>span').text (store.name);
-        $form.find ('input').prop ('disabled', false).filter ('[value="' + store.pokemon + '"]').prop ('checked', true);
-
-        $form.addClass ('s');
-      });
-    }).each (function () {
-      var info = $(this).data ('info');
-      $(this).addClass (window.storages.updated.has (info.id) ? 'ed' : null);
-    });
-
-
-    $form.find ('.radios').each (function () {
-      var $that = $(this),
-          $input = $(this).find ('input')
-          ;
-
-      $that.get (0).oriVal = $input.filter (':checked').val ();
-
-      $input.unbind ('change').change (function () {
-        $.ajax ({ url: 'update.php',
-          data: {
-            id: $form.data ('id'),
-            pokemon: $input.filter (':checked').val ()
-          }, async: true, cache: false, dataType: 'json', type: 'POST',
-          beforeSend: function () { $input.prop ('disabled', true); $that.addClass ('loading'); }
-        })
-        .done (function (result) { 
-          $input.prop ('disabled', false).filter ('[value="' + result.pokemon + '"]').prop ('checked', true);
-          $that.removeClass ('loading').get (0).oriVal = $input.filter (':checked').val ();
-          window.storages.updated.add (result.id);
-          $a.filter ('[data-id="' + result.id + '"]').addClass ('ed');
-        })
-        .fail (function (result) { 
-          $input.prop ('disabled', false).filter ('[value="' + $that.removeClass ('loading').get (0).oriVal + '"]').prop ('checked', true);
-        });
-      });    
     });
   });
 });

@@ -7,7 +7,7 @@
 http_response_code (405);
 
 
-if (!(isset ($_POST['id']) && isset ($_POST['pokemon']) && is_numeric ($id = $_POST['id']) && is_numeric ($pokemon = $_POST['pokemon']))) {
+if (!(isset ($_POST['id']) && isset ($_POST['type']) && isset ($_POST['val']) && is_numeric ($id = $_POST['id']) && is_numeric ($val = $_POST['val']) && is_string ($type = $_POST['type']) && ($val >= 0))) {
   echo json_encode (array (
     'msg' => 'Post error!'
   ));
@@ -21,7 +21,14 @@ if (!$store = Store::find ('one', array ('conditions' => array ('status = 1 AND 
   return ;
 }
 
-$store->pokemon = $pokemon;
+$column = 'pokemon_' . $type;
+if (isset ($store->$column)) {
+  $store->$column = $val;
+  $store->pokemon = json_encode (array (
+      'store' => $store->pokemon_store,
+      'gym' => $store->pokemon_gym,
+    ));
+}
 
 if (!$store->save ()) {
   echo json_encode (array (
@@ -38,5 +45,6 @@ echo json_encode (array (
     'name' => $store->name,
     'lat' => $store->latitude,
     'lng' => $store->longitude,
-    'pokemon' => $store->pokemon ? $store->pokemon : 0
+    'store' => $store->pokemon_store,
+    'gym' => $store->pokemon_gym,
   ));
