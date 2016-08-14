@@ -14,29 +14,19 @@ function setStorage (key, data) { if (typeof (Storage) !== 'undefined') { localS
 
 $(function () {
   window.vars = {};
+  window.vars.isLoad = false;
+  window.vars.points = [];
+  window.vars.timer = 1 * 1000;
+  window.vars.Q = [];
   window.vars.$maps = $('#maps');
-  window.vars.marker = null;
+  window.vars.$mapMenu = $('#map_menu');
+  window.vars.$markerMenu = $('#marker_menu');
+  window.vars.$polylineMenu = $('#polyline_menu');
+  window.vars.$length = $('#length');
+  window.vars.$move = $('#move');
+  window.vars.$speed = $('#speed');
 
-  window.funs = {};
-  window.funs.ajaxError = function (result) { console.error (result.responseText); };
-  window.funs.setLocation = function (latLng) {
-    $.ajax ({
-      url: 'set.php',
-      data: {
-        lat: latLng.lat (),
-        lng: latLng.lng ()
-      },
-      async: true, cache: false, dataType: 'json', type: 'post',
-      beforeSend: function () {
-      }
-    })
-    .done (function (result) {
-      window.storages.lastMarker.set ('lat', latLng.lat ())
-                                .set ('lng', latLng.lng ());
-    }.bind (this))
-    .fail (function (result) { window.funs.ajaxError (result); })
-    .complete (function (result) {});
-  }
+  window.vars.marker = null;
 
   window.storages = {};
   window.storages.lastMaps = {
@@ -81,14 +71,167 @@ $(function () {
       return this;
     }
   };
-  // console.error ();
+
+  window.funs = {};
+  window.funs.ajaxError = function (result) { console.error (result.responseText); };
+  window.funs.setLocation = function (latLng) {
+    if (window.vars.isLoad) return false;
+    window.vars.isLoad = true;
+
+    $.ajax ({
+      url: 'set.php',
+      data: {
+        lat: latLng.lat (),
+        lng: latLng.lng ()
+      },
+      async: true, cache: false, dataType: 'json', type: 'post',
+      beforeSend: function () {
+        window.vars.isLoad = true;
+      }
+    })
+    .done (function (result) {
+      window.vars.isLoad = false;
+      window.storages.lastMarker.set ('lat', latLng.lat ())
+                                .set ('lng', latLng.lng ());
+    }.bind (this))
+    .fail (function (result) { window.funs.ajaxError (result); })
+    .complete (function (result) {
+      window.vars.isLoad = false;
+    });
+  }
+
+  window.funs.getPixelPosition = function (obj) {
+    var scale = Math.pow (2, obj.map.getZoom ());
+    var nw = new google.maps.LatLng (
+        obj.map.getBounds ().getNorthEast ().lat (),
+        obj.map.getBounds ().getSouthWest ().lng ()
+    );
+    var worldCoordinateNW = obj.map.getProjection ().fromLatLngToPoint (nw);
+    var worldCoordinate = obj.map.getProjection ().fromLatLngToPoint (obj.getPosition ());
+    
+    return new google.maps.Point (
+        (worldCoordinate.x - worldCoordinateNW.x) * scale,
+        (worldCoordinate.y - worldCoordinateNW.y) * scale
+    );
+  };
+
+  window.funs.circlePath = function (r) {
+    return 'M 0 0 m -' + r + ', 0 '+
+           'a ' + r + ',' + r + ' 0 1,0 ' + (r * 2) + ',0 ' +
+           'a ' + r + ',' + r + ' 0 1,0 -' + (r * 2) + ',0';
+  }
+
+  window.funs.drawPath = function (polyline) {
+    var prevPosition = polyline.prevMarker.getPosition ();
+    var nextPosition = polyline.nextMarker.getPosition ();
+    polyline.setPath ([prevPosition, nextPosition]);
+
+    if (!polyline.hasPath && (polyline.prevMarker != polyline.nextMarker)) {
+      polyline.hasPath = true;
+      
+      var m = window.funs.calculate ([prevPosition, nextPosition]);
+      
+      var unt = m / 3;
+      var lat = (prevPosition.lat () - nextPosition.lat ()) / unt;
+      var lng = (prevPosition.lng () - nextPosition.lng ()) / unt;
+
+      for (var i = 0; i < unt; i++) {
+        if (i == 0)
+          window.vars.Q.push (polyline.nextMarker);
+        else if (i == unt - 1)
+          window.vars.Q.push (polyline.prevMarker);
+        else 
+          window.vars.Q.push (new google.maps.Marker ({map: window.vars.maps, draggable: true, position: new google.maps.LatLng (nextPosition.lat () + lat * i+ (Math.random () / 99999) * (Math.random () > 0.5 ? 1 : -1), nextPosition.lng () + lng * i+ (Math.random () / 99999) * (Math.random () > 0.5 ? 1 : -1)), icon: {path: window.funs.circlePath (5), strokeColor: 'rgba(247, 92, 79, .4)', strokeWeight: 1, fillColor: 'rgba(247, 92, 79, .95)', fillOpacity: 0.5}}));
+      };
+    }
+    
+  }
+
+  window.funs.fromLatLngToPoint = function (map, latLng) {
+    var scale = Math.pow (2, map.getZoom ());
+    var topRight = map.getProjection ().fromLatLngToPoint (map.getBounds ().getNorthEast ());
+    var bottomLeft = map.getProjection ().fromLatLngToPoint (map.getBounds ().getSouthWest ());
+    var worldPoint = map.getProjection ().fromLatLngToPoint (latLng);
+    return new google.maps.Point ((worldPoint.x - bottomLeft.x) * scale, (worldPoint.y - topRight.y) * scale);
+  }
+
+  window.funs.formatFloat = function (num, pos) {
+    var size = Math.pow (10, pos);
+    return Math.round (num * size) / size;
+  }
+  window.funs.calculate = function (points) {
+    if (google.maps.geometry.spherical)
+      return google.maps.geometry.spherical.computeLength (points);
+    return 0;
+  }
+  window.funs.calculateLength = function (points) {
+    window.vars.$length.html (window.funs.formatFloat (window.funs.calculate (points) / 1000, 2));
+  }
+  window.funs.setPolyline = function () {
+    for (var i = 0; i < window.vars.points.length; i++) {
+      if (!window.vars.points[i].polyline) {
+        var polyline = new google.maps.Polyline ({
+          map: window.vars.maps,
+          strokeColor: 'rgba(68, 77, 145, .6)',
+          strokeWeight: 4,
+          prevMarker: null,
+          nextMarker: null,
+        });
+
+        polyline.addListener ('rightclick', function (e) {
+          var point = window.funs.fromLatLngToPoint (window.vars.maps, e.latLng);
+
+          window.vars.$polylineMenu.css ({ top: point.y, left: point.x })
+                       .data ('lat', e.latLng.lat ())
+                       .data ('lng', e.latLng.lng ())
+                       .addClass ('show').get (0).polyline = polyline;
+                              
+        });
+        window.vars.points[i].polyline = polyline;
+
+      }
+      
+      window.vars.points[i].polyline.prevMarker = window.vars.points[i - 1] ? window.vars.points[i - 1] : window.vars.points[i];
+      window.vars.points[i].polyline.nextMarker = window.vars.points[i];
+      
+      window.funs.drawPath (window.vars.points[i].polyline);
+    }
+
+    if (window.vars.points.length > 1) window.funs.calculateLength (window.vars.Q.map (function (t) { return t.getPosition (); }));
+  }
+  window.funs.initMarker = function (position, index) {
+    var marker = new google.maps.Marker ({
+        map: window.vars.maps,
+        draggable: true,
+        position: position,
+        icon: {
+            path: window.funs.circlePath (5),
+            strokeColor: 'rgba(50, 60, 140, .4)',
+            strokeWeight: 1,
+            fillColor: 'rgba(68, 77, 145, .95)',
+            fillOpacity: 0.5
+          },
+        polyline: null
+      });
+
+    google.maps.event.addListener (marker, 'drag', window.funs.setPolyline);
+
+    // marker.addListener ('rightclick', function (e) {
+    //   var pixel = window.funs.getPixelPosition (this);
+    //   window.vars.$markerMenu.css ({ top: pixel.y, left: pixel.x }).addClass ('show').get (0).marker = marker;
+    // });
+    
+    window.vars.points.splice (index > -1 ? index : window.vars.points.length, 0, marker);
+    
+    window.funs.setPolyline ();
+  }
+
   
 
   google.maps.event.addDomListener (window, 'load', function () {
 
     var lastMaps = window.storages.lastMaps.get ();
     var lastMarker = window.storages.lastMarker.get ();
-
     window.vars.maps = new google.maps.Map (window.vars.$maps.get (0), {
       zoom: lastMaps.zoom, zoomControl: true, scrollwheel: true, scaleControl: true, mapTypeControl: false, navigationControl: true, streetViewControl: false, disableDoubleClickZoom: true,
       center: new google.maps.LatLng (lastMaps.lat, lastMaps.lng)}
@@ -124,14 +267,70 @@ $(function () {
                           .set ('lat', window.vars.maps.center.lat ())
                           .set ('lng', window.vars.maps.center.lng ());
     });
-    google.maps.event.addListener (window.vars.maps, 'click', function (e) {
+    google.maps.event.addListener (window.vars.maps, 'dblclick', function (e) {
       window.vars.marker.setPosition (e.latLng)
       window.funs.setLocation (e.latLng);
     });
+
+    google.maps.event.addListener (window.vars.maps, 'rightclick', function (e) {
+      window.vars.$mapMenu.css ({ top: e.pixel.y, left: e.pixel.x })
+              .data ('lat', e.latLng.lat ())
+              .data ('lng', e.latLng.lng ()).addClass ('show');
+    });
+
+    google.maps.event.addListener (window.vars.maps, 'mousemove', function () {
+      window.vars.$mapMenu.css ({ top: -100, left: -100 }).removeClass ('show');
+      window.vars.$markerMenu.css ({ top: -100, left: -100 }).removeClass ('show');
+      window.vars.$polylineMenu.css ({ top: -100, left: -100 }).removeClass ('show');
+    });
+
+    window.vars.$mapMenu.find ('.add_marker').click (function () {
+      window.funs.initMarker (new google.maps.LatLng (window.vars.$mapMenu.data ('lat'), window.vars.$mapMenu.data ('lng')), 0);
+      window.vars.$mapMenu.css ({ top: -100, left: -100 }).removeClass ('show');
+    });
+
+    window.vars.$markerMenu.find ('.del').click (function () {
+      window.vars.points.splice (window.vars.points.indexOf (window.vars.$markerMenu.get (0).marker), 1);
+      if (window.vars.$markerMenu.get (0).marker.polyline) window.vars.$markerMenu.get (0).marker.polyline.setMap (null);
+      window.vars.$markerMenu.get (0).marker.setMap (null);
+      
+      window.funs.setPolyline ();
+      window.vars.$markerMenu.css ({ top: -100, left: -100 }).removeClass ('show');
+    });
+
+    window.vars.$polylineMenu.find ('.add').click (function () {
+      if (window.vars.$polylineMenu.get (0).polyline)
+        window.funs.initMarker (new google.maps.LatLng (window.vars.$polylineMenu.data ('lat'), window.vars.$polylineMenu.data ('lng')), window.vars.points.indexOf (window.vars.$polylineMenu.get (0).polyline.nextMarker));
+
+      window.vars.$polylineMenu.css ({ top: -100, left: -100 }).removeClass ('show');
+    });
+
     google.maps.event.addListener (window.vars.marker, 'dragend', function (e) {
       window.funs.setLocation (e.latLng);
     });
 
+    setInterval (function () {
+      var move = window.vars.$move.find ('input').prop ('checked');
+      var lastLatLng = window.vars.marker.position;
+      var latLng = window.vars.marker.position;
+
+      if (move && window.vars.Q.length) {
+        var pop = window.vars.Q.shift ();
+        latLng = pop.getPosition ();
+        if (pop.polyline) pop.polyline.setMap (null);
+        pop.setMap (null);
+        window.funs.calculateLength (window.vars.Q.map (function (t) { return t.getPosition (); }));
+      } else {
+        var lat = latLng.lat () + (Math.random () / 99999) * (Math.random () > 0.5 ? 1 : -1);
+        var lng = latLng.lng () + (Math.random () / 99999) * (Math.random () > 0.5 ? 1 : -1);
+        latLng = new google.maps.LatLng (lat, lng);
+      }
+      window.vars.marker.setPosition (latLng); 
+      window.funs.setLocation (latLng);
+      window.vars.$speed.text (window.funs.formatFloat ((window.funs.calculate ([lastLatLng, latLng]) / (window.vars.timer / 1000)) / 0.27, 2));
+    }, window.vars.timer);
+
+// window.vars.$speed
 
   });
 });

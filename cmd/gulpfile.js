@@ -14,7 +14,8 @@ gulp.task ('updatexcode', function () {
     if (timer) return;
     timer = true;
     gulp.run ('xcode');
-    console.log ('Update!');
+    
+console.log ('Update!');
     timer = false;
   });
   
@@ -29,12 +30,12 @@ gulp.task ('default', function () {
     timer = false;
   });
 
-  setInterval (function () {
-    if (timer) return;
-    timer = true;
-    gulp.run ('xcode');
-    timer = false;
-  }, 3000);
+  // setInterval (function () {
+  //   if (timer) return;
+  //   timer = true;
+  //   gulp.run ('xcode');
+  //   timer = false;
+  // }, 3000);
 
   // livereload.listen ();
 
@@ -43,6 +44,15 @@ gulp.task ('default', function () {
   //     gulp.run ('reload');
   //   });
   // });
+});
+gulp.task ('x', function () {
+  livereload.listen ();
+
+  ['./root/*.html', './root/*.php', './root/css/**/*.css', './root/js/**/*.js'].forEach (function (t) {
+    gulp.watch (t).on ('change', function () {
+      gulp.run ('reload');
+    });
+  });
 });
 gulp.task ('reload', function () {
   livereload.changed ();

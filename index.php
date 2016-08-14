@@ -39,5 +39,17 @@
   </head>
   <body lang="zh-tw">
     <div id='maps'></div>
+    <div id='length'>0</div>
+
+    <div id='map_menu'><div><div class='add_marker'>新增節點</div></div></div>
+    <div id='marker_menu'><div><div class='del'>刪除節點</div></div></div>
+    <div id='polyline_menu'><div><div class='add'>插入節點</div></div></div>
+
+    <label class='switch' id='move'>
+      <input type='checkbox' checked>
+      <span></span>
+      跟著路徑移動
+    </label>
+    <div id='speed'>0</div>
   </body>
 </html>

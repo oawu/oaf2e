@@ -68,3 +68,195 @@ html {
   height: 100%;
   background-color: rgba(255, 255, 255, 1.00);
 }
+#marker_menu, #map_menu, #polyline_menu {
+  position: absolute;
+  top: -10000px;
+  left: -100000px;
+
+  display: inline-block;
+  padding: 7px;
+
+  @include opacity(0);
+  &:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(40, 40, 35, .4);
+    @include border-radius(50%);
+  }
+  &.show {
+    @include opacity(1);
+  }
+  > div {
+    border: 1px solid rgba(40, 40, 35, .4);
+    background-color: rgba(250, 250, 250, 1);
+    @include border-radius(2px);
+    @include box-shadow(0 0 15px 1px rgba(0, 0, 0, 0.2));
+    div {
+      cursor: pointer;
+      padding: 10px;
+
+      + div {
+        border-top: 1px solid rgba(200, 200, 200, 1);
+      }
+
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(200, 200, 200, 1);
+      }
+    } 
+  }
+}
+#length {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  padding: 5px 10px;
+  border: 1px solid rgba(39, 40, 34, .4);
+  background-color: rgba(255, 255, 255, .8);
+  @include border-radius(2px);
+  @include transition(all .3s);
+  @include box-shadow(0 0 15px 1px rgba(0, 0, 0, 0.2));
+
+  &:before {
+    content: "總長度 ";
+  }
+  &:after {
+    content: " 公里";
+  }
+}
+#speed {
+
+  position: absolute;
+  top: 90px;
+  right: 10px;
+  padding: 5px 10px;
+  border: 1px solid rgba(39, 40, 34, .4);
+  background-color: rgba(255, 255, 255, .8);
+  @include border-radius(2px);
+  @include transition(all .3s);
+  @include box-shadow(0 0 15px 1px rgba(0, 0, 0, 0.2));
+
+  &:after {
+    content: " 公里/小時";
+  }
+}
+#move {
+  padding: 5px;
+  background-color: rgba(0, 0, 255, 0.2);
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  border: 1px solid rgba(39, 40, 34, .4);
+  background-color: rgba(255, 255, 255, .8);
+  @include border-radius(2px);
+  @include transition(all .3s);
+  @include box-shadow(0 0 15px 1px rgba(0, 0, 0, 0.2));
+
+}
+label.switch {
+  $w: 20px;
+  $l: 40px;
+  $lw: 4px;
+  position: relative;
+  display: inline-block;
+  width: $l;
+  height: $w;
+  cursor: pointer;
+  
+  // @include box-shadow(inset 0 0 1px rgba(150, 150, 150, 1.00));
+  &:not(.loading) {
+    input {
+      &:checked {
+        ~ span {
+          &:before {
+            background-color: rgba(37, 184, 153, 1.00);
+            border-color: rgb(38, 185, 154);
+            @include box-shadow(inset 0px 0px 0px 11px rgba(38, 185, 154, 1));
+          }
+          &:after {
+            left: $l + 1px - $w;
+          }
+        }
+      }
+    }
+  }
+  &.loading {
+    cursor: not-allowed;
+
+    span {
+      width: $w;
+      height: $w;
+
+      &:before {
+        border-width: 0;
+        @include box-shadow(inset 0 0 1px rgba(0, 0, 0, .15));
+        @include border-radius(50%);
+        @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
+        @include animation(rotate 1s linear infinite);
+        z-index: 1;
+      }
+      &:after {
+        left: $lw;
+        top: $lw;
+        background-color: rgba(255, 255, 255, 1.00);
+        width: calc(100% - #{$lw} * 2);
+        height: calc(100% - #{$lw} * 2);
+        @include border-radius(50%);
+        @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
+        // @include transition(none);
+        z-index: 2;
+      }
+    }
+  }
+  span {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    width: $l;
+    height: $w;
+    overflow: hidden;
+    @include border-radius($w / 2);
+    background-color: rgba(255, 255, 255, 1.00);
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(223, 223, 223, 1.00);
+      @include border-radius($w / 2);
+      @include box-shadow(inset 0px 0px 0px 0px rgba(223, 223, 223, 1));
+      @include transition(box-shadow 0.4s, background-color .2s);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      display: inline-block;
+      width: $w - 1px * 2;
+      height: $w - 1px * 2;
+      @include border-radius(50%);
+      @include transition(background-color 0.4s, left 0.2s);
+      @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+      background-color: rgba(255, 255, 255, 1.00);  
+    }
+  }
+  input {
+    position: absolute;
+    @include opacity(0);
+  }
+}
