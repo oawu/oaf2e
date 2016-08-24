@@ -7,36 +7,62 @@
 
     <title></title>
 
-    <meta name="robots" content="index,follow" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" rel="stylesheet" type="text/css" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW&libraries=visualization" language="javascript" type="text/javascript" ></script>
 
-    <meta name="author" content="吳政賢(OA Wu)" />
+    <link href="css/0.css" rel="stylesheet" type="text/css" />
+    <link href="css/1.css" rel="stylesheet" type="text/css" />
+    <link href="css/2.css" rel="stylesheet" type="text/css" />
 
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
-
-    <meta property="fb:admins" content="100000100541088" />
-    <meta property="fb:app_id" content="640377126095413" />
-
-    <meta property="og:locale" content="zh_TW" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta property="og:type" content="city" />
-    <meta property="og:image" content="" alt="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
-    <link href="css/public.css" rel="stylesheet" type="text/css" />
-
-    <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
-    <script src="js/public.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/0.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/1.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/2.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/z.js" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw">
+
+
+    <div id='tab_titles'>
+      <a data-key='dashboard'>總表數據</a>
+      <a data-key='heatmaps'>訂單熱點</a>
+    </div>
+
+
+    <div id='tab_panels'>
+      <div id='dashboard' class='tab_panel'>
+        <div id='all_order_count' class='x1 y1 w1 h1 number'><span>今日<b>訂單總數</b></span><div></div></div>
+        <div id='taipei_order_count' class='x2 y1 w1 h1 number'><span><i>台北</i>訂單數</span><div></div></div>
+        <div id='tainan_order_count' class='x3 y1 w1 h1 number'><span><i>台南</i>訂單數</span><div></div></div>
+        <div id='taichung_order_count' class='x4 y1 w1 h1 number coming_soon'><span><i>台中</i>訂單數</span><div></div></div>
+        <div id='kaohsiung_order_count' class='x5 y1 w1 h1 number coming_soon'><span><i>高雄</i>訂單數</span><div></div></div>
+        <div id='alleypay_order_count' class='x1 y2 w1 h1 number'><span><u>快付</u>訂單數</span><div></div></div>
+        <div id='app_online_count' class='x2 y2 w1 h1 number'><span>APP <b>線上人數</b></span><div></div></div>
+        <div id='app_lines' class='x3 y2 w3 h1'><span>APP 人數<i>變化</i></span><div></div></div>
+        <div id='compare_lines' class='x1 y3 w5 h1'>
+          <span><i>每小時</i>訂單數量</span><a class='today'></a><a class='last_week_day'>上週</a>
+          <div><div class='hours'></div><div></div></div>
+        </div>
+      </div>
+
+      <div id='heatmaps' class='tab_panel'>
+        <div class='items'>
+          <a id='heatmap_all'>全部熱點</a>
+          <a id='heatmap_store'>商家銷售</a>
+          <a id='heatmap_user'>用戶分佈</a>
+          <a id='heatmap_clean'>清除熱點</a>
+        </div>
+
+        <div class='maps'>
+          <div id='heatmap_taiwan'><img src='img/taiwan.png' /></div>
+          <div id='heatmap_taipei' class='map'><div></div></div>
+          <div id='heatmap_tainan' class='map'><div></div></div>
+          <div id='heatmap_taichung' class='map'><div></div></div>
+          <div id='heatmap_kaohsiung' class='map'><div></div></div>
+          <div id='heatmap_logo'><span>台北</span><span>台南</span><span>台中</span><span>高雄</span><img src='img/ic_launcher.png' /></div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>

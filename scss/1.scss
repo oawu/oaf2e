@@ -1,0 +1,361 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+#dashboard {
+  position: relative;
+  > div {
+    position: absolute;
+
+    background-color: rgba(30, 34, 42, 1.00);
+    border: 1px solid rgba(10, 50, 75, 1.00);
+  }
+  $xc: 5;
+  $yc: 3;
+  $spacing: 7px;
+
+  @for $i from 1 through $xc {
+    .x#{$i} { left: calc(((100% - #{$spacing * 2}) / #{$xc}) * #{$i - 1} + #{$spacing * 2}); }
+    .w#{$i} { width: calc(((100% - #{$spacing * 2}) / #{$xc}) * #{$i} - #{$spacing * 2}); }
+  }
+  @for $i from 1 through $yc {
+    .y#{$i} { top: calc(((100% - #{$spacing * 2}) / #{$yc}) * #{$i - 1} + #{$spacing * 2}); }
+    .h#{$i} { height: calc(((100% - #{$spacing * 2}) / #{$yc}) * #{$i} - #{$spacing * 2}); }
+  }
+}
+#dashboard {
+  i, b, u {
+    display: inline-block;
+    font-weight: normal;
+    margin-right: 1px;
+    margin-left: 1px;
+    color: rgba(221, 89, 76, 1.00);
+    font-style: normal;
+    text-decoration: none;
+  }
+  i {
+    color: rgba(194, 146, 39, 1.00);
+  }
+  u {
+    color: rgba(91, 192, 222, 1.00);
+  }
+  .number {
+    padding-top: 3%;
+    * {
+      position: relative;
+      z-index: 2;
+    }
+    > span {
+      display: block;
+      font-size: 20px;
+      letter-spacing: 2px;
+      line-height: 23px;
+      z-index: 3;
+    }
+    > div {
+      color: rgba(255, 255, 255, 1.00);
+      margin-top: 10px;
+      font-size: 50px;
+      font-family: "Open sans";
+      
+      &.show {
+        &:before {
+          content: '';
+          position: absolute;
+          left: calc(50% - 10px / 2);
+          top: calc(50% - 10px / 2);
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          background-color: rgba(91, 192, 222, .200);
+          @include border-radius(50%);
+          @include scale(0);
+          @include opacity(0);
+          @include animation(scale_opacity 1s);
+          z-index: 1;
+        }
+      }
+    }
+    &.coming_soon {
+      > div {
+        margin-top: 0;
+        position: relative;
+
+        &:after {
+          content: 'Coming Soon!';
+          font-weight: bold;
+          @include text-shadow(0 0 2px rgba(30, 30, 30, 1.00), 0 0 1px rgba(30, 30, 30, 1.00));
+          position: absolute;
+          left: 0;
+          top: 0;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          color: rgba(255, 255, 255, 1.00);
+          font-size: 25px;
+          margin-top: 24px;
+        }
+        span {
+          @include filter(blur(10px));
+          font-size: 65px;
+        }
+      }
+    }
+  }
+}
+#compare_lines {
+  position: relative;
+  padding: 15px;
+  padding-bottom: 0;
+
+  > span {
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    text-align: left;
+  }
+  > a {
+    position: absolute;
+    right: 100px + 5px * 2;
+    top: 5px;
+    display: inline-block;
+    padding: 2px 10px;
+    line-height: 22px;
+    width: 100px;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(209, 68, 50, 1.00);
+      margin-top: 5px + 1px;
+      margin-right: 5px;
+      @include border-radius(2px);
+    }
+
+    &.last_week_day {
+      right: 5px;
+      &:before {
+        background-color: rgba(255, 204, 0, 1.00);
+      }
+    }
+  }
+  > div {
+    position: relative;
+    margin-top: 15px;
+    height: calc(100% - 33px - 15px);
+    @include clearfix();
+    $count: 16;
+
+    > div {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: calc(100% - 25px);
+
+      &:first-child {
+        border-bottom: 1px solid rgba(51, 55, 63, 1.00);
+
+        > div {
+          + div {
+            border-left: 1px dashed rgba(51, 55, 63, 1.00);
+          }
+          @include clearfix();
+          
+          > span {
+            position: relative;
+            float: left;
+            display: inline-block;
+            width: 50%;
+            height: 100%;
+            $th: 12px;
+
+            &:after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              display: inline-block;
+              width: 10px;
+              height: 0;
+              @include border-top-radius(1px);
+              @include transition(height .3s);
+            }
+            &:before {
+              content: '';
+              font-size: 10px;
+              position: absolute;
+              bottom: 0 + $th;
+              display: inline-block;
+              width: 100%;
+              color: rgba(200, 200, 200, 1.00);
+              @include transition(bottom .3s);
+            }
+            &:first-child {
+              &:before, &:after {
+                right: 0;
+                text-align: right;
+              }
+              &:after {
+                background-color: rgba(255, 204, 0, 1.00);
+              }
+            }
+            &:last-child {
+              &:before, &:after {
+                left: 0;
+                text-align: left;
+              }
+              &:after {
+                background-color: rgba(209, 68, 50, 1.00);
+              }
+            }
+
+            @for $i from 0 through 100 {
+              &._l#{$i} {
+                &:before {
+                  content: attr(data-val);
+                  bottom: calc((100% - #{$th}) / 100 * #{$i});
+                }
+                &:after {
+                  height: calc((100% - #{$th}) / 100 * #{$i});
+                }
+              }
+            }
+          }
+        }
+      }
+      &:last-child {
+        height: 25px;
+        line-height: 24px;
+        > div {
+          &:before {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            font-size: 10px;
+          }
+          @for $i from 1 through $count {
+            &:nth-child(#{$i}) {
+              &:before {
+                content: '#{$i + 4} ~ #{$i + 5}';
+              }
+            }
+          }
+        }
+      }
+
+      > div {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: inline-block;
+        width: calc(100% / #{$count});
+        height: 100%;
+        @for $i from 1 through $count {
+          &:nth-child(#{$i}) {
+            left: calc((100% / #{$count}) * #{$i - 1});
+          }
+        }
+      }
+    }
+  }
+}
+#app_lines {
+  padding: 15px;
+  padding-bottom: 5px;
+  > span {
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+  }
+  > div {
+    position: relative;
+    margin-top: 15px;
+    height: calc(100% - 33px - 15px);
+    @include clearfix();
+
+    @for $i from 0 through 100 {
+      ._l#{$i} {
+        &:before {
+          height: calc((100% - 25px) / 100 * #{$i});
+        }
+        span {
+          bottom: calc((100% - 25px) / 100 * #{$i} + 18px);
+        }
+      }
+    }
+    > div {
+      $count: 15;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: inline-block;
+      width: calc(100% / #{$count});
+      height: 100%;
+      @include transition(left .3s);
+      + div {
+        border-left: 1px dashed rgba(137, 141, 146, .20);
+      }
+
+      span {
+        position: absolute;
+        bottom: 18px;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+        font-size: 10px;
+        color: white;
+        @include transition(bottom .3s);
+      }
+      @for $i from 1 through $count {
+        &:nth-child(#{$i}) {
+          left: calc((100% / #{$count}) * #{$i - 1});
+          &:after {
+            content: '#{$i} 分鐘';
+          }
+        }
+      }
+      &:nth-child(n + #{$count + 1}) {
+        display: none;
+      }
+
+      &:after, &:before {
+        content: '';
+        position: absolute;
+        display: inline-block;
+      }
+      &:after {
+        bottom: 0;
+        left: -1px;
+        width: calc(100% + 2px);
+        font-size: 10px;
+        background-color: rgba(30, 34, 42, 1.00);
+        border-top: 1px solid rgba(137, 141, 146, .20);
+      }
+      &:before {
+        bottom: 19px;
+        left: calc(50% - 10px / 2);
+        width: 10px;
+        height: 0;
+        background-color: rgba(79, 195, 68, 1.00);
+        @include border-top-radius(1px);
+        @include transition(height .3s);
+        
+      }
+    }
+  }
+}
+@include keyframes(scale_opacity){
+  0% {
+    @include scale(0);
+    @include opacity(1);
+  }
+  100% {
+    @include scale(30);
+    @include opacity(0);
+  }
+}
+

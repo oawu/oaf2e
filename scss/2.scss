@@ -1,0 +1,431 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+#heatmaps {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+
+  a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"], .gm-style-cc, .gmnoprint {
+    display: none !important;
+  }
+  @include clearfix();
+  
+  .items, .maps {
+    position: relative;
+    float: left;
+    display: inline-block;
+    width: 180px;
+    height: 100%;
+    z-index: 2;
+  }
+  .items {
+    padding: 5px;
+    padding-right: 0;
+
+    a {
+      display: inline-block;
+      width: calc(100% - 5px);
+      margin: 10px 5px;
+      margin-right: 0;
+      padding: 10px 5px;
+      background-color: #1e222a;
+      border: 1px solid rgba(10, 50, 75, 1.00);
+      cursor: pointer;
+
+      &:hover, &.a {
+        color: rgba(255, 255, 255, 1.00);
+        background-color: rgba(10, 50, 75, 1.00);
+        @include transition(color .3s, background-color .3s);
+      }
+    }
+  }
+  .maps {
+    width: calc(100% - 180px);
+    
+    .map {
+      position: absolute;
+      display: inline-block;
+      z-index: 2;
+
+      > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+      }
+    }
+  }
+}
+
+#heatmap_taiwan {
+  position: absolute;
+  left: calc(50% - 400px / 2);
+  top: 0;
+  display: inline-block;
+  width: 400px;
+  background-color: #1e1e1e;
+  z-index: 1;
+  @include opacity(0);
+  @include transition(opacity 1s);
+  
+  img {
+    width: 100%;
+  }
+}
+
+#heatmap_logo {
+  position: absolute;
+  z-index: 20;
+  top: calc(50% - 120px / 2);
+  left: calc(50% - 150px / 2);
+  display: inline-block;
+  width: 150px;
+  height: 120px;
+  line-height: 120px / 2 - 2px;
+  z-index: 4;
+  background-color: transparent;
+  overflow: hidden;
+  @include opacity(0);
+  @include box-shadow(0 0 10px rgba(0, 0, 0, .400));
+  @include border-radius(5px);
+
+  > * {
+    position: absolute;
+    display: inline-block;
+  }
+  img {
+    top: 0;
+    left: calc(50% - 120px / 2);
+    width: 120px;
+    height: 120px;
+    z-index: 1;
+    @include opacity(0);
+  }
+  span {
+    width: 50%;
+    height: 50%;
+    font-size: 18px;
+    z-index: 2;
+    color: #ffffff;
+    @include opacity(0);
+
+    &:nth-child(-n + 2) {
+      top: 0;
+    }
+    &:nth-child(2n + 1) {
+      left: 0;
+    }
+    &:nth-child(2n) {
+      left: 50%;
+    }
+    &:nth-child(n + 3) {
+      top: 50%;
+    }
+  }
+}
+#heatmaps {
+  .map {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(20, 134, 162, 1.00);
+    overflow: hidden;
+
+    @include scale(0);
+    @include opacity(0);
+    @include border-radius(50%);
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      z-index: 4;
+      @include opacity(1);
+      @include transition(opacity .3s);
+      background-color: rgba(20, 134, 162, 1.00);
+    }
+    &:before {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    &:after {
+      left: calc(50% - 100px / 2);
+      top: calc(50% - 35px / 2);
+      width: 100px;
+      height: 35px;
+      line-height: 35px - 2px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 1.00);
+    }
+  }
+
+  &.step1 {
+    #heatmap_taiwan {
+      @include opacity(1);
+    }
+
+    &.step2 {
+      .map {
+        @include scale(1);
+        @include opacity(1);
+        @include transition(transform .5s);
+      }
+      #heatmap_taipei { top: 3%; left: 56.5%; &:after { content: '台北'; } }
+      #heatmap_tainan { top: 28.5%; right: 51%; &:after { content: '台南'; } }
+      #heatmap_taichung { top: 63%; left: 36%; &:after { content: '台中'; } }
+      #heatmap_kaohsiung { top: 76%; right: 56%; &:after { content: '高雄'; } }
+
+      &.step3 {
+        .map {
+          @include transition(top .5s, left .5s, right .5s);
+        }
+        #heatmap_taipei { top: 10%; left: 10%; }
+        #heatmap_tainan { top: 10%; right: 10%; }
+        #heatmap_taichung { top: 60%; left: 10%; }
+        #heatmap_kaohsiung { top: 60%; right: 10%; }
+        
+        &.step4 {
+          $spacing: 15px;
+          .map {
+            width: calc(50% - #{$spacing + $spacing / 2});
+            height: calc(50% - #{$spacing + $spacing / 2});
+            @include border-radius(2px);
+            @include transition(top .4s, left .4s, right .4s, width .4s, height .4s, border-radius .4s);
+
+            &:after {
+              font-size: 18px;
+            }
+          }
+
+          #heatmap_taiwan { @include opacity(0); }
+
+          #heatmap_taipei { top: $spacing; left: $spacing; &:after { content: '初始中..'; } }
+          #heatmap_tainan { top: $spacing; right: $spacing; &:after { content: '初始中..'; } }
+          #heatmap_taichung { top: calc(50% + #{$spacing} / 2); left: $spacing; &:after { content: '初始中..'; } }
+          #heatmap_kaohsiung { top: calc(50% + #{$spacing} / 2); right: $spacing; &:after { content: '初始中..'; } }
+
+          &.step5 {
+            .map {
+              &:before {
+                @include opacity(0);
+              }
+              &:after {
+                @include opacity(0);
+                @include transition(none);
+
+                left: calc(50% - 80px / 2);
+                top: calc(50% - 80px / 2);
+                width: 80px;
+                height: 80px;
+                line-height: 80px - 2px;
+                
+                background-color: rgba(30, 30, 30, 1.00);
+                @include border-radius(20px);
+              }
+            }
+            #heatmap_taipei { &:after { content: '台北'; } }
+            #heatmap_tainan { &:after { content: '台南'; } }
+            #heatmap_taichung { &:after { content: '台中'; } }
+            #heatmap_kaohsiung { &:after { content: '高雄'; } }
+            
+            &.step6 {
+              .map {
+                &:after {
+                  @include opacity(1);
+                  @include transition(opacity 1.2s);
+                }
+              }
+
+
+              &.step7 {
+
+                .map {
+                  &:after {
+                  @include transition(left .5s, top .5s);
+                  }
+                }
+
+                #heatmap_taipei:after { 
+                  top: calc(100% - 2px);
+                  left: calc(100% - 2px);
+                }
+                #heatmap_tainan:after { 
+                  top: calc(100% + 2px);
+                  left: -80px - 2px;
+                }
+                #heatmap_taichung:after { 
+                  top: -80px - 2px;
+                  left: calc(100% + 2px);
+                }
+                #heatmap_kaohsiung:after { 
+                  top: -80px - 2px;
+                  left: -80px - 2px;
+                }
+                #heatmap_logo {
+                  background-color: #f79d1a;
+                  @include opacity(1);
+                  @include transition(background-color 1s);
+
+                  img {
+                    @include opacity(1);
+                    @include transition(opacity 1s);
+                    @include transition-delay(.3s); 
+                  }
+                }
+
+                &.step8 {
+                  #heatmap_logo {
+                    background-color: #1e1e1e;
+                    
+                    img {
+                      @include opacity(0);
+                      @include transition-delay(0); 
+                    }
+
+                    span {
+                      @include opacity(1);
+                      @include transition(opacity 1s);
+                      @include transition-delay(1s); 
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// #heatmaps {
+//   position: relative;
+//   display: inline-block;
+//   width: 100%;
+//   height: 100%;
+
+//   a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"], .gm-style-cc, .gmnoprint {
+//     display: none !important;
+//   }
+
+//   .heatmaps {
+//     $sec: .7s;
+//     position: absolute;
+//     z-index: 2;
+//     display: inline-block;
+//     width: 70px;
+//     height: 70px;
+//     background-color: rgba(20, 134, 162, 1.00);
+//     overflow: hidden;
+
+//     @include scale(0);
+//     @include opacity(0);
+//     @include border-radius(50%);
+//     @include transition(border-radius $sec, opacity $sec, transform $sec, top $sec ease-in-out, left $sec ease-in-out, right $sec ease-in-out, width $sec, height $sec, background-color $sec);
+
+
+
+//   }
+// }
+
+
+// #heatmaps {
+//   &.show {  } }
+
+//   &.move {
+
+//     &.finish {
+
+//       &.no_load {
+//         .heatmaps {
+//           &:before {
+//             @include opacity(0);
+//           }
+//           &.coming_soon {
+//             > * {
+//               @include filter(blur(10px));
+//             }
+//             &:before {
+//               content: 'Coming Soon!';
+//               font-weight: bold;
+//               @include text-shadow(0 0 8px rgba(0, 0, 0, .500));
+//               color: rgba(255, 255, 255, 1.00);
+//               font-size: 25px;
+//               padding-top: calc(25% - 25px / 2);
+
+//               background-color: rgba(39, 40, 34, .300);
+//               @include opacity(1);
+//             }
+//           }
+//           &:after {
+//             content: '';
+
+//             width: 60px;
+//             height: 40px;
+//             line-height: 40px - 2;
+
+//             @include box-shadow(0 0 10px rgba(0, 0, 0, .400));
+//             @include transition(border-radius .5s, width .3s, height .3s, top .5s, left .5s, right .5s);
+//           }
+//         }
+
+//         #heatmap_taipei:after {
+//           content: '台北' !important;
+//           top: calc(100% - 2px);
+//           left: calc(100% - 2px);
+//           @include border-radius(20px);
+//         }
+//         #heatmap_tainan:after {
+//           content: '台南' !important;
+//           top: calc(100% + 2px);
+//           left: -60px - 2px;
+//           @include border-radius(20px);
+//         }
+//         #heatmap_taichung:after {
+//           content: '台中' !important;
+//           top: -40px - 2px;
+//           left: calc(100% + 2px);
+//           @include border-radius(20px);
+//         }
+//         #heatmap_kaohsiung:after {
+//           content: '高雄' !important;
+//           top: -40px - 2px;
+//           left: -60px - 2px;
+//           @include border-radius(20px);
+//         }
+
+//         &.show_area {
+//           
+//         }
+//         &.show_logo {
+//           // .heatmaps {
+//           //   &:after {
+//           //     width: 80px;
+//           //     height: 60px;
+//           //     line-height: 60px - 2;
+//           //   }
+//           // }
+
+//           // #heatmap_taipei:after { top: calc(100% - 60px); left: calc(100% - 80px); }
+//           // #heatmap_tainan:after { top: calc(100% - 60px); left: 0; }
+//           // #heatmap_taichung:after { top: 0; left: calc(100% - 80px); }
+//           // #heatmap_kaohsiung:after { top: 0; left: 0; }
+
+//           #heatmap_logo {
+//             @include opacity(1);
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

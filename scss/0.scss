@@ -1,0 +1,128 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+* {
+  &, &:after, &:before {
+    vertical-align: top;
+    @include box-sizing(border-box);
+    @include selection(rgba(150, 200, 255, 1), rgba(255, 255, 255, 1));
+    @include font-smoothing(antialiased);
+  }
+}
+
+html {
+  height: 100%;
+
+  body {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: medium;
+    font-family: "Open sans", Comfortaa,'Helvetica Neue',Helvetica,Arial,'Hiragino Maru Gothic ProN','メイリオ','ヒラギノ丸ゴ ProN W4','微軟正黑體',Meiryo,'Droid Sans';
+
+    background: rgba(0, 0, 0, 1.00);
+    color: rgba(50, 50, 50, 0.8);
+
+    @include font-smoothing(antialiased);
+  }
+}
+
+
+#tab_titles {
+  position: relative;
+  display: block;
+  height: 50px;
+  @include clearfix();
+
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(63, 69, 81, 1.00);
+    z-index: 2;
+  }
+  a {
+    float: left;
+    position: relative;
+    display: inline-block;
+    padding: 5px 20px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px - 8px;
+    color: rgba(156, 157, 164, 1.00);
+    border-right: 1px solid rgba(63, 69, 81, 1.00);
+    border-top: 1px solid rgba(0, 0, 0, 1.00);
+    background-color: rgba(0, 0, 0, 1.00);
+    z-index: 1;
+    cursor: pointer;
+    text-decoration: none;
+
+    &.a {
+      color: rgba(255, 255, 255, 1.00);
+      z-index: 3;
+      background-color: rgba(30, 30, 30, 1.00);
+
+    }
+  }
+  @for $i from 0 through 10 {
+    &[data-index="#{$i}"] {
+      + #tab_panels {
+        .tab_panel {
+          @for $j from 1 through 10 {
+            &:nth-child(#{$j}) {
+              left: #{($j - 1 - $i) * 100%};
+              
+              @if $j - 1 - $i == 0 {
+                @include opacity(1);
+              }
+            }
+          }
+        }
+      } 
+    }
+  }
+}
+#tab_panels {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(100% - 55px);
+  overflow: hidden;
+
+  .tab_panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: rgba(137, 141, 146, 1.00);
+
+    background-color: rgba(30, 30, 30, 1.00);
+    @include opacity(0);
+    @include transition(left .3s, opacity .3s);
+    
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        left: #{($i - 1) * 100%};
+      }
+    }
+  }
+}
+
