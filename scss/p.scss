@@ -35,8 +35,8 @@
     height: 50px;
 
     display: inline-block;
-    background-color: rgba(30, 34, 42, 1.00);
-    border: 1px solid rgba(40, 50, 65, 1.00);
+    background-color: rgba(3, 169, 244, 1.00);
+    border: 1px solid rgba(3, 169, 244, 1.00);
     z-index: 2;
 
     @include scale(0);
@@ -115,8 +115,9 @@
             left: 10%;
             width: calc(100% - 10% * 2);
             height: calc(100% - 10% * 2);
+            background-color: rgba(30, 34, 42, 1.00);
             @include border-radius(3px);
-            @include transition(top .3s, left .3s, width .3s, height .3s, border-radius .3s);
+            @include transition(background-color .3s, top .3s, left .3s, width .3s, height .3s, border-radius .3s);
           }
           &.step5 {
             .loading {
@@ -129,8 +130,9 @@
               height: 50px;
               top: calc(50% - 50px / 2);
               left: calc(50% - 50px / 2);
+              background-color: rgba(3, 169, 244, 1.00);
               @include border-radius(50%);
-              @include transition(top .3s, left .3s, width .3s, height .3s, border-radius .3s);
+              @include transition(background-color .3s, top .3s, left .3s, width .3s, height .3s, border-radius .3s);
             }
 
             &.step7 {
