@@ -7,7 +7,10 @@ $(function () {
 
   window.func.loads.dashboard ();
   setInterval (window.func.loads.dashboard, window.vars.timer.loadDashboard);
+  window.vars.$.tabTitles.find ('a[data-key="dashboard"]').click ();
   setTimeout (function () {
-    window.vars.$.tabTitles.find ('a[data-key="heatmaps"]').click ();
-  }, 1500);
+    cursor_feature_dashboard_all ();
+  }, 100);
+
+  window.vars.isFinished = true;
 });

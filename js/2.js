@@ -136,9 +136,11 @@ $(function () {
     };
 
     window.vars.heatmaps.data = data;
-
+    window.vars.heatmaps.$.types.filter ('.a').click ();
   };
   window.func.inits.heatmaps = function () {
+    !window.vars.heatmaps.$.types.filter ('.a').length &&  window.vars.heatmaps.$.types.first ().click ();
+
     window.vars.$.heatmaps.addClass ('step1');
 
     window.vars.heatmaps.timers.push (setTimeout (function () {
@@ -171,7 +173,6 @@ $(function () {
 
                 window.vars.heatmaps.timers.push (setTimeout (function () {
                   window.vars.$.heatmaps.addClass ('step8');
-                  !window.vars.heatmaps.$.types.filter ('.a').length &&  window.vars.heatmaps.$.types.first ().click ();
                 }, 2500));
               }, 1500));
             }, 400));
@@ -182,6 +183,8 @@ $(function () {
   };
   window.func.releases.heatmaps = function () {
     window.vars.$.heatmaps.attr ('class', 'tab_panel');
+
+    window.vars.heatmaps.$.types.removeClass ('a');
 
     window.vars.heatmaps.timers.forEach (function (t, i) {
       clearTimeout (t);

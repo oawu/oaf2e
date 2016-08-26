@@ -12,27 +12,50 @@ Array.prototype.diff = function (a, k) { return this.filter (function (i) { retu
 Array.prototype.max = function (k) { return Math.max.apply (null, this.column (k)); };
 Array.prototype.min = function (k) { return Math.min.apply (null, this.column (k)); };
 
+Array.prototype.first = function () { return this.length ? this[this.length - 1] : null; };
+Array.prototype.last = function () { return this.length ? this[0] : null; };
+
 $(function () {
 
   window.vars = {
     $: {
       dashboard: $('#dashboard'),
       heatmaps: $('#heatmaps'),
+      cursor: $('#cursor'),
+      popanel: $('#popanel'),
     },
     timer: {
       loadDashboard: 5 * 1000,
     },
     dashboard: {},
-    heatmaps: {}
+    heatmaps: {},
+    isFinished: false,
+    cursorArray: [],
+    cursor: {
+      dashboard: [
+        ['all', 'taipei', 'tainan', 'taichung', 'kaohsiung'],
+        ['alleypay',]
+      ],
+      heatmaps: [
+        ['all'],
+        ['store'],
+        ['user'],
+        ['clean'],
+      ],
+    },
+    cursorTimer: null
   };
+
   window.func = {
     releases: {},
     inits: {},
     loads: {},
     percentage: function (value, maxValue) { return parseInt ((maxValue ? value / maxValue : 0) * 100, 10); },
-    
+    ajaxError: function (result) { console.error (result.responseText); },    
     dashboard: {},
     heatmaps: {},
+    cursor: {},
+    popanel: {},
   };
 
   window.api = {
@@ -56,4 +79,6 @@ $(function () {
     func = window.func.inits[$(this).data ('key')];
     typeof func !== 'undefined' && func ();
   });
+
+  google.charts.load ('current', {'packages':['corechart', 'calendar']});
 });

@@ -9,14 +9,20 @@
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" rel="stylesheet" type="text/css" />
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW&libraries=visualization" language="javascript" type="text/javascript" ></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/underscore-min.js" language="javascript" type="text/javascript" ></script>
 
     <link href="css/0.css" rel="stylesheet" type="text/css" />
     <link href="css/1.css" rel="stylesheet" type="text/css" />
     <link href="css/2.css" rel="stylesheet" type="text/css" />
+    <link href="css/p.css" rel="stylesheet" type="text/css" />
+    <link href="css/c.css" rel="stylesheet" type="text/css" />
 
     <script src="js/0.js" language="javascript" type="text/javascript" ></script>
     <script src="js/1.js" language="javascript" type="text/javascript" ></script>
     <script src="js/2.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/p.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/c.js" language="javascript" type="text/javascript" ></script>
     <script src="js/z.js" language="javascript" type="text/javascript" ></script>
 
   </head>
@@ -64,5 +70,17 @@
       </div>
     </div>
 
+    <div id='cursor' data-hide='yes'>
+      <img src="img/benefits-of-mouse-cursors-articles-web-18.png">
+    </div>
+
+    <div id='popanel'></div>
+
   </body>
 </html>
+
+<script id='_popanel_dashboard_all' type='text/x-html-template'>
+  <div class='chart1'></div>
+  <div class='chart2'></div>
+  <div class='chart3'></div>
+</script>

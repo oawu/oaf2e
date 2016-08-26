@@ -1,0 +1,150 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+#cursor {
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  z-index: 999;
+  @include transition(top .3s, left .3s);
+
+  &[data-hide='yes'] {
+    img {
+      display: none;
+    }
+  }
+  &[data-in='not'] {
+    img {
+      @include animation(cursor_not .5s);
+    }
+  }
+  &[data-in='yes'] {
+    &:before {
+      @include opacity(1);
+      @include animation(scale_opacity .5s);
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(91, 192, 222, .200);
+    @include scale(0);
+    @include opacity(0);
+    @include border-radius(50%);
+  }
+
+
+  &[class] {
+    display: inline-block;
+  }
+  &.dashboard {
+    top: 20px;
+    left: 20px;
+  }
+  &.dashboard_all {
+    top: 25%;
+    left: 10%;
+  }
+  &.dashboard_taipei {
+    top: 25%;
+    left: 30%;
+  }
+  &.dashboard_tainan {
+    top: 25%;
+    left: 50%;
+  }
+  &.dashboard_taichung {
+    top: 25%;
+    left: 70%;
+  }
+  &.dashboard_kaohsiung {
+    top: 25%;
+    left: 90%;
+  }
+  &.dashboard_alleypay {
+    top: 57%;
+    left: 10%;
+  }
+  &.dashboard_online {
+    top: 57%;
+    left: 30%;
+  }
+  &.dashboard_online_list {
+    top: 57%;
+    left: 50%;
+  }
+
+  &.heatmaps {
+    top: 20px;
+    left: 120px;
+  }
+  &.heatmaps_all {
+    top: 80px;
+    left: 110px;
+  }
+  &.heatmaps_store {
+    top: 148px;
+    left: 110px;
+  }
+  &.heatmaps_user {
+    top: 215px;
+    left: 110px;
+  }
+  &.heatmaps_clean {
+    top: 280px;
+    left: 110px;
+  }
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    @include animation(cursor 1s linear infinite);
+  }
+}
+@include keyframes(cursor_not){
+  0% {
+    left: 0;
+  }
+  25% {
+    left: 20px;
+  }
+  75% {
+    left: -20px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@include keyframes(cursor){
+  0% {
+    @include simple-transform(1, -3deg, 0, 0, 0, 0, 105px / 2, 0);
+  }
+  25% {
+    @include simple-transform(1, 3deg, 0, 0, 0, 0, 105px / 2, 0);
+  }
+  50% {
+    @include simple-transform(1, -3deg, 0, 0, 0, 0, 105px / 2, 0);
+  }
+  75% {
+    @include simple-transform(1, 3deg, 0, 0, 0, 0, 105px / 2, 0);
+  }
+  100% {
+    @include simple-transform(1, -3deg, 0, 0, 0, 0, 105px / 2, 0);
+  }
+}
