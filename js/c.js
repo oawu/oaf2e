@@ -31,23 +31,23 @@ function cursor_feature_dashboard_all () {
     var row = new google.visualization.DataTable ();
     row.addColumn ('string', '區域');
     row.addColumn ('number', '訂單數');
-    row.addRows ([['台北', parseInt (Math.random () * 100, 10)]]);
-    row.addRows ([['台南', parseInt (Math.random () * 100, 10)]]);
-    row.addRows ([['台中', parseInt (Math.random () * 100, 10)]]);
-    row.addRows ([['高雄', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['台北單數', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['台南單數', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['台中單數', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['高雄單數', parseInt (Math.random () * 100, 10)]]);
     pie.draw (row, $.extend({}, options, { title: '區域比例' }));
 
 
 
     pie = new google.visualization.PieChart ($(this).find ('.chart2').get (0));
     row = new google.visualization.DataTable ();
-    row.addColumn ('string', '區域');
+    row.addColumn ('string', '類型');
     row.addColumn ('number', '訂單數');
-    row.addRows ([['中西料理', parseInt (Math.random () * 100, 10)]]);
-    row.addRows ([['日式料理', parseInt (Math.random () * 100, 10)]]);
-    row.addRows ([['台式料理', parseInt (Math.random () * 100, 10)]]);
-    row.addRows ([['在地小吃', parseInt (Math.random () * 100, 10)]]);
-    pie.draw (row, $.extend({}, options, { title: '分類比例' }));
+    row.addRows ([['一般商品', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['分潤商品', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['買斷商品', parseInt (Math.random () * 100, 10)]]);
+    row.addRows ([['快付商品', parseInt (Math.random () * 100, 10)]]);
+    pie.draw (row, $.extend({}, options, { title: '訂單類型' }));
 
 
 
@@ -136,7 +136,8 @@ function closeAuto () {
                         .data ('y', 0);
     
     window.vars.cursorArray = window.func.cursor.buildArray (page);
-    console.error (window.vars.cursorArray);
+    
+console.error (window.vars.cursorArray);
     
     return false;
   }
