@@ -59,3 +59,19 @@ html {
     }
   }
 }
+
+#pokemons {
+  display: inline-block;
+  width: 100%;
+  @include clearfix();
+  
+  a {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
