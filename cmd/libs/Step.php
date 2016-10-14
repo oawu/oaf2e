@@ -146,9 +146,7 @@ class Step {
         try {
           Step::progress ('上傳檔案');
           return !S3::putFile ($file['path'], BUCKET, NAME . DIRECTORY_SEPARATOR . $file['uri']) ? ' 檔案：' . $file['path'] : '';
-        } catch (Exception $e) {
-          return ' 檔案：' . $file['path'];
-        }
+        } catch (Exception $e) { Step::error (array (' ' . $e->getMessage ())); }
       }, $files))) Step::error ($errors);
     Step::progress ('上傳檔案', '完成！');
   }
@@ -172,9 +170,7 @@ class Step {
         try {
           Step::progress ('刪除 S3 上需要刪除的檔案');
           return !S3::deleteObject (BUCKET, $file['name']) ? ' 檔案：' . $file['name'] : '';
-        } catch (Exception $e) {
-          return ' 檔案：' . $file['name'];
-        }
+        } catch (Exception $e) { Step::error (array (' ' . $e->getMessage ())); }
       }, $files))) Step::error ($errors);
     Step::progress ('刪除 S3 上需要刪除的檔案', '完成！');
   }
