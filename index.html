@@ -1,42 +1,61 @@
 <!DOCTYPE html>
-<html lang="tw">
+<html>
   <head>
-    <meta http-equiv="Content-Language" content="zh-tw" />
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
-
-    <title></title>
-
-    <meta name="robots" content="index,follow" />
-
-    <meta name="author" content="吳政賢(OA Wu)" />
-
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
-
-    <meta property="fb:admins" content="100000100541088" />
-    <meta property="fb:app_id" content="640377126095413" />
-
-    <meta property="og:locale" content="zh_TW" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta property="og:type" content="city" />
-    <meta property="og:image" content="" alt="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
-    <link href="css/public.css" rel="stylesheet" type="text/css" />
-
-    <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
-    <script src="js/public.js" language="javascript" type="text/javascript" ></script>
-
+    <meta charset="utf-8">
+    <title>360&deg; Image Gallery</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
+    <script src="components/set-image.js"></script>
+    <script src="components/update-raycaster.js"></script>
   </head>
-  <body lang="zh-tw">
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="http://pic.360.ioa.tw/upload/pictures/name/0/0/1/24/4096w_1439351054_57fb7e1e543cd.jpg">
+        <img id="city-thumb" crossorigin="anonymous" src="http://pic.360.ioa.tw/upload/pictures/name/0/0/1/23/4096w_901467422_57fb7d0d75984.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="http://pic.360.ioa.tw/upload/pictures/name/0/0/1/22/4096w_1552351102_57da9efa830a8.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
 
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/nunjucks">
+          <a-plane class="link" height="1" width="1"
+            material="shader: flat; src: {{ thumb }}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: {{ src }}"
+            sound="on: click; src: #click-sound"
+            update-raycaster="#cursor"></a-plane>
+        </script>
+      </a-assets>
+
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city"></a-sky>
+
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+      </a-entity>
+
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
   </body>
 </html>
