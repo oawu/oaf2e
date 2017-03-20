@@ -20,7 +20,7 @@ include_once PATH_CMD_LIBS . 'Minify' . DIRECTORY_SEPARATOR . 'Min' . PHP;
 Step::start ();
 
 $file = array_shift ($argv);
-$argv = Step::params ($argv, array (array ('-b', '-bucket'), array ('-a', '-access'), array ('-s', '-secret'), array ('-u', '-upload'), array ('-m', '-minify')));
+$argv = Step::params ($argv, array (array ('-b', '-bucket'), array ('-a', '-access'), array ('-s', '-secret'), array ('-u', '-upload'), array ('-m', '-minify'), array ('-n', '-usname')));
 if (!(isset ($argv['-b'][0]) && ($bucket = trim ($argv['-b'][0], '/')) && isset ($argv['-a'][0]) && ($access = $argv['-a'][0]) && isset ($argv['-s'][0]) && ($secret = $argv['-s'][0]))) {
   echo str_repeat ('=', 80) . "\n";
   echo ' ' . Step::color ('◎', 'R') . ' ' . Step::color ('錯誤囉！', 'r') . Step::color ('請確認參數是否正確，分別需要', 'p') . ' ' . Step::color ('-b', 'W') . '、' . Step::color ('-a', 'W') . '、' . Step::color ('-s', 'W') . Step::color (' 的參數！', 'p') . ' ' . Step::color ('◎', 'R');
@@ -34,6 +34,7 @@ define ('SECRET', $secret);
 
 define ('UPLOAD', isset ($argv['-u'][0]) && is_numeric ($tmp = $argv['-u'][0]) ? $tmp ? true : false : true);
 define ('MINIFY', isset ($argv['-m'][0]) && is_numeric ($tmp = $argv['-m'][0]) ? $tmp ? true : false : true);
+define ('USNAME', isset ($argv['-n'][0]) && is_numeric ($tmp = $argv['-n'][0]) ? $tmp ? true : false : true);
 
 // 開始執行
 Step::init ();
