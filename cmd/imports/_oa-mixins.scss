@@ -12,7 +12,34 @@
 
 @import "functions/_oa-material";
 
-@mixin font-smoothing ($val: antialiased) {
+@mixin icomoon-font($ff){
+  @content;
+  font-family: $ff, Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"微軟正黑體", "Microsoft JhengHei";
+}
+@mixin range-width($min: 0, $max: 0){
+  @if $max == 0 {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: $max - 1px) and (min-width: $min) {
+      @content;
+    }
+  }
+}
+@mixin range-height($min: 0, $max: 0){
+  @if $max == 0 {
+    @media screen and (min-height: $min) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-height: $max - 1px) and (min-height: $min) {
+      @content;
+    }
+  }
+}
+
+@mixin font-smoothing($val: antialiased){
   -moz-osx-font-smoothing: $val;
    -webkit-font-smoothing: $val;
       -moz-font-smoothing: $val;
@@ -20,10 +47,10 @@
         -o-font-smoothing: $val;
 }
 
-@mixin clearfix () {
+@mixin clearfix(){
   *zoom: 1;
 
-  &:after {
+  &:after{
     display: table;
     content: "";
     line-height: 0;
@@ -31,7 +58,7 @@
   }
 }
 
-@mixin svg-color ($color: rgba(255, 255, 255, 1), $hoverColor: rgba(0, 0, 0, 1), $transition: all .3s) {
+@mixin svg-color($color: rgba(255, 255, 255, 1), $hoverColor: rgba(0, 0, 0, 1), $transition: all .3s){
   &, * {
     color: $color;
     fill: $color;
@@ -44,8 +71,15 @@
     }
   }
 }
-@mixin split ($leftName: '.l', $rightName: '.r') {
+@mixin split($leftName: '', $rightName: ''){
   @include clearfix();
+  
+  @if $leftName == '' {
+    $leftName: '> *:first-child'
+  }
+  @if $rightName == '' {
+    $rightName: '> *:last-child'
+  }
 
   #{$leftName}, #{$rightName} {
     float: left;
@@ -56,9 +90,15 @@
     float: right;
   }
 }
-@mixin split-left ($leftWidth: 100px, $leftName: '.l', $rightName: '.r') {
+@mixin split-left($leftWidth: 100px, $leftName: '', $rightName: ''){
   @include split($leftName, $rightName);
-
+  
+  @if $leftName == '' {
+    $leftName: '> *:first-child'
+  }
+  @if $rightName == '' {
+    $rightName: '> *:last-child'
+  }
   #{$leftName} {
     width: $leftWidth;
   }
@@ -66,9 +106,15 @@
     width: calc(100% - #{$leftWidth});
   }
 }
-@mixin split-right ($rightWidth: 100px, $leftName: '.l', $rightName: '.r') {
+@mixin split-right($rightWidth: 100px, $leftName: '', $rightName: ''){
   @include split($leftName, $rightName);
-
+  
+  @if $leftName == '' {
+    $leftName: '> *:first-child'
+  }
+  @if $rightName == '' {
+    $rightName: '> *:last-child'
+  }
   #{$leftName} {
     width: calc(100% - #{$rightWidth});
   }
@@ -77,7 +123,7 @@
   }
 }
 
-@mixin overflow-docx3 () {
+@mixin overflow-docx3(){
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
