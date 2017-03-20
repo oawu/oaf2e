@@ -168,10 +168,11 @@ class Step {
     Step::newLine ('-', '過濾需要刪除檔案');
 
     $files = array_filter (Step::$s3Files, function ($s3File) {
-      if (USNAME)
+      if (USNAME) {
         foreach (Step::$localFiles as $localFile) if ($s3File['name'] == (NAME . DIRECTORY_SEPARATOR . $localFile['uri'])) return false;
-      else 
+      } else {
         foreach (Step::$localFiles as $localFile) if ($s3File['name'] == ($localFile['uri'])) return false;
+      }
       Step::progress ('過濾需要刪除檔案');
       return true;
     });
