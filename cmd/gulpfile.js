@@ -24,6 +24,12 @@ gulp.task ('default', function () {
   watcherScss.on ('change', function (path) {
     gulp.start ('compass_compile');
     console.log ('\n ' + colors.red ('•') + colors.yellow (' [scss] ') + '完成編譯 scss，檔案：' + colors.gray (path.replace (/\\/g,'/').replace (/.*\//, '')) + '');
+  }).on ('unlink', function (path) {
+    del (path.replace (/scss\//g, 'css/').replace (/\.scss/g, '.css'));
+    console.log ('\n ' + colors.red ('•') + colors.yellow (' [scss] ') + '刪除 scss，檔案：' + colors.gray (path.replace (/\\/g,'/').replace (/.*\//, '')) + '');
+  }).on ('add', function (path) {
+    gulp.start ('compass_compile');
+    console.log ('\n ' + colors.red ('•') + colors.yellow (' [scss] ') + '完成編譯 scss，檔案：' + colors.gray (path.replace (/\\/g,'/').replace (/.*\//, '')) + '');
   });
 
   var watcherReload = chokidar.watch (['./root/*.html', './root/css/**/*.css', './root/js/**/*.js'], {
@@ -62,7 +68,7 @@ gulp.task ('update_icomoon_font_icon', function () {
     var t = buffer.match (/\.icon-[a-zA-Z_-]*:before\s?\{\s*content:\s*"[\\A-Za-z0-9]*";\s*}/g);
       if (!(t && t.length)) return;
 
-      writeFile ('./root/scss/icon.scss', '@import "_oa";\n\n@include font-face("icomoon", font-files("icomoon/fonts/icomoon.eot", "icomoon/fonts/icomoon.woff", "icomoon/fonts/icomoon.ttf", "icomoon/fonts/icomoon.svg"));\n[class^="icon-"], [class*=" icon-"] {\n  font-family: "icomoon", Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"微軟正黑體", "Microsoft JhengHei"; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1;\n  @include font-smoothing(antialiased);\n}\n\n' + t.join ('\n'), function(err) {
+      writeFile ('./root/scss/icon.scss', '@import "_oa";\n\n@include font-face("icomoon", font-files("icomoon/fonts/icomoon.eot", "icomoon/fonts/icomoon.woff", "icomoon/fonts/icomoon.ttf", "icomoon/fonts/icomoon.svg"));\n[class^="icon-"], [class*=" icon-"] {\n  font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1;\n  @include font-smoothing(antialiased);\n}\n\n' + t.join ('\n'), function(err) {
         console.log ('\n ' + colors.red ('•') + colors.yellow (' [icon] ') + '更新 icon 惹，目前有 ' + colors.magenta (t.length) + ' 個！');
         if (err) console.log(err);
       });
