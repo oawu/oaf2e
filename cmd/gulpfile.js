@@ -133,7 +133,7 @@ gulp.task ('watch', function () {
 
 gulp.task ('update_icomoon_font_icon', function () {
   read ('./root/font/icomoon/style.css', 'utf8', function (err, buffer) {
-    var t = buffer.match (/\.icon-[a-zA-Z_-]*:before\s?\{\s*content:\s*"[\\A-Za-z0-9]*";\s*}/g);
+    var t = buffer.match (/\.icon-[a-zA-Z_\-0-9]*:before\s?\{\s*content:\s*"[\\A-Za-z0-9]*";\s*}/g);
       if (!(t && t.length)) return;
 
       writeFile ('./root/scss/icon.scss', '@import "_oa";\n\n@include font-face("icomoon", font-files("icomoon/fonts/icomoon.eot", "icomoon/fonts/icomoon.woff", "icomoon/fonts/icomoon.ttf", "icomoon/fonts/icomoon.svg"));\n[class^="icon-"], [class*=" icon-"] {\n  font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1;\n  @include font-smoothing(antialiased);\n}\n\n' + t.join ('\n'), function(err) {
