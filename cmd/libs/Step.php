@@ -33,7 +33,7 @@ class Step {
   public static function start () {
     Step::$startTime = microtime (true);
     echo "\n" . str_repeat ('=', 80) . "\n";
-    echo ' ' . self::color ('◎ 執行開始 ◎', 'P') . str_repeat (' ', 48) . '[' . self::color ('OA S3 Tools v1.0', 'y') . "]\n";
+    echo ' ' . self::color ('◎ 執行開始 ◎', 'P') . str_repeat (' ', 48) . '[' . self::color ('OA S3 Tools v2.0', 'y') . "]\n";
   }
   public static function end () {
     echo str_repeat ('=', 80) . "\n";
@@ -54,7 +54,7 @@ class Step {
     echo str_repeat ('=', 80) . "\n";
     $size = Step::memoryUnit (memory_get_usage ());
     echo ' ' . self::color ('➜', 'W') . ' ' . self::color ('使用記憶體：', 'R') . '' . self::color ($size[0], 'W') . ' ' . $size[1] . "\n";
-    echo str_repeat ('-', 80) . "\n";
+    echo self::color (str_repeat ('-', 80), 'N') . "\n";
 
     echo ' ' . self::color ('➜', 'W') . ' ' . self::color ('執行時間：', 'R') . '' . self::color (round (microtime (true) - Step::$startTime, 4), 'W') . ' 秒' . "\n";
   }
@@ -65,7 +65,7 @@ class Step {
   public static function error ($errors = array ()) {
     echo "\n" . str_repeat ('=', 80) . "\n";
     echo " " . self::color ('➜', 'W') . ' ' . self::color ('有發生錯誤！', 'r') . "\n";
-    echo $errors ? str_repeat ('-', 80) . "\n" . implode ("\n" . str_repeat ('-', 80) . "\n", $errors) . "\n" : "";
+    echo $errors ? self::color (str_repeat ('-', 80), 'N') . "\n" . implode ("\n" . self::color (str_repeat ('-', 80), 'N') . "\n", $errors) . "\n" : "";
     echo str_repeat ('=', 80) . "\n";
     exit ();
   }
@@ -76,11 +76,11 @@ class Step {
   }
   public static function init () {
     $paths = array (PATH);
-    Step::newLine ('-', '初始化環境與變數', count ($paths));
+    Step::newLine (self::color ('-', 'N'), '初始化環境與變數', count ($paths));
     Step::progress ('初始化環境與變數', '完成！');
   }
-  public static function initS3 ($access, $secret) {
-    Step::newLine ('-', '初始化 S3 工具');
+  public static function initS3 ($access, $secret, $ch = '-') {
+    Step::newLine ($ch, '初始化 S3 工具');
     
     try {
       if (!S3::init ($access, $secret)) throw new Exception ('初始化失敗！');
@@ -89,7 +89,7 @@ class Step {
     Step::progress ('初始化 S3 工具', '完成！');
   }
   public static function listLocalFiles () {
-    Step::newLine ('-', '列出即將上傳所有檔案');
+    Step::newLine (self::color ('-', 'N'), '列出即將上傳所有檔案');
 
     $uploadDirs = array (); foreach (Step::$uploadDirs as $key => $value) array_push ($uploadDirs, array ('path' => PATH . $key, 'formats' => $value));
 
@@ -118,9 +118,9 @@ class Step {
   public static function listS3Files () {
     try {
       if (USNAME)
-        Step::newLine ('-', '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET, NAME)));
+        Step::newLine (self::color ('-', 'N'), '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET, NAME)));
       else
-        Step::newLine ('-', '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET)));
+        Step::newLine (self::color ('-', 'N'), '列出 S3 上所有檔案', count ($list = S3::getBucket (BUCKET)));
 
       Step::$s3Files = array_filter ($list, function ($file) {
         Step::progress ('列出 S3 上所有檔案');
@@ -134,7 +134,7 @@ class Step {
     Step::progress ('列出 S3 上所有檔案', '完成！');
   }
   public static function filterLocalFiles () {
-    Step::newLine ('-', '過濾需要上傳檔案');
+    Step::newLine (self::color ('-', 'N'), '過濾需要上傳檔案');
 
     $files = array_filter (Step::$localFiles, function ($file) {
       foreach (Step::$s3Files as $s3File)
@@ -151,7 +151,7 @@ class Step {
     return $files;
   }
   public static function uploadLocalFiles ($files) {
-    Step::newLine ('-', '上傳檔案', count ($files));
+    Step::newLine (self::color ('-', 'N'), '上傳檔案', count ($files));
     
     if ($errors = array_filter (array_map (function ($file) {
         try {
@@ -165,7 +165,7 @@ class Step {
     Step::progress ('上傳檔案', '完成！');
   }
   public static function filterS3Files () {
-    Step::newLine ('-', '過濾需要刪除檔案');
+    Step::newLine (self::color ('-', 'N'), '過濾需要刪除檔案');
 
     $files = array_filter (Step::$s3Files, function ($s3File) {
       if (USNAME) {
@@ -182,7 +182,7 @@ class Step {
     return $files;
   }
   public static function deletwS3Files ($files) {
-    Step::newLine ('-', '刪除 S3 上需要刪除的檔案', count ($files));
+    Step::newLine (self::color ('-', 'N'), '刪除 S3 上需要刪除的檔案', count ($files));
 
     if ($errors = array_filter (array_map (function ($file) {
         try {
@@ -234,7 +234,7 @@ class Step {
       $sourceDir = rtrim ($sourceDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
       while (false !== ($file = readdir ($fp))) {
-        if (!trim ($file, '.') || (($hidden == false) && ($file[0] == '.')) || is_link ($file) || ($file == 'cmd')) continue;
+        if (trim ($file, '.') == '' || (($hidden === false) && ($file[0] === '.')) || is_link ($file) || ($file == 'cmd')) continue;
 
         if ((($directoryDepth < 1) || ($new_depth > 0)) && @is_dir ($sourceDir . $file)) $filedata[$file] = Step::directoryMap ($sourceDir . $file . DIRECTORY_SEPARATOR, $new_depth, $hidden);
         else array_push ($filedata, $file);
@@ -297,5 +297,110 @@ class Step {
     fclose($fp);
 
     return true;
+  }
+  public static function listLocalFiles2 ($path, $path2) {
+    Step::newLine (self::color ('-', 'N'), '列出即將上傳所有檔案');
+
+    // $uploadDirs = array (); foreach (Step::$uploadDirs as $key => $value) array_push ($uploadDirs, array ('path' => PATH . $key, 'formats' => $value));
+
+    $files = array ();
+    Step::mergeArrayRecursive (Step::directoryMap ($path), $files, $path);
+    // $files = array_filter ($files, function ($file) use ($uploadDir) { return in_array (pathinfo ($file, PATHINFO_EXTENSION), $uploadDir['formats']); });
+
+    Step::progress ('列出即將上傳所有檔案');
+    Step::$localFiles = array_values (array_map (function ($file) use ($path, $path2) {
+      return array ('path' => $file, 'md5' => md5_file ($file), 'uri' => ($path2 ? $path2 . '/' : '') . preg_replace ('/^(' . preg_replace ('/\//', '\/', $path) . ')/', '', $file));
+    }, $files));
+
+    Step::progress ('列出即將上傳所有檔案', '完成！');
+  }
+  public static function listS3Files2 ($path) {
+    try {
+      Step::newLine (self::color ('-', 'N'), '列出 S3 上所有檔案', count ($list = $path !== '' ? S3::getBucket (BUCKET, $path) : S3::getBucket (BUCKET)));
+
+      Step::$s3Files = array_filter ($list, function ($file) use ($path) {
+        Step::progress ('列出 S3 上所有檔案');
+        return $path !== '' ? preg_match ('/^' . $path . '\//', $file['name']) : $file['name'];
+      });
+    } catch (Exception $e) { Step::error (array (' ' . $e->getMessage ())); }
+
+    Step::progress ('列出 S3 上所有檔案', '完成！');
+  }
+  public static function filterLocalFiles2 () {
+    Step::newLine (self::color ('-', 'N'), '過濾需要上傳檔案');
+
+    $files = array_filter (Step::$localFiles, function ($file) {
+      foreach (Step::$s3Files as $s3File)
+        if (($s3File['name'] == $file['uri']) && ($s3File['hash'] == $file['md5']))
+          return false;
+
+      Step::progress ('過濾需要上傳檔案');
+      return $file;
+    });
+    Step::progress ('過濾需要上傳檔案', '完成！');
+
+    return $files;
+  }
+  public static function uploadLocalFiles2 ($files) {
+    Step::newLine (self::color ('-', 'N'), '上傳檔案', count ($files));
+    
+    if ($errors = array_filter (array_map (function ($file) {
+        try {
+          Step::progress ('上傳檔案');
+          return !S3::putFile ($file['path'], BUCKET, $file['uri']) ? ' 檔案：' . $file['path'] : '';
+        } catch (Exception $e) { Step::error (array (' ' . $e->getMessage ())); }
+      }, $files))) Step::error ($errors);
+    Step::progress ('上傳檔案', '完成！');
+  }
+  public static function filterS3Files2 () {
+    Step::newLine (self::color ('-', 'N'), '過濾需要刪除檔案');
+
+    $files = array_filter (Step::$s3Files, function ($s3File) {
+      foreach (Step::$localFiles as $localFile) if ($s3File['name'] == $localFile['uri']) return false;
+      Step::progress ('過濾需要刪除檔案');
+      return true;
+    });
+
+    Step::progress ('過濾需要刪除檔案', '完成！');
+
+    return $files;
+  }
+  public static function scan () {
+    $fp = fopen ('php://stdin', 'r');
+    return preg_replace ('/^[\s\/]*|[\s\/]*$/', '', fgets ($fp, 1024));
+  }
+  public static function scanLocal () {
+    echo self::color (str_repeat ('-', 80), 'N') . "\n";
+
+    do {
+      echo ' ' . self::color ('➜', 'Y') . ' ' . self::color ('請選擇資料夾', 'c') . self::color ('：', 'W');
+      $path = self::scan ();
+      if ($a = !($path != '' && file_exists ('/' . $path . '/') && is_readable ('/' . $path . '/') && is_dir ('/' . $path . '/')))
+        echo ' ' . self::color ('!', 'r') . ' ' . self::color ('[路徑錯誤]', 'w') . ' ' . self::color ('資料夾不存在，或不能讀取！', 'R') . "\n\n";
+    } while ($a);
+
+    return '/' . $path . '/';
+  }
+  public static function scanS3 () {
+    echo self::color (str_repeat ('-', 80), 'N') . "\n";
+    do {
+      echo ' ' . self::color ('➜', 'Y') . ' ' . self::color ('請輸入要上傳的資料夾位置', 'c') . self::color ('：', 'W');
+      $path = self::scan ();
+      if ($a = !$path)
+        echo ' ' . self::color ('!', 'r') . ' ' . self::color ('[路徑錯誤]', 'w') . ' ' . self::color ('不能使用根目錄！', 'R') . "\n\n";
+    } while ($a);
+
+    return $path;
+  }
+  public static function checkPath ($p1, $p2) {
+    echo str_repeat ('=', 80) . "\n";
+      
+    echo ' ' . self::color ('➜', 'W') . ' ' . self::color ('您選擇的目錄', 'g') . self::color ('：', 'W') . self::color ($p1, 'w') . "\n";
+    echo self::color (str_repeat ('-', 80), 'N') . "\n";
+    echo ' ' . self::color ('➜', 'W') . ' ' . self::color ('要上傳的位置', 'g') . self::color ('：', 'W') . self::color ($p2, 'w') . "\n";
+
+    echo self::color (str_repeat ('-', 80), 'N') . "\n";
+    echo ' ' . self::color ('➜', 'Y') . ' ' . self::color ('以上是您這次要上傳的資訊嗎？', 'C') . self::color ('(y/N)', 'N') . self::color ('：', 'W');
+    return strtolower (self::scan ()) == 'y' ? true : false;
   }
 }
