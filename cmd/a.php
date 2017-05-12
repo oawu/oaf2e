@@ -32,70 +32,28 @@ if (!(isset ($argv['-b'][0]) && ($bucket = trim ($argv['-b'][0], '/')) && isset 
   define ('ACCESS', $access);
   define ('SECRET', $secret);
 
-  // do {
-  //   $pathLocal = Step::scanLocal ();
-  //   $pathS3 = Step::scanS3 ();
-  // } while (!Step::checkPath ($pathLocal, $pathS3));
+  do {
+    $pathLocal = Step::scanLocal ();
+    $pathS3 = Step::scanS3 ();
+  } while (!Step::checkPath ($pathLocal, $pathS3));
 
-  $pathLocal = '/Users/OA/Downloads/aa/';
-  $pathS3 = 'a';
+  // $pathLocal = '/Users/OA/Downloads/aa/';
+  // $pathS3 = 'a';
 
   include_once PATH_CMD_LIBS . 'S3' . PHP;
   Step::initS3 (ACCESS, SECRET, '=');
   
-//   Step::listLocalFiles2 ($pathLocal, $pathS3);
-//   Step::listS3Files2 ($pathS3);
+  Step::listLocalFiles2 ($pathLocal, $pathS3);
+  Step::listS3Files2 ($pathS3);
 
-//   $files = Step::filterLocalFiles2 ();
-//   Step::uploadLocalFiles2 ($files);
+  $files = Step::filterLocalFiles2 ();
+  Step::uploadLocalFiles2 ($files);
 
-//   $files = Step::filterS3Files2 ();
-//   Step::deletwS3Files ($files);
+  $files = Step::filterS3Files2 ();
+  Step::deletwS3Files ($files);
 
-// Step::usage ();
-// Step::end ();
-// function set_nested_array_value(&$array, $path, &$value, $delimiter = '/') {
-//     $pathParts = explode($delimiter, $path);
-
-//     $current = &$array;
-//     foreach($pathParts as $key) {
-//         $current = &$current[$key];
-//     }
-
-//     $backup = $current;
-//     $current = $value;
-
-//     return $backup;
-
-// }$b = array (1,23);
-// set_nested_array_value ($a, '123/324/435/123', $b);
-// var_dump ($a, $b);
-// exit ();
-
-Step::listS3Files2 ('');
-
-$arr = array_values (array_map (function ($t) {
-  return array (
-      'p' => explode ('/', pathinfo ($t['name'], PATHINFO_DIRNAME)),
-      'n' => pathinfo ($t['name'], PATHINFO_BASENAME)
-    );
-}, Step::$s3Files));
-
-$arr2 = array ();
-foreach ($arr as $val) {
-  $a = &$arr2;
-
-  foreach ($val['p'] as $k) {
-    if (!isset ($a[$k]))
-      $a[$k] = array ();
-    $a = &$a[$k];
-  }
-  array_push ($a, $val['n']);
-}
-
-var_dump (json_encode ($arr2));
-exit ();
-
+Step::usage ();
+Step::end ();
 echo "\n";
 exit ();
 
