@@ -65,7 +65,7 @@
         ~ span {
           &:before {
             background-color: $color;
-            border-color: adjust-lightness($color, -5);
+            border-color: adjust-lightness($color, -5%);
             @include box-shadow(inset 0px 0px 0px 11px $color);
           }
           &:after {

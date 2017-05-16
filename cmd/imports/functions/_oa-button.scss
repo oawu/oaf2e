@@ -5,7 +5,7 @@
  */
 
 // <button></button>
-@mixin button($color: rgba(250, 191, 38, 1.00)){
+@mixin button($color: rgba(69, 139, 244, 1.00)){
   display: inline-block;
   width: auto;
   height: 25px;
@@ -34,7 +34,7 @@
     cursor: not-allowed;
     @include text-shadow(none);
     @include box-shadow(none);
-    $amount: 15;
+    $amount: 15%;
     @include contrasted(adjust-lightness($color, $amount), adjust-lightness(rgba(55, 55, 55, 1.00), $amount), adjust-lightness(rgba(255, 255, 255, 1.00), $amount));
   }
 }

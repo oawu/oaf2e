@@ -11,7 +11,7 @@
   text-decoration: none;
   @if $hoverColor {
   } @else {
-    $hoverColor: adjust-lightness($color, -15);
+    $hoverColor: adjust-lightness($color, -15%);
   }
 
   @include transition(color .3s, border-bottom .3s);
