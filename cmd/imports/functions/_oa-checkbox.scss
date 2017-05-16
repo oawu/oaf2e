@@ -12,6 +12,7 @@
   height: 20px;
   line-height: 20px;
   padding-left: 24px;
+  $x: '_checkbox_r_'+random(1000);
 
   > * {
     position: absolute;
@@ -104,7 +105,7 @@
       &:before {
         @include border-radius(50%);
         @include background-image(linear-gradient(rgba(184, 241, 148, 1.00) 0%, rgba(89, 178, 169, 1.00) 100%));
-        @include animation(checkbox-rotate 1s linear infinite);
+        @include animation(#{$x} 1s linear infinite);
       }
       &:after {
         content: "";
@@ -123,13 +124,5 @@
       }
     }
   }
-}
-
-@include keyframes(checkbox-rotate){
-  0% {
-    @include rotate(0);
-  }
-  100% {
-    @include rotate(360deg);
-  }
+  @include keyframes(#{$x}) { 0% { @include rotate(0); } 100% { @include rotate(360deg); } }
 }
