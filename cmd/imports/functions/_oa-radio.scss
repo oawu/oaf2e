@@ -4,6 +4,10 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
+// <label>
+//   <input type='radio'>
+//   <span></span>
+// </label>
 @mixin radio($color: rgba(69, 139, 244, 1.00), $d: 20px, $s: 5px){
   position: relative;
   display: inline-block;

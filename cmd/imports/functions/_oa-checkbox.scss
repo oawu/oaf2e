@@ -4,6 +4,10 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
+// <label>
+//   <input type='checkbox'>
+//   <span></span>
+// </label>
 @mixin checkbox($color: rgba(69, 139, 244, 1.00)){
   $w: 4px;
   position: relative;
