@@ -26,27 +26,23 @@ OA 個人常用的前端開發工具！
 
 1. 尚未執行過 sudo npm install .
 	* 本機尚未有 gh-pages 分支，請在專案目錄下執行以下指令：
-
-		```
+```
 git branch -v gh-pages && git checkout gh-pages && cd cmd && sudo npm install .  && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 
 	* 本機已經有 gh-pages 分支，請在專案目錄下執行以下指令：
-
-		```
+```
 git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && sudo npm install . && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 
 2. 已經執行過 sudo npm install .
 	* 本機尚未有 gh-pages 分支，請在專案目錄下執行以下指令：
-
-		```
+```
 git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 
 	* 本機已經有 gh-pages 分支，請在專案目錄下執行以下指令：
-
-		```
+```
 git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 	
