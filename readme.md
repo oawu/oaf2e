@@ -47,7 +47,6 @@ git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd 
 ### AWS S3
 主要是藉由執行 `cmd/put.php` 將檔案上傳至 S3，請確保本機能執行 php 版本 5.6 或以上版本才可以使用，指令中的 {bucket}、{access}、{secret} 請置換成自己的值
 
-
 * **要**壓縮檔案，請載專案目錄下執行以下指令
 ```
 git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} -m 0 && cd .. && git checkout .
