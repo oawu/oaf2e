@@ -5,5 +5,12 @@
  */
 
 $(function () {
-
+  $("input[name='style']").change (function () {
+    if ($(this).val () == '1') {
+      $('#list').removeClass ('block');
+    } else {
+      $('#list').addClass ('block');
+    }
+    
+  })
 });
