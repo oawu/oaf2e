@@ -13,6 +13,8 @@
   display: inline-block;
   height: $d;
   min-width: $d;
+  padding-left: $d + 4px;
+
   cursor: pointer;
   $x: '_radio_r_'+random(1000);
 
@@ -32,6 +34,7 @@
     width: $d;
     height: $d;
     z-index: 2;
+    background-color: white;
     @include border-radius(50%);
     @include transition(background-color .3s);
     @include box-shadow(inset 0 0 0 .5px rgba(100, 100, 100, .500));
