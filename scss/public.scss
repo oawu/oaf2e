@@ -34,27 +34,335 @@ html {
 
     background: $mainBackgroundColor;
     background-image: $mainBackgroundImage;
+    background-attachment: fixed;
+    // background-color: rgba(255, 250, 245, 1.00);
+    background-color: rgba(240, 240, 240, 1.00);
 
     @include font-smoothing(antialiased);
   }
 }
-#style {
+
+.bcover {
+  position: fixed;
+  left: -100%;
+  top: 0;
   display: inline-block;
-  width: 720px;
-  margin-top: 16px;
+  width: 100%;
+  height: 100%;
+  @include opacity(0);
+  @include transition(opacity .3s);
+  z-index: -9999;
+  background-color: rgba(0, 0, 0, 0.3)
+}
+.ckbh {
+  position: fixed;
+  left: -9999;
+  top: -9999;
+  display: none;
+  @include opacity(0);
+  @include scale(0);
+  z-index: -9999;
+}
+$headerHeight: 55px;
+$menuWidth: 250px;
+$mainWidth: 1024px;
+
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  width: 100%;
+  background-color: rgba(245, 98, 98, 1.00);
+  height: $headerHeight;
+  line-height: $headerHeight;
+  z-index: 100;
+  @include box-shadow(0 1px 8px rgba(0,0,0,.3));
+
+  > div {
+    display: inline-block;
+    width: 100%;
+    max-width: $mainWidth;
+    
+    @include clearfix();
+    
+    > * {
+      float: left;
+      display: inline-block;
+      height: $headerHeight;
+    }
+    .icon-menu {
+      width: 55px;
+      font-size: 25px;
+      color: rgba(254, 236, 236, 1.00);
+      @include transition(color .3s);
+      cursor: pointer;
+      
+      &:hover {
+        color: white;
+      }
+    }
+    .logo {
+      width: $menuWidth - 55px;
+      text-align: left;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+    }
+    .avatar {
+      width: 55px;
+      
+      > div {
+        width: 35px;
+        height: 35px;
+        margin-top: ($headerHeight - 35px) / 2;
+        overflow: hidden;
+        cursor: pointer;
+        @include border-radius(50%);
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .search {
+      width: calc(100% - 55px - #{$menuWidth});
+    }
+  }
+}
+#menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  width: $menuWidth;
+  height: 100%;
+  padding-top: $headerHeight + 16px;
+  z-index: 100 - 10;
+
+  @include opacity(1);
+  @include transition(top .3s, opacity .3s);
+
+  > header {
+    display: none;
+    width: 100%;
+    background-color: rgba(245, 98, 98, 1.00);
+    padding: 16px 0;
+    > div {
+      height: 28px;
+      line-height: 28px;
+      color: white;
+      font-size: 20px;
+    }
+  }
+  > a {
+    position: relative;
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    color: rgba(100, 100, 100, 1.00);
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 45px;
+    text-align: left;
+    @include transition(background-color .3s);
+    
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+    }
+    &.active {
+      color: rgba(245, 98, 98, 1.00);
+      background-color: rgba(225, 225, 225, 1.00);
+    }
+    &:hover {
+      background-color: rgba(230, 230, 230, 1.00);
+    }
+  }
+  @include range-width(0, 750px) {
+    padding-top: 0;
+    background-color: white;
+    z-index: 100 + 10;
+    left: -$menuWidth;
+    @include opacity(0);
+    @include box-shadow(0 -1px 24px rgba(0,0,0,0.4));
+    @include transition(left .3s, opacity .3s);
+
+
+    + label.bcover {
+      z-index: 100 + 10 - 5;
+    }
+    > header {
+      display: inline-block;
+    }
+  }
+  @include range-width(750px, 850px) {
+    top: -100%;
+  }
+  @include range-width($mainWidth + 24px) {
+    left: calc(50% - #{$mainWidth} / 2);
+  };
+}
+
+#main {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: $mainWidth;
+  margin: 0 auto;
+
+  padding-top: $headerHeight;
+  padding-left: $menuWidth;
+  z-index: 100 - 10 - 10;
+
+  @include range-width(750px) {
+    @include transition(padding-left .3s);
+  }
+  @include range-width(0, 850px) {
+    padding-left: 0;
+  }
+  > div {
+    display: inline-block;
+    width: 100%;
+    padding: 16px;
+  }
+}
+
+
+.pagination {
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+  margin-top: 24px;
+  text-align: right;
+
+  @include range-width(0, 530px){
+    text-align: center;
+    background-color: white;
+    @include border-radius(2px);
+    @include box-shadow(0 1px 2px rgba(0,0,0,0.2));
+  }
+  &:empty {
+    display: none;
+  }
+  > ul {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    @include clearfix();
+
+    @include range-width(0, 530px) {
+      width: 100%;
+    }
+    @include range-width(530px) {
+      background-color: white;
+      @include border-radius(2px);
+      @include box-shadow(0 0 2px 1px rgba(0, 0, 0, .075), 0 1px 2px rgba(0,0,0,0.2));
+    }
+
+    > li {
+      position: relative;
+      float: left;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      overflow: hidden;
+      @include transition(background-color .3s);
+      
+      @include range-width(0, 530px){
+        display: none;
+        width: calc(100% / 3);
+        height: 45px;
+        line-height: 45px;
+
+        // &.f, &.l, 
+        &.n, &.p, &.active {
+          display: inline-block;
+          + * {
+            margin-left: 10px;
+          }
+        }
+        &.active {
+          &:first-child {
+            display: none;
+            ~ li.n {
+              width: 100%;
+              &:before {
+                content: '下一頁';
+              }
+            }
+            ~ li.l {
+              display: none;
+            }
+          }
+        }
+      }
+      &:hover {
+        background-color: rgba(250, 250, 250, 1.00);
+      }
+      &.active {
+        font-weight: bold;
+        @include range-width(530px){
+          background-color: rgba(245, 245, 245, 1.00);
+        }
+        &, a {
+          color: rgba(200, 75, 75, 1.00);
+        }
+      }
+      &, a {
+        font-size: 14px;
+        color: rgba(100, 100, 100, 1.00);
+        &:before {
+          font-size: 16px;
+        }
+      }
+
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.lay {
+  display: inline-block;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
   @include clearfix();
-  
-  label {
-    float: left;
+  + .lay {
+    margin-top: 8px;
+  }
+  b {
+    margin: 0 2px;
+  }
+  > label {
     @include radio;
-    + label {
+  }  
+  > * {
+    float: left;
+    + * {
       margin-left: 16px;
     }
   }
 }
 #list {
   display: inline-block;
-  width: 720px;
+  width: 100%;
   margin-top: 16px;
 
   .item {
@@ -84,21 +392,23 @@ html {
       @include overflow-docx3();
 
       &:nth-child(1) {
-        width: 350px;
+        width: calc(100% - 100px - 120px - 70px);
         text-align: left;
       }
       &:nth-child(2) {
         width: 100px;
         font-weight: bold;
         text-align: right;
-        sup {
-          line-height: 16px;
+        &:before {
+          content: '$';
+          // line-height: 16px;
           margin-right: 2px;
           @include opacity(.5);
         }
       }
       &:nth-child(3) {
-        width: 180px;
+        width: 120px;
+
 
         display: flex;
         flex-direction: row;
@@ -121,6 +431,8 @@ html {
       }
       &:nth-child(4) {
         width: 70px;
+        color: rgba(155, 155, 155, 1);
+        font-size: 13px;
       }
     }
   }
@@ -161,12 +473,38 @@ html {
         }
         &:nth-child(4) {
           text-align: right;
-          font-size: 13px;
-          color: rgba(155, 155, 155, 1);
           border-top: 1px solid rgba(0, 0, 0, .1);
           margin-top: 8px;
         }
       }
+    }
+  }
+}
+
+
+#menu_ckb:checked {
+  ~ #menu {
+    @include range-width(0, 750px) {
+      left: 0;
+      @include opacity(1);
+      + label.bcover {
+        left: 0;
+        @include opacity(1);
+      }
+    }
+    @include range-width(750px, 850px) {
+      top: 0;
+      @include opacity(1);
+    }
+    @include range-width(850px) {
+      top: -100%;
+      @include opacity(0);
+    }
+  }
+  ~ #main {
+    padding-left: 0;
+    @include range-width(750px, 850px) {
+      padding-left: $menuWidth;
     }
   }
 }

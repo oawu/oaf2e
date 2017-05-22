@@ -6,6 +6,18 @@
   @include font-smoothing(antialiased);
 }
 
+.icon-home:before {
+  content: "\e901";
+}
+.icon-file-text2:before {
+  content: "\e926";
+}
+.icon-binoculars:before {
+  content: "\e985";
+}
+.icon-search:before {
+  content: "\e986";
+}
 .icon-star-empty:before {
   content: "\e9d7";
 }
@@ -14,4 +26,34 @@
 }
 .icon-star-full:before {
   content: "\e9d9";
+}
+.icon-user:before {
+  content: "\e902";
+}
+.icon-profile:before {
+  content: "\e902";
+}
+.icon-account:before {
+  content: "\e902";
+}
+.icon-avatar:before {
+  content: "\e902";
+}
+.icon-keyboard_arrow_left:before {
+  content: "\e314";
+}
+.icon-keyboard_arrow_right:before {
+  content: "\e315";
+}
+.icon-first_page:before {
+  content: "\e5dc";
+}
+.icon-last_page:before {
+  content: "\e5dd";
+}
+.icon-menu:before {
+  content: "\e900";
+}
+.icon-info:before {
+  content: "\e903";
 }

@@ -44,350 +44,403 @@
 
   </head>
   <body lang="zh-tw">
-    <div id='style'>
-      <label>
-        <input type='radio' name='style' checked value='1'>
-        <span></span>
-        列表
-      </label>
-      <label>
-        <input type='radio' name='style' value='2'>
-        <span></span>
-        區塊
-      </label>
+    <input type='checkbox' id='menu_ckb' class='ckbh'>
+
+    <header id='header'>
+      <div>
+        <label class='icon-menu' for='menu_ckb'></label>
+        <a class='logo'>獸吼。接案</a>
+        <div class='search'></div>
+        <div class='avatar'>
+          <div><img src='img/user.png'></div>
+        </div>
+      </div>
+    </header>
+
+    <div id='main'>
+      <div>
+        <div class='lay'>
+          <span>請選擇<b>排列</b>方式：</span>
+          <label>
+            <input type='radio' name='layout' checked value='1'>
+            <span></span>
+            列表
+          </label>
+          <label>
+            <input type='radio' name='layout' value='2'>
+            <span></span>
+            區塊
+          </label>
+        </div>
+        <div class='lay'>
+          <span>請選擇<b>排序</b>方式：</span>
+          <label>
+            <input type='radio' name='sort' value='1'>
+            <span></span>
+            價格由大到小
+          </label>
+          <label>
+            <input type='radio' name='sort' value='2'>
+            <span></span>
+            星星由多到低
+          </label>
+          <label>
+            <input type='radio' name='sort' value='3'>
+            <span></span>
+            日期由近到遠
+          </label>
+        </div>
+
+        <div id='list'>
+          <a href="" class='item'>
+            <span>機器人控制MCU程式開發專案</span>
+            <span><sup>$</sup>1,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>商業室內空間設計專案</span>
+            <span><sup>$</sup>12,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>3D動畫製作專案</span>
+            <span><sup>$</sup>12,023</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
+            <span><sup>$</sup>2,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>全台灣各區輸送機維修專案</span>
+            <span><sup>$</sup>3,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>廠內包裝員/家庭代工專案</span>
+            <span><sup>$</sup>4,341</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>桃園區域房屋業務代銷專案</span>
+            <span><sup>$</sup>1,200</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>美工網拍行銷專案</span>
+            <span><sup>$</sup>7,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>代理網站機房服務專案</span>
+            <span><sup>$</sup>21,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁設計程式撰寫專案</span>
+            <span><sup>$</sup>3,000</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁版面 flash設計專案</span>
+            <span><sup>$</sup>12,124</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>機器人控制MCU程式開發專案</span>
+            <span><sup>$</sup>1,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>商業室內空間設計專案</span>
+            <span><sup>$</sup>12,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>3D動畫製作專案</span>
+            <span><sup>$</sup>12,023</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
+            <span><sup>$</sup>2,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>全台灣各區輸送機維修專案</span>
+            <span><sup>$</sup>3,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>廠內包裝員/家庭代工專案</span>
+            <span><sup>$</sup>4,341</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>桃園區域房屋業務代銷專案</span>
+            <span><sup>$</sup>1,200</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>美工網拍行銷專案</span>
+            <span><sup>$</sup>7,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>代理網站機房服務專案</span>
+            <span><sup>$</sup>21,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁設計程式撰寫專案</span>
+            <span><sup>$</sup>3,000</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁版面 flash設計專案</span>
+            <span><sup>$</sup>12,124</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>機器人控制MCU程式開發專案</span>
+            <span><sup>$</sup>1,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>商業室內空間設計專案</span>
+            <span><sup>$</sup>12,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>3D動畫製作專案</span>
+            <span><sup>$</sup>12,023</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
+            <span><sup>$</sup>2,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>全台灣各區輸送機維修專案</span>
+            <span><sup>$</sup>3,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>廠內包裝員/家庭代工專案</span>
+            <span><sup>$</sup>4,341</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>桃園區域房屋業務代銷專案</span>
+            <span><sup>$</sup>1,200</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>美工網拍行銷專案</span>
+            <span><sup>$</sup>7,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>代理網站機房服務專案</span>
+            <span><sup>$</sup>21,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁設計程式撰寫專案</span>
+            <span><sup>$</sup>3,000</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁版面 flash設計專案</span>
+            <span><sup>$</sup>12,124</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>機器人控制MCU程式開發專案</span>
+            <span><sup>$</sup>1,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>商業室內空間設計專案</span>
+            <span><sup>$</sup>12,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>3D動畫製作專案</span>
+            <span><sup>$</sup>12,023</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
+            <span><sup>$</sup>2,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>全台灣各區輸送機維修專案</span>
+            <span><sup>$</sup>3,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>廠內包裝員/家庭代工專案</span>
+            <span><sup>$</sup>4,341</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>桃園區域房屋業務代銷專案</span>
+            <span><sup>$</sup>1,200</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>美工網拍行銷專案</span>
+            <span><sup>$</sup>7,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>代理網站機房服務專案</span>
+            <span><sup>$</sup>21,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁設計程式撰寫專案</span>
+            <span><sup>$</sup>3,000</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁版面 flash設計專案</span>
+            <span><sup>$</sup>12,124</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>機器人控制MCU程式開發專案</span>
+            <span><sup>$</sup>1,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>商業室內空間設計專案</span>
+            <span><sup>$</sup>12,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>3D動畫製作專案</span>
+            <span><sup>$</sup>12,023</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
+            <span><sup>$</sup>2,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>全台灣各區輸送機維修專案</span>
+            <span><sup>$</sup>3,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>廠內包裝員/家庭代工專案</span>
+            <span><sup>$</sup>4,341</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>桃園區域房屋業務代銷專案</span>
+            <span><sup>$</sup>1,200</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>美工網拍行銷專案</span>
+            <span><sup>$</sup>7,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>代理網站機房服務專案</span>
+            <span><sup>$</sup>21,323</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁設計程式撰寫專案</span>
+            <span><sup>$</sup>3,000</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+          <a href="" class='item'>
+            <span>網頁版面 flash設計專案</span>
+            <span><sup>$</sup>12,124</span>
+            <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
+            <span>三天前</span>
+          </a>
+        </div>
+
+        <div class="pagination"><ul><li class="active"><a href="#">1</a></li><li><a href="">2</a></li><li><a href="">3</a></li><li><a href="">4</a></li><li class="n icon-keyboard_arrow_right"><a href=""></a></li></ul></div>
+      </div>
     </div>
 
-    <div id='list'>
-      <a href="" class='item'>
-        <span>機器人控制MCU程式開發專案</span>
-        <span><sup>$</sup>1,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>商業室內空間設計專案</span>
-        <span><sup>$</sup>12,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>3D動畫製作專案</span>
-        <span><sup>$</sup>12,023</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
-        <span><sup>$</sup>2,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>全台灣各區輸送機維修專案</span>
-        <span><sup>$</sup>3,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>廠內包裝員/家庭代工專案</span>
-        <span><sup>$</sup>4,341</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>桃園區域房屋業務代銷專案</span>
-        <span><sup>$</sup>1,200</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>美工網拍行銷專案</span>
-        <span><sup>$</sup>7,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>代理網站機房服務專案</span>
-        <span><sup>$</sup>21,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁設計程式撰寫專案</span>
-        <span><sup>$</sup>3,000</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁版面 flash設計專案</span>
-        <span><sup>$</sup>12,124</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>機器人控制MCU程式開發專案</span>
-        <span><sup>$</sup>1,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>商業室內空間設計專案</span>
-        <span><sup>$</sup>12,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>3D動畫製作專案</span>
-        <span><sup>$</sup>12,023</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
-        <span><sup>$</sup>2,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>全台灣各區輸送機維修專案</span>
-        <span><sup>$</sup>3,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>廠內包裝員/家庭代工專案</span>
-        <span><sup>$</sup>4,341</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>桃園區域房屋業務代銷專案</span>
-        <span><sup>$</sup>1,200</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>美工網拍行銷專案</span>
-        <span><sup>$</sup>7,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>代理網站機房服務專案</span>
-        <span><sup>$</sup>21,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁設計程式撰寫專案</span>
-        <span><sup>$</sup>3,000</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁版面 flash設計專案</span>
-        <span><sup>$</sup>12,124</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>機器人控制MCU程式開發專案</span>
-        <span><sup>$</sup>1,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>商業室內空間設計專案</span>
-        <span><sup>$</sup>12,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>3D動畫製作專案</span>
-        <span><sup>$</sup>12,023</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
-        <span><sup>$</sup>2,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>全台灣各區輸送機維修專案</span>
-        <span><sup>$</sup>3,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>廠內包裝員/家庭代工專案</span>
-        <span><sup>$</sup>4,341</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>桃園區域房屋業務代銷專案</span>
-        <span><sup>$</sup>1,200</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>美工網拍行銷專案</span>
-        <span><sup>$</sup>7,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>代理網站機房服務專案</span>
-        <span><sup>$</sup>21,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁設計程式撰寫專案</span>
-        <span><sup>$</sup>3,000</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁版面 flash設計專案</span>
-        <span><sup>$</sup>12,124</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>機器人控制MCU程式開發專案</span>
-        <span><sup>$</sup>1,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>商業室內空間設計專案</span>
-        <span><sup>$</sup>12,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>3D動畫製作專案</span>
-        <span><sup>$</sup>12,023</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
-        <span><sup>$</sup>2,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>全台灣各區輸送機維修專案</span>
-        <span><sup>$</sup>3,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>廠內包裝員/家庭代工專案</span>
-        <span><sup>$</sup>4,341</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>桃園區域房屋業務代銷專案</span>
-        <span><sup>$</sup>1,200</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>美工網拍行銷專案</span>
-        <span><sup>$</sup>7,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>代理網站機房服務專案</span>
-        <span><sup>$</sup>21,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁設計程式撰寫專案</span>
-        <span><sup>$</sup>3,000</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁版面 flash設計專案</span>
-        <span><sup>$</sup>12,124</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>機器人控制MCU程式開發專案</span>
-        <span><sup>$</sup>1,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>商業室內空間設計專案</span>
-        <span><sup>$</sup>12,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>3D動畫製作專案</span>
-        <span><sup>$</sup>12,023</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案  </span>
-        <span><sup>$</sup>2,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>全台灣各區輸送機維修專案</span>
-        <span><sup>$</sup>3,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>廠內包裝員/家庭代工專案</span>
-        <span><sup>$</sup>4,341</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>桃園區域房屋業務代銷專案</span>
-        <span><sup>$</sup>1,200</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>美工網拍行銷專案</span>
-        <span><sup>$</sup>7,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>代理網站機房服務專案</span>
-        <span><sup>$</sup>21,323</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁設計程式撰寫專案</span>
-        <span><sup>$</sup>3,000</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
-      <a href="" class='item'>
-        <span>網頁版面 flash設計專案</span>
-        <span><sup>$</sup>12,124</span>
-        <span><i class='icon-star-full'></i><i class='icon-star-full'></i><i class='icon-star-half'></i><i class='icon-star-empty'></i><i class='icon-star-empty'></i></span>
-        <span>三天前</span>
-      </a>
+    <div id='menu'>
+      <header>
+        <div>獸吼</div>
+        <div>接案</div>
+      </header>
+
+      <a href='' class='icon-home'>網站首頁</a>
+      <a href='' class='icon-binoculars active'>我要找案</a>
+      <a href='' class='icon-file-text2'>我要發案</a>
+      <a href='' class='icon-avatar'>個人資料</a>
+      <a href='' class='icon-info'>關於我們</a>
     </div>
+    <label for='menu_ckb' class='bcover'></label>
+    
   </body>
 </html>
