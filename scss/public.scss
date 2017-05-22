@@ -108,11 +108,16 @@ $mainWidth: 1024px;
       color: white;
       font-size: 25px;
       cursor: pointer;
+      @include range-width(0, 650px) {
+        display: none;
+      }
     }
     .avatar {
       width: 55px;
-      
+      text-align: center;
       > div {
+        display: inline-block;
+        margin: 0 auto;
         width: 35px;
         height: 35px;
         margin-top: ($headerHeight - 35px) / 2;
@@ -127,22 +132,91 @@ $mainWidth: 1024px;
     }
     .search {
       width: calc(100% - 55px - #{$menuWidth});
+      @include range-width(0, 650px) {
+        width: calc(100% - 55px * 2);
+      };
+      padding: 0 8px;
+      position: relative;
+
+      input[type='text'] {
+        border: 1px solid rgba(255, 0, 0, 0);
+        background-color: rgba(255,255,255,.15);
+        width: 100%;
+        margin-top: 10px;
+        height: calc(100% - 10px * 2);
+        padding-left: 40px;
+        color: rgba(255, 255, 255, 1.00);
+        font-weight: bold;
+        font-size: 16px;
+
+        @include input-placeholder {
+          font-size: 15px;
+          font-weight: normal;
+          color: rgba(255, 255, 255, .750);
+        }
+        @include border-radius(2px);
+        @include transition(border-color .3s, background-color .3s);
+        
+        + * {
+          position: absolute;
+          left: 8px;
+          top: 8px;
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          padding: 0;
+          text-align: center;
+          font-size: 15px;
+          color: rgba(255, 255, 255, .7500);
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0);
+          border: 0;
+
+          &:focus {
+            outline: 0;
+          }
+        }
+
+        &:focus {
+          outline: 0;
+          border-color: rgba(172, 48, 46, 1.00);
+          color: rgba(60, 60, 60, 1.00);
+          background-color: rgba(255, 255, 255, 1);
+          
+          + * {
+            &:before {
+              color: rgba(60, 60, 60, 1.00);
+            }
+          }
+        }
+      }
     }
   }
 }
 #menu {
   position: fixed;
   left: 0;
-  top: 0;
+  top: $headerHeight + 16px;
   display: inline-block;
   width: $menuWidth;
   height: 100%;
-  padding-top: $headerHeight + 16px;
   z-index: 100 - 10;
 
   @include opacity(1);
   @include transition(top .3s, opacity .3s);
 
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(175, 175, 175, 1.00);
+    @include border-radius(4px);  
+  }
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
   > header {
     display: none;
     width: 100%;
@@ -153,6 +227,33 @@ $mainWidth: 1024px;
       line-height: 28px;
       color: white;
       font-size: 20px;
+    }
+  }
+
+  > footer {
+    display: inline-block;
+    width: 100%;
+    color: rgba(150, 150, 150, 1.00);
+    font-size: 12px;
+    text-align: left;
+    border-top: 1px solid rgba(225, 225, 225, .85);
+    padding: 5px 0;
+    padding-top: 7px;
+    padding-left: 5px;
+    height: 50px;
+    margin-top: 20px;
+
+    a {
+      text-decoration: none;
+      @include a;
+      @include opacity(.75);
+    }
+    * {
+      display: inline-block;
+      width: 100%;
+      + * {
+        margin-top: 3px;
+      }
     }
   }
   > a {
@@ -186,7 +287,7 @@ $mainWidth: 1024px;
     }
   }
   @include range-width(0, 750px) {
-    padding-top: 0;
+    top: 0;
     background-color: white;
     z-index: 100 + 10;
     left: -$menuWidth;

@@ -45,14 +45,22 @@ $(function () {
     });
   }
 
-  function render (c) {
+  function render (c, s) {
     if (c)
       datas.sort (function (a, b) {
         return c != '3' ? c != '2' ? (b.p - a.p) : (b.s - a.s) : (a.d - b.d);
       });
 
+    var x = datas;
+    if (s && s.length)
+      x = datas.filter (function (t) {
+        var re = new RegExp ("(" + s.split (/\s+/).join ('|') + ")+");
+
+        return re.test (t.t);
+      });
+
     $('#list').empty ()
-              .append (datas.map (function (t) {
+              .append (x.map (function (t) {
       return $('<a />').addClass ('item')
                        .append ($('<span />').text (t.t))
                        .append ($('<span />').text (number_format (t.p)))
@@ -69,12 +77,12 @@ $(function () {
     }
   });
   $("input[name='sort']").change (function () {
-    // if ($(this).val () == '1') {
-      // $('#list').removeClass ('block');
-    // } else {
-      // $('#list').addClass ('block');
-    // }
     render ($(this).val ());
+  });
+  $('#sfm').submit (function () {
+    render (null, $('#search').val ());
+    
+    return false;
   });
 
   render ();
