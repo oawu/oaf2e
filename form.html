@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tw">
+  <head>
+    <meta http-equiv="Content-Language" content="zh-tw" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+
+    <title></title>
+
+    <link href="css/public.css" rel="stylesheet" type="text/css" />
+    <link href="css/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/public.js" language="javascript" type="text/javascript" ></script>
+
+  </head>
+  <body lang="zh-tw">
+    <input type='checkbox' id='menu_ckb' class='ckbh'>
+    <input type='checkbox' id='setting_ckb' class='ckbh'>
+
+    <header id='header'>
+      <div>
+        <label class='icon-menu' for='menu_ckb'></label>
+        <a class='logo'>獸吼。接案</a>
+        <form id='sfm' action="" method="get" class="search">
+          <input type="text" placeholder="搜尋.." id="search" name="search" value="">
+          <button type="submit" class="icon-search"></button>
+        </form>
+        <div class='avatar c'>
+          <div><img src='img/user.png'></div>
+        </div>
+      </div>
+    </header>
+
+    <div id='main'>
+      <div>
+        <div class='panel'>
+          <form class='form-type1' action='list.html'>
+
+            <div class='row'>
+              <b class='need'>專案標題</b>
+              <input type='text' name='title' value='' placeholder='請輸入專案標題..' maxlength='200' pattern='.{1,200}' required title='輸入相簿標題!' />
+            </div>
+
+            <div class='row'>
+              <b class='need' data-title='請確實選擇正確的分類。'>專案分類</b>
+              <select name='user_id'>
+                <option value=''>平面外包</option>
+                <option value=''>網頁外包</option>
+                <option value=''>程式外包</option>
+                <option value=''>iOS App 外包</option>
+                <option value=''>Android App 外包</option>
+              </select>
+            </div>
+            
+
+            <div class='row'>
+              <b class='need' data-title='請選擇大約預算，細節請在說明補充。'>專案預算</b>
+              <select name='user_id'>
+                <option value=''>1千 以下</option>
+                <option value=''>1千 ～ 3千</option>
+                <option value=''>3千 ～ 5千</option>
+                <option value=''>5千 ～ 7千</option>
+                <option value=''>7千 ～ 1萬</option>
+                <option value=''>1萬 ～ 3萬</option>
+                <option value=''>3萬 ～ 5萬</option>
+                <option value=''>5萬 ～ 7萬</option>
+                <option value=''>7萬 ～ 10萬</option>
+                <option value=''>10萬 ～ 15萬</option>
+                <option value=''>15萬 ～ 20萬</option>
+                <option value=''>20萬 ～ 25萬</option>
+                <option value=''>25萬 ～ 30萬</option>
+                <option value=''>30萬 ～ 40萬</option>
+                <option value=''>40萬 ～ 50萬</option>
+                <option value=''>50萬 ～ 60萬</option>
+                <option value=''>60萬 ～ 70萬</option>
+                <option value=''>70萬 ～ 80萬</option>
+                <option value=''>80萬 ～ 90萬</option>
+                <option value=''>90萬 ～ 100萬</option>
+                <option value=''>100萬 以上</option>
+              </select>
+            </div>
+
+            <div class='row'>
+              <b class='need'>有效時間</b>
+              <input type='text' name='title' value='' placeholder='請輸入專案標題..' maxlength='200' pattern='.{1,200}' required title='輸入相簿標題!' />
+            </div>
+            <div class='row'>
+              <b class='need' data-title='請敘述專案內容，可以按照格式填寫。'>專案說明</b>
+              <textarea name='content' class='cke' placeholder='請輸入專案內容說明..'>
+建議使用下列格式外，您亦可以自己補充敘述：
+
+* 專案說明：(接案者需完成的工作內容事項) 
+* 預算說明：(預計專案的費用預算範圍與相關說明) 
+* 注意事項：(聯絡時或溝通方式等其他注意事項)
+* 附註：(其他說明事項)</textarea>
+            </div>
+
+            <div class='row'>
+              <b class='need'>所在地區</b>
+              <select name='user_id'>
+                <option value=''>台北市</option>
+                <option value=''>新北市</option>
+              </select>
+            </div>
+
+            <div class='row'>
+              <b class='need'>徵求對象</b>
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value='' checked>
+                <span></span>
+                學生兼差
+              </label>
+
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value='' checked>
+                <span></span>
+                一般兼職
+              </label>
+
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value='' checked>
+                <span></span>
+                個人工作室
+              </label>
+              
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value='' checked>
+                <span></span>
+                公司
+              </label>
+            </div>
+            
+            <div class='row'>
+              <b class='need'>聯絡方式</b>
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value='' checked>
+                <span></span>
+                E-mail
+              </label>
+
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value=''>
+                <span></span>
+                Line
+              </label>
+
+              <label class='checkbox'>
+                <input type='checkbox' name='customer_tag_id[]' value=''>
+                <span></span>
+                Facebook
+              </label>
+            </div>
+            
+
+
+
+            <div class='row'>
+              <button type='submit'>確定送出</button>
+              <button type='reset'>重新填寫</button>
+              <a href='list.html'>回上一頁</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id='menu'>
+      <header>
+        <div>獸吼</div>
+        <div>接案</div>
+      </header>
+
+      <a href='' class='icon-home'>網站首頁</a>
+      <a href='list.html' class='icon-binoculars'>我要找案</a>
+      
+      <div class='subs'>
+        <a href='list.html' class='icon-palette sub'>平面外包</a>
+        <a href='list.html' class='icon-chrome sub'>網頁外包</a>
+        <a href='list.html' class='icon-file-code-o sub'>程式外包</a>
+        <a href='list.html' class='icon-apple sub'>iOS App 外包</a>
+        <a href='list.html' class='icon-android sub'>Android App 外包</a>
+      </div>
+
+      <a href='form.html' class='icon-file-text2 active'>我要發案</a>
+      <a href='' class='icon-avatar'>個人資料</a>
+      <a href='' class='icon-info'>關於我們</a>
+
+      <footer>
+        <a href=''>隱私權政策 - 服務條款</a>
+        <span>© 2014-2017 SOHO.TW</span>
+      </footer>
+    </div>
+    
+    <label for='menu_ckb' class='bcover'></label>
+    
+  </body>
+</html>
