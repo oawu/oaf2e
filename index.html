@@ -45,6 +45,7 @@
   </head>
   <body lang="zh-tw">
     <input type='checkbox' id='menu_ckb' class='ckbh'>
+    <input type='checkbox' id='setting_ckb' class='ckbh'>
 
     <header id='header'>
       <div>
@@ -54,44 +55,56 @@
           <input type="text" placeholder="搜尋.." id="search" name="search" value="">
           <button type="submit" class="icon-search"></button>
         </form>
-        <div class='avatar'>
+        <div class='avatar c'>
           <div><img src='img/user.png'></div>
         </div>
       </div>
     </header>
 
     <div id='main'>
+
       <div>
-        <div class='lay'>
-          <span>請選擇<b>排列</b>方式：</span>
-          <label>
-            <input type='radio' name='layout' checked value='1'>
-            <span></span>
-            列表
-          </label>
-          <label>
-            <input type='radio' name='layout' value='2'>
-            <span></span>
-            區塊
-          </label>
-        </div>
-        <div class='lay'>
-          <span>請選擇<b>排序</b>方式：</span>
-          <label>
-            <input type='radio' name='sort' value='1'>
-            <span></span>
-            價格由大到小
-          </label>
-          <label>
-            <input type='radio' name='sort' value='2'>
-            <span></span>
-            星星由多到低
-          </label>
-          <label>
-            <input type='radio' name='sort' value='3'>
-            <span></span>
-            日期由近到遠
-          </label>
+        
+        <div id='setting'>
+          <div class='top'>
+            <span>共 1,234 筆</span>
+            <label class='icon-equalizer' for='setting_ckb'></label>
+          </div>
+
+          <div class='lays'>
+            <div class='lay'>
+              <span>請選擇<b>排列</b>方式：</span>
+              <label>
+                <input type='radio' name='layout' checked value='1'>
+                <span></span>
+                列表
+              </label>
+
+              <label>
+                <input type='radio' name='layout' value='2'>
+                <span></span>
+                區塊
+              </label>
+            </div>
+            <div class='lay'>
+              <span>請選擇<b>排序</b>方式：</span>
+              <label>
+                <input type='radio' name='sort' value='1'>
+                <span></span>
+                價格由大到小
+              </label>
+              <label>
+                <input type='radio' name='sort' value='2'>
+                <span></span>
+                星星由多到低
+              </label>
+              <label>
+                <input type='radio' name='sort' value='3'>
+                <span></span>
+                日期由近到遠
+              </label>
+            </div>
+          </div>
         </div>
 
         <div id='list'></div>
@@ -108,6 +121,15 @@
 
       <a href='' class='icon-home'>網站首頁</a>
       <a href='' class='icon-binoculars active'>我要找案</a>
+      
+      <div class='subs'>
+        <a href='' class='icon-palette sub'>平面外包</a>
+        <a href='' class='icon-chrome sub'>網頁外包</a>
+        <a href='' class='icon-file-code-o sub'>程式外包</a>
+        <a href='' class='icon-apple sub'>iOS App 外包</a>
+        <a href='' class='icon-android sub'>Android App 外包</a>
+      </div>
+
       <a href='' class='icon-file-text2'>我要發案</a>
       <a href='' class='icon-avatar'>個人資料</a>
       <a href='' class='icon-info'>關於我們</a>
