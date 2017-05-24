@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?82fs9u');
-  src:  url('fonts/icomoon.eot?82fs9u#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?82fs9u') format('truetype'),
-    url('fonts/icomoon.woff?82fs9u') format('woff'),
-    url('fonts/icomoon.svg?82fs9u#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?hs58mx');
+  src:  url('fonts/icomoon.eot?hs58mx#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?hs58mx') format('truetype'),
+    url('fonts/icomoon.woff?hs58mx') format('woff'),
+    url('fonts/icomoon.svg?hs58mx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -48,6 +48,9 @@
 .icon-star-full:before {
   content: "\e9d9";
 }
+.icon-warning:before {
+  content: "\ea07";
+}
 .icon-android:before {
   content: "\eac0";
 }
@@ -84,6 +87,9 @@
 .icon-cross:before {
   content: "\e908";
 }
+.icon-flag-o:before {
+  content: "\e909";
+}
 .icon-mail-forward:before {
   content: "\e907";
 }
@@ -95,6 +101,9 @@
 }
 .icon-palette:before {
   content: "\e906";
+}
+.icon-share:before {
+  content: "\e90a";
 }
 .icon-info:before {
   content: "\e903";

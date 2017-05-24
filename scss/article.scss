@@ -7,7 +7,7 @@
 @import "_oa";
 
 
-#article, #comments, #others {
+#article, #comments, #others, #aa {
   position: relative;
   display: block;
   width: calc(100% - 15px);
@@ -37,7 +37,7 @@
   };
 }
 #article {
-  // margin-bottom: 0;
+  margin-bottom: 0;
 
   > header {
     display: inline-block;
@@ -215,7 +215,89 @@ section.section {
     margin: 0;
   }
 }
+#aa {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  @include clearfix();
+  text-align: center;
+  
+  a {
+    position: relative;
+    float: left;
+    display: inline-block;
+    width: calc(100% / 4);
+    padding: 16px 0;
+    color: rgba(100, 100, 100, 1);
+    @include clearfix();
+    
 
+    + a {
+      border-left: 1px solid rgba(230, 230, 230, 1.00);
+    }
+
+    @include range-width(550px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    &:before {
+      width: 45px;
+      height: 44px;
+      line-height: 44px;
+      font-size: 30px;
+      color: rgba(200, 200, 200, 1.00);
+      @include transition(color .3s);
+    }
+    > div {
+      max-width: calc(100% - 45px);
+      width: 100px;
+      text-align: left;
+      > * {
+        display: block;
+      }
+      b {
+        height: 23px;
+        line-height: 23px;
+        font-size: 16px;
+        i {
+          font-style: normal;
+        }
+      }
+      span {
+        height: 20px;
+        line-height: 20px;
+        font-size: 10px;
+        color: rgba(130, 130, 130, 1);
+      }
+    }
+    &:hover {
+      &:before {
+        color: rgba(252, 200, 200, 1.00);
+      }
+    }
+  }
+  @include range-width(0, 550px) {
+    a {
+      &:before {
+        width: 100%;
+        font-size: 28px;
+        display: block;
+      }
+      > div {
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        i, span {
+          display: none;
+        }
+      }
+    }
+  }
+}
 #comments {
   padding: 24px;
   margin-top: 0;
