@@ -352,13 +352,23 @@ section.section {
       }
     }
     &:before {
-      content: '推';
+      content: '→';
       display: inline-block;
       width: 30px;
       font-size: 16px;
       text-align: center;
-      font-weight: bold;
-      color: rgba(45, 182, 163, 1.00);
+      color: rgba(185, 185, 185, 1.00);
+    }
+    &.p, &.s {
+      &:before {
+        font-weight: bold;
+      }
+    }
+    &.p {
+      &:before {
+        content: '推';
+        color: rgba(45, 182, 163, 1.00);
+      }
     }
     &.s {
       &:before {
