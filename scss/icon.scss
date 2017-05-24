@@ -6,6 +6,18 @@
   @include font-smoothing(antialiased);
 }
 
+.icon-mail:before {
+  content: "\e90c";
+}
+.icon-palette:before {
+  content: "\e906";
+}
+.icon-share:before {
+  content: "\e90a";
+}
+.icon-info:before {
+  content: "\e903";
+}
 .icon-home:before {
   content: "\e901";
 }
@@ -69,6 +81,9 @@
 .icon-cross:before {
   content: "\e908";
 }
+.icon-commenting-o:before {
+  content: "\e90b";
+}
 .icon-flag-o:before {
   content: "\e909";
 }
@@ -80,13 +95,4 @@
 }
 .icon-file-code-o:before {
   content: "\e905";
-}
-.icon-palette:before {
-  content: "\e906";
-}
-.icon-share:before {
-  content: "\e90a";
-}
-.icon-info:before {
-  content: "\e903";
 }
