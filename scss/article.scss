@@ -375,8 +375,11 @@ section.section {
   }
   @include range-width(0, 550px) {
     padding: 16px 12px;
+    select {
+      width: 65px;
+    }
     input {
-      width: calc(100% - 45px - 50px - 8px * 2);
+      width: calc(100% - 65px - 50px - 8px * 2);
     }
     button {
       width: 50px;
