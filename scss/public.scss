@@ -756,7 +756,7 @@ $mainWidth: 1024px;
       }
     }
     @include range-width(750px, 850px) {
-      top: 0;
+      top: 16px;
       @include opacity(1);
     }
     @include range-width(850px) {
@@ -980,12 +980,6 @@ form.form-type1 {
 
   @include opacity(0);
   @include box-shadow(0 4px 10px 0 rgba(0,0,0,0.15));
-  @include range-width(0, 400px){
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  };
   @include transition(opacity .3s);
   
   header {
@@ -1140,5 +1134,15 @@ form.form-type1 {
       @include opacity(1);
       z-index: 200 - 5;
     }
+    
+    @include range-width(0, 400px){
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    };
   }
 }
+
+
+
