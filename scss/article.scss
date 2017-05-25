@@ -54,8 +54,16 @@
       color: #f5a69f;
       @include border-radius(5px);
       @include opacity(.45);
-      @include animation(marionette_shadow 1.0s ease-in);
+      @include animation(article_finish 1.0s ease-in);
       @include rotate(30deg);
+
+      @include range-width(0, 550px) {
+        // font-size: 30px;
+        top: 180px;
+        @include rotate(-30deg);
+        // right: 30px;
+      @include animation(article_finish2 1.0s ease-in);
+      }
     }
   }
   > header {
@@ -189,12 +197,7 @@
           }
         }
       };
-
     }
-
-  }
-  > section {
-
   }
 }
 
@@ -734,12 +737,30 @@ section.section {
     @include transform(rotate(30deg) scale(.9));
     @include opacity(.5);
   }
-  85%{
+  80%{
     @include transform(rotate(30deg) scale(1.05));
     @include opacity(.5);
   }
   100%{
     @include transform(rotate(30deg) scale(1.0));
+    @include opacity(.5);
+  }
+}
+@include keyframes(article_finish2){
+  0%{
+    @include transform(rotate(-30deg) scale(5.0));
+    @include opacity(.0);
+  }
+  60%{
+    @include transform(rotate(-30deg) scale(.9));
+    @include opacity(.5);
+  }
+  80%{
+    @include transform(rotate(-30deg) scale(1.05));
+    @include opacity(.5);
+  }
+  100%{
+    @include transform(rotate(-30deg) scale(1.0));
     @include opacity(.5);
   }
 }
