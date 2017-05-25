@@ -729,7 +729,7 @@ section.section {
 
 
 
-@include keyframes(marionette_shadow){
+@include keyframes(article_finish){
   0%{
     @include transform(rotate(30deg) scale(5.0));
     @include opacity(.0);
