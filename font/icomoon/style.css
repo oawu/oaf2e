@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?2rr70o');
-  src:  url('fonts/icomoon.eot?2rr70o#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?2rr70o') format('truetype'),
-    url('fonts/icomoon.woff?2rr70o') format('woff'),
-    url('fonts/icomoon.svg?2rr70o#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?5ek0r9');
+  src:  url('fonts/icomoon.eot?5ek0r9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?5ek0r9') format('truetype'),
+    url('fonts/icomoon.woff?5ek0r9') format('woff'),
+    url('fonts/icomoon.svg?5ek0r9#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -96,8 +96,23 @@
 .icon-menu:before {
   content: "\e900";
 }
+.icon-keyboard_arrow_up:before {
+  content: "\e90e";
+}
+.icon-check:before {
+  content: "\e910";
+}
+.icon-keyboard_arrow_down:before {
+  content: "\e90d";
+}
 .icon-cross:before {
   content: "\e908";
+}
+.icon-pencil2:before {
+  content: "\e90f";
+}
+.icon-bin:before {
+  content: "\e9ac";
 }
 .icon-commenting-o:before {
   content: "\e90b";

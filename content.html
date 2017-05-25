@@ -19,7 +19,7 @@
     <input type='checkbox' id='menu_ckb' class='ckbh'>
     <input type='checkbox' id='setting_ckb' class='ckbh'>
     <input type='checkbox' id='login_box_ckb' class='ckbh'>
-    <input type='checkbox' id='message_ckb' class='ckbh'>
+    <input type='checkbox' id='options_ckb' class='ckbh' checked>
 
     <header id='header'>
       <div>
@@ -52,17 +52,23 @@
               <i class='icon-keyboard_arrow_right'></i>
               <h1>兼職時間彈性 月入20,000↑ 經銷商營收多增6位數↑專案</h1>
             </nav>
+            <label class='icon-keyboard_arrow_down options' for='options_ckb'>
+              <a class='icon-pencil2'>修改專案</a>
+              <a class='icon-bin'>刪除專案</a>
+              <a class='icon-check'>設定完成</a>
+              <label for='options_ckb' class='icon-cross'>關閉</label>  
+            </label>
             
-            <a class='icon-mail-forward share'></a>
+          
 
             <div class='fblike'>
               <div class='fb-like' data-href='123' data-send='false' data-layout='button_count' data-action='like' data-show-faces='false' data-share='true'></div>
             </div>
-            <time>2017.12.23</time>
+            <time data-time='2017.12.23'>2 天之前</time>
           </header>
 
           <section class='section'>
-            <p><b>專案預算：</b><span>90萬 ～ 100萬</span></p>
+            <p><b>專案預算：</b><span>90萬 ～ 100萬<a class='re_price'>建議預算</a></span></p>
             <p><b>所在地區：</b><span>台北市</span></p>
             <p><b>有效時間：</b><span>2017.09.09</span></p>
             <p><b>徵求對象：</b><span>學生兼差、一般兼職、學生兼差、一般兼職</span></p>
@@ -77,19 +83,12 @@
 </span>
             <p><b>聯絡方式：</b></p>
             <ul>
-              <li>Mail: <a href=''>comdan66@gmail.com</a></li>
-              <li>Line: <a href=''>comdan66</a></li>
-              <li>facebook: <a href=''>https://www.facebook.com/comdan66</a></li>
+              <li><b>Mail</b>：<a href=''>comdan66@gmail.com</a></li>
+              <li><b>Line</b>：comdan66</li>
+              <li><b>facebook</b>：<a href=''>https://www.facebook.com/comdan66</a></li>
+              <li><b>站內信</b>：<a>點我</a></li>
             </ul>
             
-
-            <!-- <div class='line'></div> -->
-            <!--  -->
-            
-            <!-- <div class='other'>
-              <header>相關留言</header>
-            </div> -->
-
           </section>
         </article>
 
@@ -97,7 +96,7 @@
         <div id='aa'>
           <a class='icon-star-full'><div><b><i>標記</i>收藏</b><span>持續關注專案</span></div></a>
           <a class='icon-share'><div><b><i>社群</i>分享</b><span>分享此至臉書</span></div></a>
-          <a class='icon-flag-o'><div><b><i>報價</i>建議</b><span>給原案主建議</span></div></a>
+          <a class='icon-mail'><div><b><i>站內</i>訊息</b><span>給案主站內信</span></div></a>
           <a class='icon-warning'><div><b>檢舉<i>違規</i></b><span>內容有違版規</span></div></a>
         </div>
 
@@ -191,6 +190,6 @@
     </div>
     <label for='login_box_ckb' class='bcover'></label>
 
-    <label id='mailbox' for='message_ckb' class='icon-mail' data-count='10+'></label>
+    <a id='mailbox' class='icon-mail' data-count='99+'></a>
   </body>
 </html>
