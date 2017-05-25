@@ -38,7 +38,26 @@
 }
 #article {
   margin-bottom: 0;
+  &.finish {
+    &:after {
+      content: '已完成';
+      position: absolute;
+      right: 60px;
+      top: 120px;
+      display: inline-block;
+      font-size: 50px;
+      letter-spacing: 5px;
+      padding: 3px 16px;
+      font-weight: bolder;
 
+      border: 6px solid rgba(255, 0, 0, .3);
+      color: #f5a69f;
+      @include border-radius(5px);
+      @include opacity(.45);
+      @include animation(marionette_shadow 1.0s ease-in);
+      @include rotate(30deg);
+    }
+  }
   > header {
     position: relative;
     display: inline-block;
@@ -705,3 +724,22 @@ section.section {
 }
 
 
+
+@include keyframes(marionette_shadow){
+  0%{
+    @include transform(rotate(30deg) scale(5.0));
+    @include opacity(.0);
+  }
+  60%{
+    @include transform(rotate(30deg) scale(.9));
+    @include opacity(.5);
+  }
+  85%{
+    @include transform(rotate(30deg) scale(1.05));
+    @include opacity(.5);
+  }
+  100%{
+    @include transform(rotate(30deg) scale(1.0));
+    @include opacity(.5);
+  }
+}
