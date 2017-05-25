@@ -60,7 +60,8 @@
       @include range-width(0, 550px) {
         // font-size: 30px;
         top: 180px;
-        @include rotate(-30deg);
+        right: 20px;
+        @include rotate(-20deg);
         // right: 30px;
       @include animation(article_finish2 1.0s ease-in);
       }
@@ -748,19 +749,19 @@ section.section {
 }
 @include keyframes(article_finish2){
   0%{
-    @include transform(rotate(-30deg) scale(5.0));
+    @include transform(rotate(-20deg) scale(5.0));
     @include opacity(.0);
   }
   60%{
-    @include transform(rotate(-30deg) scale(.9));
+    @include transform(rotate(-20deg) scale(.9));
     @include opacity(.5);
   }
   80%{
-    @include transform(rotate(-30deg) scale(1.05));
+    @include transform(rotate(-20deg) scale(1.05));
     @include opacity(.5);
   }
   100%{
-    @include transform(rotate(-30deg) scale(1.0));
+    @include transform(rotate(-20deg) scale(1.0));
     @include opacity(.5);
   }
 }
