@@ -52,18 +52,17 @@
 
       border: 6px solid rgba(255, 0, 0, .3);
       color: #f5a69f;
+      z-index: 1;
       @include border-radius(5px);
       @include opacity(.45);
       @include animation(article_finish 1.0s ease-in);
       @include rotate(30deg);
 
       @include range-width(0, 550px) {
-        // font-size: 30px;
         top: 180px;
         right: 20px;
         @include rotate(20deg);
-        // right: 30px;
-      @include animation(article_finish2 1.0s ease-in);
+        @include animation(article_finish2 1.0s ease-in);
       }
     }
   }
@@ -73,6 +72,7 @@
     width: 100%;
     padding: 20px 32px;
     @include clearfix();
+    z-index: 2;
     @include range-width(0, 400px) {
       padding: 8px 16px;
     };
