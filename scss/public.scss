@@ -2189,6 +2189,9 @@ section.section {
       }
     }
 
+    @include range-width(0, 550px) {
+      margin-top: 8px;
+    }
     @include range-width(400px, 600px) {
       padding: 0 8px;
       &[data-title] {
