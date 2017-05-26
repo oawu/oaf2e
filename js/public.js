@@ -10,6 +10,8 @@ window.fbAsyncInit = function () { FB.init ({ appId: 436436213363323, cookie: tr
 
 function number_format(a,b,c,d){a=(a+"").replace(/[^0-9+\-Ee.]/g,"");var e=isFinite(+a)?+a:0,f=isFinite(+b)?Math.abs(b):0,g=void 0===d?",":d,h=void 0===c?".":c,i="",j=function(a,b){var c=Math.pow(10,b);return""+Math.round(a*c)/c};return i=(f?j(e,f):""+Math.round(e)).split("."),i[0].length>3&&(i[0]=i[0].replace(/\B(?=(?:\d{3})+(?!\d))/g,g)),(i[1]||"").length<f&&(i[1]=i[1]||"",i[1]+=new Array(f-i[1].length+1).join("0")),i.join(h)}
 $(function () {
+  $('._ic').OAIL ({verticalAlign: 'center'});
+
   $('.subs').each (function () {
     $(this).addClass ('n' + $(this).find ('.sub').length);
   });

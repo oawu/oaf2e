@@ -9,6 +9,9 @@
 .icon-mail:before {
   content: "\e90c";
 }
+.icon-verified_user:before {
+  content: "\e912";
+}
 .icon-palette:before {
   content: "\e906";
 }
@@ -21,8 +24,14 @@
 .icon-home:before {
   content: "\e901";
 }
+.icon-profile2:before {
+  content: "\e923";
+}
 .icon-file-text2:before {
   content: "\e926";
+}
+.icon-users:before {
+  content: "\e972";
 }
 .icon-binoculars:before {
   content: "\e985";
@@ -32,6 +41,9 @@
 }
 .icon-equalizer:before {
   content: "\e992";
+}
+.icon-eye:before {
+  content: "\e9ce";
 }
 .icon-star-empty:before {
   content: "\e9d7";
@@ -110,4 +122,7 @@
 }
 .icon-file-code-o:before {
   content: "\e905";
+}
+.icon-briefcase:before {
+  content: "\e911";
 }
