@@ -17,6 +17,8 @@
   <body lang="zh-tw">
     <input type='checkbox' id='menu_ckb' class='ckbh'>
     <input type='checkbox' id='setting_ckb' class='ckbh'>
+    <input type='checkbox' id='login_box_ckb' class='ckbh'>
+    <input type='checkbox' id='options_ckb' class='ckbh'>
 
     <header id='header'>
       <div>
@@ -34,6 +36,7 @@
 
     <main id='main'>
       <div>
+        
       </div>
     </main>
 
@@ -43,7 +46,7 @@
         <div>我的專案書</div>
       </header>
 
-      <a href='' class='icon-home active'>網站首頁</a>
+      <a href='' class='icon-home'>網站首頁</a>
       <a href='list.html' class='icon-binoculars'>我要找案</a>
       
       <div class='subs'>
@@ -55,7 +58,16 @@
       </div>
 
       <a href='form.html' class='icon-file-text2'>我要發案</a>
-      <a href='profile.html' class='icon-avatar'>個人資料</a>
+      <a href='profile.html' class='icon-avatar a'>個人資料</a>
+
+      <div class='subs'>
+        <a href='profile.html' class='icon-profile2 sub'>基本設定</a>
+        <a href='p1.html' class='icon-briefcase sub active'>作品管理</a>
+        <a href='p2.html' class='icon-star-full sub'>關注專案</a>
+        <a href='p3.html' class='icon-mail sub'>站內信箱</a>
+        <a href='p4.html' class='icon-eye sub'>公開視角</a>
+      </div>
+
       <a href='' class='icon-info'>關於我們</a>
 
       <footer>
@@ -63,9 +75,36 @@
         <span>© 2017 casebook.tw</span>
       </footer>
     </div>
-
+    
     <label for='menu_ckb' class='bcover'></label>
     
+    <div id='login_box'>
+      <header>
+        <div class='avatar'>
+          <img src='' />
+        </div>
+        <div class='title'>
+          <h1>獸吼 SOHO</h1>
+          <p>找案子嗎？接案子嗎？</p>
+        </div>
+      </header>
+      
+      <span></span>
+
+      <a href='' class='facebook-login'>使用 Facebook 登入</a>
+
+      <div class='or'>or</div>
+
+      <form action='' method='post'>
+        <input type='text' name='account' placeholder='請輸入帳號' />
+        <input type='text' name='password' placeholder='請輸入密碼' />
+        <button type='submit'>使用帳密登入</button>
+      </form>
+
+      <footer>© 2017 soho.tw</footer>
+    </div>
+    <label for='login_box_ckb' class='bcover'></label>
+
     <a id='mailbox' class='icon-mail' data-count='99+'></a>
   </body>
 </html>

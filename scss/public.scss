@@ -254,6 +254,10 @@ $mainWidth: 1024px;
       line-height: 28px;
       color: white;
       font-size: 20px;
+      + * {
+        font-size: 15px;
+        @include opacity(.75);
+      }
     }
   }
 
@@ -280,6 +284,7 @@ $mainWidth: 1024px;
       width: 100%;
       + * {
         margin-top: 3px;
+        text-transform: uppercase;
       }
     }
   }
@@ -289,7 +294,7 @@ $mainWidth: 1024px;
     height: 0;
     overflow: hidden;
     @include opacity(0);
-    @include transition(height .3s, opacity .3s, margin .3s);
+    @include transition(opacity .3s, margin .3s);
 
     
     > a {
