@@ -2333,13 +2333,13 @@ section.section {
       &:hover {
         @include box-shadow(-4 0 6px 0 rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.16));
       }
-      @include range-width(0, 400px) {
-        width: 100%;
-        + div {
-          margin-top: 8px;
-        }
-      };
-      @include range-width(400px, 550px) {
+      // @include range-width(0, 400px) {
+      //   width: 100%;
+      //   + div {
+      //     margin-top: 8px;
+      //   }
+      // };
+      @include range-width(0, 550px) {
         width: calc(100% / 2 - 8px * 1 / 2);
         margin-left: 8px;
         &:nth-child(2n + 1) {
