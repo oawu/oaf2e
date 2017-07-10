@@ -19,7 +19,7 @@ function headerText ($log) {
     color ('by', 'N') . ' ' . color ('OA Wu', 'W'), "\n", str_repeat ('=', CLI_LEN), "\n",
     ' ※ 注意事項 ※', "\n", color (str_repeat ('-', CLI_LEN), 'N'), "\n",
     ' ' . color ('◎', 'N') . ' 您可以使用本程式將指定的資料上傳至 AWS S3 上。', "\n",
-    ' ' . color ('◎', 'N') . ' 若要修改上傳類型資料，請修改 ' . color ('cmd/put.php', 'y') . ' 內的 ' . color ('$_dirs', 'R') . ' 變數。', "\n",
+    ' ' . color ('◎', 'N') . ' 若要修改上傳類型資料，請修改 ' . color ('cmd/_oa.php', 'y') . ' 內的 ' . color ('$_dirs', 'R') . ' 變數。', "\n",
     ' ' . color ('◎', 'N') . ' 以下請依據步驟填寫相關設定值。', "\n", str_repeat ('=', CLI_LEN) . "\n"
     );
 }

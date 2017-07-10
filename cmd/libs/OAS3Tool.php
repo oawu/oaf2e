@@ -103,7 +103,7 @@ class OAS3Tool {
   }
   public function initS3 ($title) {
     if (RowLogger::startAndRunAndEnd ($this, $title, array (array ($this->access, $this->secret)), function ($t) {
-      return !S3::init ($t[0], $t[1]);
+      return S3::init ($t[0], $t[1]) && S3::test () ? '' : '初始化 S3 失敗，請檢查 access、secret 是否有誤。';
     })) throw new Exception ('執行「' . $title . '」時，發生錯誤！');
     return $this;
   }

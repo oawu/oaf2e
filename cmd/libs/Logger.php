@@ -129,7 +129,7 @@ class RowLogger {
 
     $this->tool->getLog ()->append ("\n", str_repeat ('=', 80), "\n")
               ->append (" ", color ('➜', 'W'), ' ', color ('有發生錯誤！', 'r'), "\n")
-              ->append ($ers ? str_repeat ('-', 80) . "\n" . implode ("\n" . str_repeat ('-', 80) . "\n", $ers) . "\n" : null)
+              ->append ($ers ? str_repeat ('-', 80) . "\n" . implode ("\n" . color (str_repeat ('-', 80), 'N') . "\n", array_map (function ($er) { return ' ' . color ('※', 'N') . ' ' . $er; }, $ers)) . "\n" : null)
               ->append (str_repeat ('=', 80), "\n");
     return $this;
   }

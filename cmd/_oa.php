@@ -29,7 +29,7 @@ try {
     
   $tool->logAppend ("\n", str_repeat ('=', CLI_LEN), "\n", array (' ◎ 執行開始 ◎', 'P'), str_repeat (' ', 46), '[ ', array ('OA S3 Tools v2.0', 'Y'), ' ]', "\n", str_repeat ('=', CLI_LEN), "\n");
 
-  $tool->loads ('載入所需資源', array ('Func', 'Step', 'Minify', 'S3'))
+  $tool->loads ('載入所需資源', array ('Func', 'Minify', 'S3'))
        ->logAppend (color (str_repeat ('-', CLI_LEN), 'N'), "\n");
 
   $tool->setDirFiles ($_dirs);
@@ -59,7 +59,7 @@ try {
   $tool->url ();
 
 } catch (Exception $e) {
-  var_dump ($e->getMessage ());
+  // var_dump ($e->getMessage ());
   exit ();
 }
 // echo nl2br(str_replace(' ', '&nbsp;', $tool->getLog ()->get ()));
