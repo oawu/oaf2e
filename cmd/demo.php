@@ -5,6 +5,7 @@
  * @copyright   Copyright (c) 2017 OA Wu Design
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
+
 include 'libs' . DIRECTORY_SEPARATOR . 'Define.php';
 include 'libs' . DIRECTORY_SEPARATOR . 'Logger' . PHP;
 system ('clear');

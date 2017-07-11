@@ -18,7 +18,6 @@ $_dirs = array (
   'img'  => [['png', 'jpg', 'jpeg', 'gif', 'svg'], true, false],
 );
 
-include 'libs' . DIRECTORY_SEPARATOR . 'Define.php';
 include 'libs' . DIRECTORY_SEPARATOR . 'OAS3Tool' . PHP;
 system ('clear');
 
