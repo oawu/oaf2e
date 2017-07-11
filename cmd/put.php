@@ -6,9 +6,9 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
-include 'libs' . DIRECTORY_SEPARATOR . 'Define.php';
-include 'libs' . DIRECTORY_SEPARATOR . 'Func' . PHP;
-include 'libs' . DIRECTORY_SEPARATOR . 'Logger' . PHP;
+include_once 'libs' . DIRECTORY_SEPARATOR . 'Define.php';
+include_once 'libs' . DIRECTORY_SEPARATOR . 'Func' . PHP;
+include_once 'libs' . DIRECTORY_SEPARATOR . 'Logger' . PHP;
 
 $file = array_shift ($argv);
 
@@ -39,4 +39,4 @@ $option = array (
     'minify' => !isset ($argv['-m'][0]) ? true : (is_numeric ($argv['-m'][0] = trim ($argv['-m'][0])) && $argv['-m'][0]),
   );
 
-@include '_oa' . PHP;
+include_once '_oa' . PHP;

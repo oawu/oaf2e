@@ -18,8 +18,10 @@ $_dirs = array (
   'img'  => [['png', 'jpg', 'jpeg', 'gif', 'svg'], true, false],
 );
 
-include 'libs' . DIRECTORY_SEPARATOR . 'OAS3Tool' . PHP;
+include_once 'libs' . DIRECTORY_SEPARATOR . 'OAS3Tool' . PHP;
 system ('clear');
+
+$tool = null;
 
 try {
   if (!isset ($option)) throw new Exception ('參數錯誤！');
@@ -57,8 +59,26 @@ try {
   $tool->logAppend (str_repeat ('=', CLI_LEN), "\n", array (' ◎ 執行結束 ◎', 'P'), str_repeat (' ', 53), sprintf ('%20s', '[ ' . color (round (microtime (true) - $tool->getStartT (), 4), 'Y') . ' ' . color ('秒', 'y') . ' ]'), "\n", str_repeat ('=', CLI_LEN), "\n");
   $tool->url ();
 
+
+  if (!CLI) {
+    header ('Content-Type: application/json', 'true');
+    echo json_encode (array ('status' => true, 'message' => nl2br(str_replace(' ', '&nbsp;', $tool->getLog ()->get ()))));
+  }
 } catch (Exception $e) {
-  // var_dump ($e->getMessage ());
-  exit ();
+  if (CLI) {
+    echo $e->getMessage ();
+    exit ();
+  } else {
+    $code = 405;
+    $server_protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : FALSE;
+
+    if (substr (php_sapi_name (), 0, 3) == 'cgi') header ('Status: ' . $code . ' Method Not Allowed', true);
+    else if (($server_protocol == 'HTTP/1.1') || ($server_protocol == 'HTTP/1.0')) header ($server_protocol . ' ' . $code . ' Method Not Allowed', true, $code);
+    else header ('HTTP/1.1 ' . $code . ' Method Not Allowed', true, $code);
+
+    header ('Content-Type: application/json', 'true');
+    echo json_encode (array ('status' => false, 'message' => $e->getMessage ()));
+
+    exit ();
+  }
 }
-// echo nl2br(str_replace(' ', '&nbsp;', $tool->getLog ()->get ()));
