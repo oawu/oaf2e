@@ -122,7 +122,7 @@ class OAS3Tool {
     $row = RowLogger::start ($this, $title, $this->lfs);
     $this->ufs = $row->run (null, function ($t) use ($s3fs) {
       foreach ($s3fs as $s3f)
-        if (($s3f['name'] == ($t['uri'])) && ($s3f['hash'] == $t['md5']))
+        if (($s3f['name'] == $t['uri']) && ($s3f['hash'] == $t['md5']))
           return false;
       return true;
     });
@@ -145,7 +145,7 @@ class OAS3Tool {
     $row = RowLogger::start ($this, $title, $this->s3fs);
     $this->dfs = $row->run (null, function ($t) use ($lfs) {
       foreach ($lfs as $lf)
-        if (($t['name'] == ($lf['uri'])) && ($t['hash'] == $lf['md5']))
+        if ($t['name'] == $lf['uri'])
           return false;
       return true;
     });
