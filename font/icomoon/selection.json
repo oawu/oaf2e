@@ -1,6 +1,39 @@
 {
   "IcoMoonType": "selection",
-  "icons": [],
+  "icons": [
+    {
+      "icon": {
+        "paths": [
+          "M512 0c-212.062 0-384 171.938-384 384s384 640 384 640 384-427.938 384-640-171.938-384-384-384zM512 640c-141.376 0-256-114.624-256-256s114.624-256 256-256 256 114.624 256 256-114.624 256-256 256zM512 256c-70.688 0-128 57.312-128 128s57.312 128 128 128 128-57.312 128-128-57.312-128-128-128z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "pin-alt",
+          "location",
+          "map",
+          "marker"
+        ],
+        "grid": 16
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 1,
+        "id": 0,
+        "prevSize": 16,
+        "code": 59648,
+        "name": "pin-alt"
+      },
+      "setIdx": 0,
+      "setId": 2,
+      "iconIdx": 0
+    }
+  ],
   "height": 1024,
   "metadata": {
     "name": "icomoon"
@@ -30,7 +63,7 @@
       "bgColor": 16777215,
       "classSelector": ".icon"
     },
-    "historySize": 100,
+    "historySize": 50,
     "showCodes": true,
     "gridSize": 16
   }
