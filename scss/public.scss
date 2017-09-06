@@ -15,6 +15,9 @@
   }
 }
 
+$mainWidth: 1024px;
+$mainColor: rgba(245 , 245 , 245 , 1.00);
+
 html {
   min-height: 100%;
 
@@ -32,9 +35,838 @@ html {
     font-size: medium;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
 
-    background: $mainBackgroundColor;
-    background-image: $mainBackgroundImage;
+    background: rgba(88, 107, 143, 1.00);//$mainColor;
 
     @include font-smoothing(antialiased);
+  }
+}
+
+a {
+  @include a;
+  text-decoration: none;
+  // color: rgba(173, 220, 228, 1.00);
+  cursor: pointer;
+}
+
+._box {
+  position: fixed;
+  display: inline-block;
+  background-color: white;
+
+  z-index: -99999;
+  left: -99999px;
+  top: -99999px;
+
+  overflow: hidden;
+  @include opacity(0);
+  @include transition(opacity .3s);
+}
+._bc {
+  position: fixed;
+  left: -100%;
+  top: 0;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  @include opacity(0);
+  @include transition(opacity .3s);
+  z-index: -9999;
+  background-color: rgba(0, 0, 0, 0.3)
+}
+
+.ti {
+  display: inline-block;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-align: left;
+  
+  font-weight: bold;
+  color: rgba(120, 120, 120, 1.00);
+  @include text-shadow(1px 1px 1px white);
+
+  @include clearfix();
+  + .list, + .ci {
+    margin-top: 0 !important;
+  }
+  
+  > * {
+    float: left;
+    display: inline-block;
+    width: 50%;
+    
+    + * {
+      text-align: right;
+    }
+    a {
+      font-weight: normal;
+      @include text-shadow(none);
+      font-size: 13px;
+      &.btn {
+        @include button(rgba(49, 183, 164, 1.00));
+        padding: 0 8px;
+        margin-top: 4px;
+      }
+    }
+    h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+  }
+}
+.list {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  background-color: white;
+  padding: 8px 0;
+  @include box-shadow(0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.1));
+  > a {
+    $h: 30px;
+    $m: 24px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: $h + $m;
+    padding-left: 8px;
+    cursor: pointer;
+    @include overflow-docx3();
+    @include clearfix();
+    
+    &:before {
+      content: "\e901";
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: inline-block;
+      width: 40px;
+      text-align: center;
+      height: $h + $m;
+      line-height: $h + $m;
+      color: rgba(180, 180, 180, 1);
+
+      font-size: 26px;
+      font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+      @include font-smoothing(antialiased);
+      @include transition(color .3s);
+    }
+    &.hot {
+      h3 {
+        &:after {
+          font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+          @include font-smoothing(antialiased);
+          content: "\e9a9";
+          
+          // position: absolute;
+          // right: 4px;
+          // bottom: 6px;
+          // display: inline-block;
+          // width: 18px;
+          // height: 18px;
+          // line-height: 18px - 2px;
+          font-size: 10px;
+          margin-left: 4px;
+
+
+          color: rgba(245, 100, 100, 1.00);
+          // background-color: white;
+          // border: 1px solid rgba(245, 100, 100, 1.00);
+          @include border-radius(50%);
+        }
+      }
+    }
+    > * {
+      float: left;
+      display: inline-block;
+      margin: 0;
+      width: 100%;
+      @include overflow-docx3();
+    }
+
+    h3 {
+      height: $h;
+      line-height: $h + 8px;
+      color: rgba(80, 80, 80, 1.00);
+      font-size: 14px;
+      @include transition(color .3s);
+      padding-right: 44px;
+    }
+    p {
+      width: 100%;
+      height: $m;
+      line-height: $m - 10px;
+      color: rgba(120, 120, 120, 1.00);
+      font-size: 12px;
+      border-bottom: 1px solid rgba(220, 220, 220, 1);
+      @include transition(color .3s);
+      padding-right: 44px;
+    }
+    i {
+      position: relative;
+      width: $h + $m;
+      font-style: normal;
+
+      height: $h + $m;
+      line-height: $h + $m;
+      margin-right: 3px;
+      
+      text-align: center;
+
+      ~ * {
+        width: calc(100% - #{$h + $m + 3px});
+        float: right;
+        padding-left: 4px;
+      }
+      &:before {
+        content: '?';
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        display: inline-block;
+        width: calc(100% - 8px * 2);
+        height: calc(100% - 8px * 2);
+        line-height: ($h + $m) - 8px * 2;
+        font-size: 20px;
+        font-weight: bold;
+        @include border-radius(50%);
+        background-color: rgba(173, 220, 228, 1.00);
+        color: rgba(255, 255, 255, 1.00);
+        @include text-shadow(0 0 1px rgba(88, 107, 143, .300));
+      }
+    }
+    span {
+      position: absolute;
+      top: ($h + $m - 20px) / 2;
+      right: 32px;
+      float: none;
+      display: inline-block;
+      width: auto;
+      max-width: 40px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      padding: 0 8px;
+      color: white;
+      background-color: rgba(121, 169, 247, 1.00);
+      @include border-radius(20px / 2);
+      font-size: 10px;
+      ~ p, ~ h3 {
+        padding-right: 44px + 40px;
+      }
+      &:empty {
+        display: none;
+        ~ p, ~ h3 {
+          padding-right: 44px;
+        }
+      }
+    }
+    &:hover {
+      &:before {
+        color: rgba(150, 150, 150, 1);
+      }
+      h3 {
+        color: rgba(50, 50, 50, 1.00);
+      }
+      p {
+        color: rgba(100, 100, 100, 1.00);
+      }
+    }
+    &:last-child {
+      p {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+#menu {
+  $headH: 54px;
+  $wrapH: 36px;
+
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: $headH + $wrapH + 16px;
+  z-index: 5;
+  
+  .head, .wrap {
+    position: absolute;
+    display: inline-block;
+    max-width: $mainWidth;
+    width: calc(100% - 16px);
+
+    @include range-width(0, $mainWidth + 16px) {
+      left: 8px;
+    //   padding: 0 8px;
+    };
+    @include range-width($mainWidth + 16px) {
+      left: calc(50% - #{$mainWidth / 2});
+    };
+  }
+  
+  .head {
+    top: 0;
+    height: $headH;
+    text-align: left;
+    $h: 32px;
+
+    h1, h2, h3, b {
+      font-size: 20px;
+      margin: 0;
+      display: inline-block;
+      width: 100%;
+      height: $h;
+      line-height: $h;
+      margin-top: 8px;
+      color: rgba(255, 237, 120, 1.00);
+
+      @include overflow-docx3();
+    }
+    p {
+      display: inline-block;
+      width: 100%;
+      height: $headH - $h;
+      margin: 0;
+      margin-top: -4px;
+      color: rgba(255, 255, 255, .8);
+      @include overflow-docx3();
+    }
+  }
+  .wrap {
+    bottom: 0;
+    height: $wrapH + 8px;
+    line-height: $wrapH + 8px;
+    padding-top: 8px;
+    overflow: hidden;
+    @include clearfix();
+
+    > a {
+      position: relative;
+      float: left;
+      z-index: 1;
+      display: inline-block;
+
+      height: $wrapH - 4px;
+      line-height: $wrapH - 4px;
+      padding: 0 12px;
+      margin-top: 4px;
+      font-size: 14px;
+      background-color: rgba(red($mainColor), green($mainColor), blue($mainColor), .7);
+      color: rgba(64, 64, 64, .7);
+      @include transition(background-color .3s);
+      
+      &:before {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: 0;
+        display: none;
+        width: 1px;
+        height: 100%;
+        background-color: rgba(red($mainColor), green($mainColor), blue($mainColor), .5);
+      }
+      + a {
+        margin-left: 1px;
+        &:before {
+          display: inline-block;
+        }
+      }
+      &:hover {
+        background-color: rgba(red($mainColor), green($mainColor), blue($mainColor), .9);
+      }
+      &.a {
+        height: $wrapH;
+        line-height: $wrapH;
+        margin-top: 0;
+        font-size: 15px;
+        color: rgba(64, 64, 64, 1);
+        background-color: $mainColor;
+        @include scale(1);
+        @include border-top-radius(3px);
+        z-index: 2;
+        @include box-shadow(0 0 10px 1px rgba(0, 0, 0, .2));
+
+        &, + a {
+          margin-left: 0;
+          &:before {
+            display: none;
+          }
+        }
+      }
+      &:first-child {
+        @include border-top-left-radius(3px);
+      }
+      &:last-child {
+        @include border-top-right-radius(3px);
+      }
+    }
+  }
+}
+
+#footer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  z-index: 1;
+  padding: 16px 0;
+  color: white;
+  div {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    text-align: left;
+    margin: 0 auto;
+
+    width: calc(100% - 16px);
+    max-width: $mainWidth;
+
+    + * {
+      font-size: 12px;
+      font-weight: normal;
+      color: rgba(255, 255, 255, .75);
+    }
+  }
+  // @include clearfix();
+  // > * {
+  //   float: left;
+  //   display: inline-block;
+  //   width: $mainWidth / 3 * 2;
+  //   text-align: left;
+  //   border: 1px solid rgba(255, 0, 0, .3);
+
+  //   &:first-child {
+  //     margin-left: calc((100% - #{$mainWidth}) / 2);
+  //     span {
+  //       display: inline-block;
+  //       width: 100%;
+  //       font-size: 14px;
+  //       font-weight: bold;
+
+  //       + span {
+  //         font-size: 10px;
+  //         font-weight: normal;
+  //       }
+  //     }
+  //   }
+    
+  //   + * {
+  //     text-align: right;
+  //     width: $mainWidth / 3;
+  //   }
+  //   @include range-width(0, $mainWidth + 16px * 2) {
+  //     width: calc(100% / 3 * 2 - 8px);
+  //     &:first-child {
+  //       margin-left: 8px;
+  //     }
+  //     + * {
+  //       width: calc(100% / 3 - 8px);
+        
+  //     }
+  //   }
+  // }
+}
+
+#main {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  width: 100%;
+  min-height: 100%;
+  text-align: center;
+  padding: 16px 0;
+  background-color: $mainColor;
+  @include box-shadow(0 0 10px 1px rgba(0, 0, 0, .2));
+  
+  > * {
+    width: calc(100% - 16px);
+    max-width: $mainWidth;
+    margin: 0 auto;
+
+    + * {
+      margin-top: 16px;
+    }
+    @include range-width(0, $mainWidth + 16px) {
+      &.article, &.list, &.ci {
+        width: 100%;
+        border-left: 0;
+        border-right: 0;
+        @include border-radius(0);
+      }
+    };
+  }
+}
+
+
+
+#loading {
+  width: 220px;
+  height: 220px;
+  line-height: 220px * 2 - 80px;
+  font-size: 14px;
+  @include scale(0);
+  @include overflow-docx3();
+  @include border-radius(10px);
+  @include box-shadow(0 7px 8px -4px rgba(0,0,0,0.2), 0 13px 19px 2px rgba(0,0,0,0.14), 0 5px 24px 4px rgba(0,0,0,0.12));
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    @include border-radius(50%);
+  }
+
+  &:before {
+    left: calc(50% - 120px / 2);
+    top: calc(50% - 120px / 2 - 16px);
+    width: 120px;
+    height: 120px;
+
+    @include background-image(linear-gradient(
+      rgba(250, 186, 22, 1.00) 0%,
+      rgba(255, 237, 120, 1.00) 100%));
+    @include animation(rotate 1s linear infinite);
+    @include box-shadow(inset 0 0 2px rgba(0, 0, 0, .3));
+  }
+  &:after {
+    left: calc(50% - 100px / 2);
+    top: calc(50% - 100px / 2 - 16px);
+    width: 100px;
+    height: 100px;
+    @include box-shadow(0 0 3px rgba(0, 0, 0, .3));
+  }
+
+  &.s {
+    top: calc(50% - 220px / 2);
+    left: calc(50% - 220px / 2);
+    z-index: 200;
+    @include opacity(1);
+    @include transition(transform .3s cubic-bezier(.68, -0.275, .825, 0.115));
+    
+    + label._bc {
+      z-index: 200 - 5;
+      left: 0;
+      @include opacity(1);
+    }
+    
+    &.a {
+      @include transition(transform .3s cubic-bezier(.175, .885, .32, 1.275));
+      @include scale(1);
+    }
+  }
+}
+@include keyframes(rotate){
+  100% {
+    @include rotate(360deg);
+  }
+}
+.pgn {
+  padding: 0;
+  margin: 0 auto;
+  margin-top: 16px;
+  text-align: right;
+
+  @include range-width(0, 530px) {
+    text-align: center;
+    background-color: white;
+    @include border-radius(2px);
+    @include box-shadow(0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.1));
+  }
+  &:empty {
+    display: none;
+  }
+  > ul {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+    @include clearfix();
+
+    @include range-width(0, 530px) {
+      width: 100%;
+    }
+    @include range-width(530px) {
+      background-color: white;
+
+      @include border-radius(2px);
+      @include box-shadow(0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.1));
+    }
+
+    > li {
+      position: relative;
+      float: left;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      overflow: hidden;
+      @include transition(background-color .3s);
+      
+      @include range-width(0, 530px) {
+        display: none;
+        width: calc(100% / 3);
+        height: 45px;
+        line-height: 45px;
+
+        &.nn, &.pp, &.active {
+          display: inline-block;
+          + * {
+            margin-left: 10px;
+          }
+        }
+        &.active {
+          &:first-child {
+            display: none;
+            ~ li.nn {
+              width: 100%;
+              &:before {
+                content: '下一頁';
+              }
+            }
+            ~ li.ll {
+              display: none;
+            }
+          }
+        }
+      }
+      &:hover {
+        background-color: rgba(250, 250, 250, 1.00);
+      }
+      &.active {
+        font-weight: bold;
+        @include range-width(530px) {
+          background-color: rgba(245, 245, 245, 1.00);
+        }
+        &, a {
+          color: rgba(200, 75, 75, 1.00);
+        }
+      }
+      &, a {
+        font-size: 14px;
+        color: rgba(100, 100, 100, 1.00);
+        &:before {
+          font-size: 16px;
+        }
+      }
+
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+      }
+    }
+  }
+}
+#nav {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  background-color: rgba(233, 236, 239, 1.00);
+  padding: 8px 16px;
+  text-align: left;
+  overflow: hidden;
+  @include clearfix();
+  @include border-radius(2px);
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(150, 150, 150, .1);
+    @include border-radius(2px);
+    z-index: 1;
+  }
+  @include range-width(0, $mainWidth) {
+    @include border-radius(0);
+    &:before {
+      @include border-radius(0);
+      border-left: 0;
+      border-right: 0;
+    }
+  };
+  
+  > * {
+    float: left;
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    z-index: 2;
+    height: 21px;
+    line-height: 21px;
+
+    + * {
+      margin-left: 16px;
+
+      &:before {
+        content: '/';
+        color: rgba(134, 142, 150, 1.00);
+        position: absolute;
+        left: -12px;
+        top: 0;
+
+        display: inline-block;
+        width: 8px;
+        text-align: center;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.ci {
+  display: inline-block;
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .1);
+  @include clearfix();
+  
+  a {
+    display: inline-block;
+    float: left;
+    width: calc(100% / 6);
+    height: 56px;
+    line-height: 56px;
+    color: rgba(88, 107, 143, 1.00);
+    background-color: white;
+    font-size: 11px;
+    @include transition(background-color .3s, color .3s);
+    @include range-width(0, 700px) {
+      width: calc(100% / 3);
+      &:nth-child(n + 4) {
+        border-top: 1px solid rgba(100, 100, 100, .100);
+      }
+      &:nth-child(3n + 2) {
+        border-right: 1px solid rgba(100, 100, 100, .100);
+        border-left: 1px solid rgba(100, 100, 100, .100);
+      }
+    };
+    @include range-width(700px) {
+      + a {
+        border-left: 1px solid rgba(100, 100, 100, .100);
+      }
+    }
+    &:hover {
+      background-color: rgba(88, 107, 143, 1.00);
+      color: white;
+    }
+    &:before {
+      display: inline-block;
+      margin-right: 4px;
+      margin-top: 1px;
+      font-size: 14px;
+    }
+  }
+}
+.article {
+  display: inline-block;
+  width: 100%;
+  background-color: white;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, .1);
+  padding: 20px 32px;
+  @include range-width(0, 750px) {
+    padding: 16px;
+  };
+  + .ci {
+    margin-top: -1px !important;
+  }
+
+  > header {
+    display: inline-block;
+    width: 100%;
+
+    > * {
+      display: block;
+    }
+    > h1, > h2, > h3 {
+      margin: 0;
+      font-size: 23px;
+      height: 35px;
+      line-height: 35px;
+      @include overflow-docx3();
+    }
+  }
+  > .info {
+    margin-top: 16px;
+    height: 30px;
+    @include clearfix();
+    
+    &:last-child {
+      padding-top: 10px;      
+      margin-top: 32px;
+      // border-top: 1px solid rgba(235, 235, 235, 1);
+    }
+    > * {
+      float: left;
+      display: inline-block;
+      width: 50%;
+      height: 100%;
+
+      + * {
+        text-align: right;
+      }
+    }
+    > .fblike {
+      padding-top: 4px;
+    }
+    > time {
+      line-height: 30px;
+      font-size: 13px;
+      color: rgba(100, 100, 100, 1);
+      position: relative;
+
+      &:before {
+        content: attr(data-time);
+        position: absolute;
+        top: -18px;
+        right: 0;
+        display: inline-block;
+        width: 100%;
+        height: 20px;
+        font-size: 10px;
+        color: rgba(150, 150, 150, 1);
+      }
+    }
+    > span {
+      font-size: 13px;
+      color: rgba(145, 145, 145, 1);
+      height: 20px;
+      line-height: 20px;
+
+      &:before {
+        display: inline-block;
+        margin-top: 1px;
+        margin-right: 4px;
+        @include opacity(.75);
+      }
+    }
+  }
+  > section {
+    display: inline-block;
+    width: 100%;
+    margin-top: 16px;
+    font-size: 14px;
+    word-break: break-all;
+
+    > p {
+      display: inline-block;
+      width: 100%;
+      margin-top: 8px;
+      margin-bottom: 0;
+      line-height: 20px;
+    }
   }
 }
