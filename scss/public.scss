@@ -1027,6 +1027,8 @@ a {
       button {
         float: right;
         width: 86px;
+        height: 30px !important;
+        line-height: 30px !important;
         &[type='submit'] {
           @include button(rgba(49, 183, 164, 1.00));
         }
@@ -1042,7 +1044,7 @@ a {
       width: calc(100% - (86px * 2 + 8px));
 
       padding: 0;
-      padding-top: 2px;
+      padding-top: 6px;
       line-height: 18px;
       font-size: 10px;
       text-align: left;
@@ -1066,6 +1068,8 @@ a {
         margin-top: 16px;
         button {
           width: calc(50% - 8px / 2);
+          height: 35px !important;
+          line-height: 35px !important;
         }
       }
     };
