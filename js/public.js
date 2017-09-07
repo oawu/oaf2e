@@ -16,7 +16,7 @@ window.fbAsyncInit = function () { FB.init ({ appId: '151833618725768', cookie: 
 
 $(function () {
   autosize ($('.autosize'));
-
+  $('#menu .wrap').each (function () { $(this).addClass ('n' + $(this).find ('>*').length); });
   var loading = {
     $el: $('#loading'),
     ter: [],
