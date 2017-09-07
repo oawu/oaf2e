@@ -986,6 +986,7 @@ a {
     input, select, textarea {
       display: inline-block;
       width: 100%;
+
     }
     input, select {
       @include input;
@@ -993,6 +994,9 @@ a {
     }
     select {
 
+    }
+    input, textarea {
+      -webkit-appearance: none;
     }
     textarea {
       @include textarea;
