@@ -178,6 +178,6 @@ class OAS3Tool {
                 ->logAppend (' ' . color ('➜', 'W') . ' ' . color ('目前使用記憶體量', 'R') . '：' . str_repeat (' ', 49) . color ($s1[0], 'W') . ' ' . $s1[1] . "\n");
   }
   public function url () {
-    return $this->logAppend ("\n ", color ('➜', 'R') . " " . color ('您的網址是', 'G') . "：" . color ($this->protocol . '//' . $this->bucket . '/' . ($this->usname ? FNAME . '/' : ''), 'W'), "\n\n");
+    return $this->logAppend ("\n ", color ('➜', 'R') . " " . color ('您的網址是', 'G') . "：" . color ($this->protocol . '://' . $this->bucket . '/' . ($this->usname ? FNAME . '/' : ''), 'W'), "\n\n");
   }
 }
