@@ -30,13 +30,40 @@
     </div>
 
     <main id='main'>
+      <nav id='nav'>
+        <a href="#">網站</a>
+        <a href="#">選項 1</a>
+        <span>新增文章</span>
+      </nav>
 
+      <form class='create'>
+<!--         <span class='r'>錯誤！</span>
+        <span class='b'>提示！</span>
+        <span class='g'>成功！</span> -->
+        <label>
+          <b class='need'>標題</b>
+          <input>
+        </label>
+        
+        <label>
+          <b class='need'>內容</b>
+          <textarea class='autosize'></textarea>
+        </label>
+        
+        <div>
+          <button type='submit'>確定新增</button>
+          <button type='reset'>重新填寫</button>
+          <span>點擊確定送出後，就代表您已閱讀並同意遵守<a href='' target='_blank'>使用條款</a>。</span>
+        </div>
 
+      </form>
     </main>
     <footer id='footer'>
       <div>版權所有 ©2017 kerker.tw, All Rights Reserved.</div>
       <div>本網站內會員言論僅代表個人觀點，不代表本站同意其說法，本站不承擔由該言論引起的法律責任。</div>
     </footer>
+    
+    <div id='ntf'></div>
     <div id='loading' class='_box'>請稍候..</div><label class='_bc'></label>
 
   </body>

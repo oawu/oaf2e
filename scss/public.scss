@@ -489,7 +489,7 @@ a {
       margin-top: 16px;
     }
     @include range-width(0, $mainWidth + 16px) {
-      &.article, &.list, &.ci {
+      &.article, &.list, &.ci, &.create {
         width: 100%;
         border-left: 0;
         border-right: 0;
@@ -869,4 +869,362 @@ a {
       line-height: 20px;
     }
   }
+}
+.create {
+  display: inline-block;
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, .1);
+  padding: 20px 32px;
+  @include range-width(0, 750px) {
+    padding: 16px;
+  }; 
+  > * {
+    display: inline-block;
+    width: 100%;
+    max-width: 512px;
+    margin: 0 auto;
+  }
+  > span {
+    position: relative;
+    text-align: left;
+    font-size: 13px;
+    min-height: 35px;
+    line-height: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 30px + 8px;
+    padding-right: 8px;
+    
+    font-weight: bold;
+    @include border-radius(2px);
+    overflow: hidden;
+
+    margin-bottom: 16px;
+    &:empty {
+      display: none;
+      margin-bottom: 0;
+    }
+
+    &:before, &:after {
+      position: absolute;
+      display: inline-block;
+    }
+    &:before {
+      content: '';
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 100%;
+    }
+    &:after {
+      content: '！';
+
+      left: (30px - 18px) / 2;
+      top: (35px - 18px) / 2;
+      width: 18px;
+      height: 18px;
+      line-height: 18px - 2px;
+      text-align: center;
+
+      font-weight: bold;
+      color: white;
+
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255 , .75);
+      @include border-radius(50%);
+    }
+    &, &.r {
+      color: adjust-lightness(rgba(246, 114, 128, 1.00), -10%);
+      border: 1px solid rgba(246, 114, 128, 1.00);
+
+      &:before {
+        background-color: rgba(246, 114, 128, 1.00);
+      }
+    }
+    &.g {
+      color: adjust-lightness(rgba(121, 209, 195, 1.00), -10%);
+      border: 1px solid rgba(121, 209, 195, 1.00);
+      
+      &:before {
+        background-color: rgba(121, 209, 195, 1.00);
+      }
+    }
+    &.b {
+      color: adjust-lightness(rgba(121, 169, 247, 1.00), -10%);
+      border: 1px solid rgba(121, 169, 247, 1.00);
+      
+      &:before {
+        background-color: rgba(121, 169, 247, 1.00);
+      }
+    }
+  }
+  label {
+    text-align: left;
+    b {
+      display: inline-block;
+      width: 100%;
+      height: 25px;
+      line-height: 25px;
+      font-size: 14px;
+      &:before {
+        content: '※';
+        display: none;
+        font-weight: normal;
+        color: rgba(245, 98, 98, 1.00);
+        margin-right: 3px;
+        font-size: 14px;
+        margin-top: -1px;
+      }
+      &.need {
+        &:before {
+          display: inline-block;
+        }
+      }
+    }
+    input, select, textarea {
+      display: inline-block;
+      width: 100%;
+    }
+    input, select {
+      @include input;
+      font-size: 14px;
+    }
+    select {
+
+    }
+    textarea {
+      @include textarea;
+      line-height: 20px;
+      font-size: 14px;
+      min-height: 20px * 4;
+    }
+    + label {
+      margin-top: 16px;
+    }
+  }
+
+  div {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 24px;
+    border-top: 1px solid rgba(222, 222, 222, 1);
+    @include clearfix();
+
+
+    button[type='submit'] {
+      @include button(rgba(253, 99, 120, 1.00));
+      width: 70px;
+      margin-top: 8px;
+    }
+    button[type='reset'] {
+      @include button(rgba(49, 183, 164, 1.00));
+      width: 70px;
+      margin-top: 8px;
+    }
+    > * {
+      float: right;
+      color: white;
+
+      + * {
+        margin-right: 8px;
+      }
+    }
+    span {
+      width: calc(100% - 70px * 2 - 8px * 2);
+      padding: 0;
+      font-size: 10px;
+      text-align: left;
+      color: rgba(100, 100, 100, 1);
+      
+      &:before {
+        content: '※';
+        display: inline-block;
+        font-weight: bold;
+        color: rgba(245, 98, 98, 1.00);
+        margin-right: 3px;
+        font-size: 14px;
+        margin-top: -1px;
+      }
+    }
+  }
+}
+
+#ntf {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  display: inline-block;
+  width: 320px;
+  z-index: 90 + 5;
+
+  $h: 85px;
+  > div {
+    position: absolute;
+    bottom: -$h;
+    right: -100%;
+
+    display: inline-block;
+    width: 100%;
+    height: $h;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 1.00);
+    overflow: hidden;
+    
+    @include border-radius(1px);
+    @include opacity(0);
+    @include box-shadow(0 1px 8px -4px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.3), 0 2px 4px rgba(0, 0, 0, .15));
+    @include transition(bottom .3s, right .3s, opacity .3s);
+    @include clearfix();
+
+    &.p {
+      cursor: pointer;
+    }
+
+    &.s {
+      right: 0;
+      @include opacity(1);
+    }
+    &:hover {
+      > span + span {
+        color: rgba(105, 105, 105, 1);
+      }
+      > div + span, > span:first-child {
+        color: rgba(85, 85, 85, 1);
+      }
+      > div {
+        background-color: rgba(240, 240, 240, 1.00);
+        
+        &.i {
+          &:before {
+            color: rgba(135, 135, 135, 1.00);
+          }
+        }
+      }
+    }
+
+    > a {
+      position: absolute;
+      right: 4px;
+      top: 8px;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      color: rgba(175, 175, 175, 1.00);
+      @include transition(color .3s);
+      font-weight: bold;
+      &:hover {
+        color: rgba(105, 105, 105, 1.00);
+      }
+    }
+    > span {
+      width: 100%;
+      float: right;
+      display: inline-block;
+      text-align: left;
+      padding: 0 12px;
+      @include transition(color .3s);
+      
+      + span {
+        height: $h - 30px - 8px - 8px;
+        line-height: 19px;
+        font-size: 10px;
+        word-break: break-all;
+        overflow: hidden;
+        color: rgba(135, 135, 135, 1);
+      }
+
+      &:first-child {
+        width: calc(100% - 20px);
+      }
+    }
+    > div {
+      float: left;
+      display: inline-block;
+      height: $h;
+      width: $h;
+      overflow: hidden;
+      background-color: rgba(245, 245, 245, 1.00);
+      border-right: 1px solid rgba(240, 240, 240, 1.00);
+      @include transition(background-color .3s);
+      
+      img {
+        width: 100%;
+      }
+      &:before {
+        line-height: $h;
+        font-size: $h / 3;
+        @include text-shadow(1px 1px rgba(255, 255, 255, 1));
+        @include transition(color .3s);
+      }
+      &.i {
+        &:before {
+          color: rgba(145, 145, 145, 1.00);
+        }
+      }
+      ~ span {
+        width: calc(100% - #{$h});
+      }
+      + span {
+        width: calc(100% - #{$h} - 20px);
+      }
+    }
+    > div + span, > span:first-child {
+      color: rgba(110, 110, 110, 1);
+      height: 30px;
+      line-height: 30px;
+      margin-top: 8px;
+      font-size: 16px;
+      @include overflow-docx3();
+      margin-right: 20px;
+      font-weight: bold;
+    }
+  }
+
+  @include range-width(450px) {
+    > div {
+      @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+          bottom: ($h + 12px) * ($i - 1);
+          z-index: 20 - $i;
+        }
+      }
+    }
+  }
+  @include range-width(0, 450px) {
+    bottom: auto;
+    right: auto;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 255, 0.2);
+    width: 100%;
+    z-index: 100 + 3;
+
+    > div {
+      right: auto;
+      bottom: auto;
+      top: -$h;
+      left: 8px;
+      width: calc(100% - 8px * 2);
+      @include opacity(1);
+      @include border-radius(3px);
+      @include box-shadow(0 7px 8px -4px rgba(0,0,0,0.2), 0 13px 19px 2px rgba(0,0,0,0.14), 0 5px 24px 4px rgba(0,0,0,0.12));
+      @include transition(top .3s);
+      
+      &.s {
+        top: 8px;
+        @for $i from 1 through 20 {
+          &:nth-last-child(#{$i}) {
+            top: 8px + ($i - 1) * 4px;
+          }
+        }
+      }
+      &:nth-last-child(n + 4) {
+        display: none;
+      }
+    }
+  };
 }
