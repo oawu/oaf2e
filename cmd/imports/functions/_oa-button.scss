@@ -7,7 +7,7 @@
 // <button></button>
 @mixin button($color: rgba(69, 139, 244, 1.00)){
   display: inline-block;
-  width: auto;
+  
   height: 25px;
   line-height: 25px;
   padding-top: 0;
