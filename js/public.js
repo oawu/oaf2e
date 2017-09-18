@@ -10,7 +10,25 @@ $(function () {
 
 
 
-
+  var loading = {
+    $el: $('#loading'),
+    ter: [],
+    clrTer: function (str) {
+      this.ter.map (clearTimeout);
+      this.ter = [];
+    },
+    show: function (str) {
+      if (typeof str !== 'undefined') this.$el.text (str);
+      this.clrTer ();
+      this.$el.addClass ('s');
+      this.ter.push (setTimeout (function () { this.$el.addClass ('a'); }.bind (this), 100));
+    },
+    close: function () {
+      this.clrTer ();
+      this.$el.removeClass ('a');
+      this.ter.push (setTimeout (function () { this.$el.removeClass ('s'); }.bind (this), 330));
+    },
+  };
   var ntf = {
     $el: $('#ntf'),
     add: function (obj) {
@@ -29,5 +47,106 @@ $(function () {
       return true;
     }
   };
-  ntf.add ({i: 'icon-13', c: 'rgba(49, 183, 164, 1.00)', t: '完成！', d: '已經成功完成操作囉。'});
+  var contact = {
+    $el: $('#contact'),
+    ter: [],
+    url: '1231',
+    _init: function () {
+
+      this.$name = $('<input />').attr ('type', 'text');
+      this.$email = $('<input />').attr ('type', 'text');
+      this.$content = $('<textarea />');
+      this.$x = $('<label />').text ('取消').click (this.close.bind (this));
+      this.$o = $('<button />').text ('確定');
+
+      this.$el.empty ()
+              .append ($('<header />').text ('聯絡我們'))
+              .append ($('<b />').text ('稱呼'))
+              .append (this.$name)
+              .append ($('<b />').text ('E-Mail'))
+              .append (this.$email)
+              .append ($('<b />').text ('您的意見'))
+              .append (this.$content)
+              .append ($('<div />').append (
+                this.$x).append (
+                this.$o));
+
+      this.$el.submit (function () {
+        if (!this.$name.val ().trim ().length && this.$el.attr ('data-tip', '請填寫暱稱！')) return false;
+        if (!this.$email.val ().trim ().length && this.$el.attr ('data-tip', '請填寫 E-Mail！')) return false;
+        if (!this.$content.val ().trim ().length && this.$el.attr ('data-tip', '請填寫您的意見！')) return false;
+        this.$el.attr ('data-tip', '');
+
+        var data = {
+          name: this.$name.val ().trim (),
+          email: this.$email.val ().trim (),
+          content: this.$content.val ().trim (),
+        };
+        // ajax
+        this.$x.click ();
+        ntf.add ({i: 'icon-13', c: 'rgba(49, 183, 164, 1.00)', t: '留言完成！', d: '我們已經收到您的建議囉，我們會盡快的回覆您！'});
+        return false;
+      }.bind (this));
+
+      return true;
+    },
+    clrTer: function (str) {
+      this.ter.map (clearTimeout);
+      this.ter = [];
+      
+      this.$el.attr ('data-tip', '');
+      this.$name.empty ();
+      this.$email.empty ();
+      this.$content.empty ();
+    },
+    show: function () {
+      // if (!this.init) this.init =
+      // 
+      
+      // if (typeof str !== 'undefined') this.$el.text (str);
+      // this.clrTer ();
+      // this.$el.addClass ('s');
+      
+      // 
+
+      this.$el.addClass ('a');
+      this.ter.push (setTimeout (function () {
+
+        this.$el.addClass ('s');
+        this._init ();
+        
+        this.ter.push (setTimeout (function () {
+          this.$el.addClass ('o');
+
+          this.ter.push (setTimeout (function () {
+            this.$name.focus ();
+          }.bind (this), 300));
+        }.bind (this), 300));
+
+      }.bind (this), 300));
+    },
+    close: function (e) {
+      e.stopPropagation ();
+      this.clrTer ();
+      
+
+      this.$el.removeClass ('o');
+      this.ter.push (setTimeout (function () {
+        this.$el.empty ().removeClass ('s');
+
+        this.ter.push (setTimeout (function () {
+          this.$el.removeClass ('a');
+
+          this.ter.push (setTimeout (function () {
+            this.$el.attr ('class', 'icon-11');
+          }.bind (this), 300));
+        }.bind (this), 300));
+      }.bind (this), 100));
+    },
+  };
+  // ntf.add ({i: 'icon-13', c: 'rgba(49, 183, 164, 1.00)', t: '完成！', d: '已經成功完成操作囉。'});
+  $('#contact').click (function () {
+    if ($(this).hasClass ('s')) return;
+    contact.show ();
+  });
 });
