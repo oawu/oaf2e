@@ -15,6 +15,22 @@
   }
 }
 
+$headerHeight: 56px;
+$maxWidth: 1024px;
+$leftWidth: 280px;
+$tagColors: (
+    rgba(49, 183, 164, 1.00),
+    rgba(136, 146, 191, 1.00),
+    rgba(66, 133, 244, 1.00),
+
+    rgba(67, 67, 67, 1.00),
+    rgba(95, 24, 84, 1.00),
+    rgba(245, 98, 98, 1.00),
+    
+    rgba(253, 190, 65, 1.00),
+  );
+
+
 html {
   min-height: 100%;
 
@@ -32,9 +48,952 @@ html {
     font-size: medium;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
 
-    background: $mainBackgroundColor;
-    background-image: $mainBackgroundImage;
+    background: rgba(240, 240, 240, 1.00);
 
     @include font-smoothing(antialiased);
+  }
+}
+
+a {
+  color: adjust-lightness(rgba(73, 138, 244, 1.00), 10%);;
+  text-decoration: none;
+  cursor: pointer;
+  @include transition(color .3s);
+
+  &:hover {
+    color: rgba(73, 138, 244, 1.00);
+  }
+}
+figure {
+  margin: 0;
+  position: relative;
+}
+
+#fb-root, ._s, ._ckbh, ._bc, ._b {
+  position: fixed;
+  display: inline-block;
+  top: -99999px;
+  left: -99999px;
+  z-index: -99999;
+  overflow: hidden;
+  background-color: white;
+  @include opacity(0);
+  @include transition(opacity .3s);
+}
+._bc {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  &[for] {
+    cursor: pointer;
+  }
+}
+
+@mixin centerPanel($p: true, $selector: '> div'){
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  
+  #{$selector} {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    
+    max-width: $maxWidth;
+    margin: 0 auto;   
+    
+    @if $p {
+      @include range-width(0, $maxWidth + 8px * 2) {
+        width: calc(100% - 8px * 2);
+      };
+    }
+    @content;
+  }
+}
+@mixin centerPanel2($p: true){
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+
+  padding-left: calc(50% - #{$maxWidth} / 2);
+  padding-right: calc(50% - #{$maxWidth} / 2);
+  
+  @if $p {
+    @include range-width(0, $maxWidth + 8px * 2) {
+      padding-left: 8px;
+      padding-right: 8px;
+    }; 
+  }
+}
+
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+
+  height: $headerHeight;
+  background-color: rgba(253, 99, 120, 1.00);
+  @include box-shadow(0 1px 8px rgba(0, 0, 0, .3));
+  
+  @include centerPanel(false) {
+    @include clearfix();
+
+    > * {
+      float: left;
+      display: inline-block;
+      margin: 0;
+      height: $headerHeight;
+      line-height: $headerHeight;
+    }
+    label {
+      width: $headerHeight;
+      cursor: pointer;
+      font-size: 28px;
+      color: white;
+
+      figure {
+        height: 100%;
+
+        // @include range-width(0, 750px) {
+        //   display: none;
+        // }
+      }
+    }
+
+    a {
+      width: $leftWidth - $headerHeight;
+      text-align: left;
+      
+      // font-size: 24px;
+      // letter-spacing: 2px;
+      padding-left: 8px;
+      line-height: 20px;
+      > * {
+        display: inline-block;
+        width: 100%;
+      }
+      div {
+        margin-top: 6px;
+        height: 26px;
+        line-height: 26px;
+        font-size: 23px;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 1);
+        font-weight: bold;
+      }
+      span {
+        height: $headerHeight - 26px - 6px * 2;
+        line-height: $headerHeight - 26px - 6px * 2;
+        font-size: 10px;
+        color: rgba(255, 255, 255, .85);
+      }
+
+      @include range-width(0, 750px) {
+        display: none;
+      }
+    }
+    form {
+      width: calc(100% - #{$headerHeight} - #{$leftWidth - $headerHeight});
+      text-align: left;
+      position: relative;
+      @include range-width(0, 750px) {
+        width: calc(100% - #{$headerHeight} - 10px);
+      }
+      @include range-width(750px, $maxWidth + 16px * 2) {
+        width: calc(100% - #{$headerHeight} - #{$leftWidth - $headerHeight} - 10px);
+      };
+
+      input {
+        -webkit-appearance: none;
+        border: 1px solid transparent;
+        background-color: rgba(255,255,255,.15);
+        width: 100%;
+        margin-top: 10px;
+        height: calc(100% - 10px * 2);
+        padding-left: 40px;
+        color: rgba(255, 255, 255, 1.00);
+        font-weight: bold;
+        font-size: 16px;
+
+        @include input-placeholder {
+          font-size: 15px;
+          font-weight: normal;
+          color: rgba(255, 255, 255, .750);
+        }
+        @include border-radius(2px);
+        @include transition(border-color .3s, background-color .3s);
+
+        &:focus {
+          outline: 0;
+          border-color: rgba(172, 48, 46, 1.00);
+          color: rgba(60, 60, 60, 1.00);
+          background-color: rgba(255, 255, 255, 1);
+          
+          + * {
+            &:before {
+              color: rgba(60, 60, 60, 1.00);
+            }
+          }
+        }
+      }
+      button {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        display: inline-block;
+        width: 40px;
+        height: calc(100% - 10px * 2);
+        line-height: calc(100% - 10px * 2);
+        padding: 0;
+        text-align: center;
+        font-size: 15px;
+        color: rgba(255, 255, 255, .7500);
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0);
+        border: 0;
+
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
+
+  + * {
+    margin-top: $headerHeight + 16px;
+  }
+}
+
+.banners {
+  height: 350px;
+  margin-top: $headerHeight !important;
+
+  @include centerPanel(false) {
+  }
+}
+.title {
+  margin-top: 24px;
+  margin-bottom: 4px;
+
+  height: 32px;
+  line-height: 32px;
+  a {
+    font-size: 13px;
+    @include text-shadow(none);
+  }
+  h1, h2, h3, h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(130, 130, 130, 1.00);
+    @include text-shadow(1px 1px 1px white);
+  }
+  @include centerPanel2();
+
+  &.n2 {
+    @include clearfix();
+    > * {
+      float: left;
+      display: inline-block;
+      width: 50%;
+
+      + * {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.index-row {
+  @include centerPanel() {
+    @include clearfix();
+    
+    > * {
+      position: relative;
+
+      float: left;
+      display: inline-block;
+      margin-left: 16px;
+      background-color: white;
+      overflow: hidden;
+      @include box-shadow(0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.1));
+      @include border-radius(2px);
+      
+
+      > * {
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+
+        position: absolute;
+        left: 0;
+      }
+
+      h1, h2, h3, h4, b, p {
+        text-align: left;
+        padding-left: 16px;
+        padding-right: 16px;
+        @include overflow-docx3();
+      }
+      figure {
+        top: 0;
+        height: 100%;
+
+        &:before, &:after, figcaption {
+          position: absolute;
+          display: inline-block;
+        }
+        &:before {
+          font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+          @include font-smoothing(antialiased);
+
+          top: 8px;
+          right: 8px;
+
+          padding: 0 6px;
+          height: 20px;
+          line-height: 20px;
+          font-size: 12px;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.3);
+          font-style: normal;
+
+          @include transition(color .3s, background-color .3s);
+          @include border-radius(20px);
+        }
+        &:after {
+          content: '';
+          left: 0;
+          top: 0;
+          display: none;
+          width: 100%;
+          height: 100%;
+          border-bottom: 1px solid rgba(0, 0, 0, .1);
+        }
+        &[data-cnt]:not([data-cnt='0']) {
+          &:before {
+            content: "\e9ce" " " attr(data-cnt);
+          }
+        }
+        figcaption {
+          width: 100%;
+          left: 0;
+          bottom: 0;
+          display: none;
+          @include opacity(0);
+        }
+      }
+      h1, h2, h3, h4, b {
+        top: calc(100% - 32px - 10px / 2);
+        height: 32px;
+        line-height: 32px;
+
+        color: rgba(85, 85, 85, 1);
+        font-size: 16px;
+        
+        + figure {
+          height: calc(100% - 32px - 10px);
+          &:after { display: inline-block; }
+        }
+      }
+      p {
+        top: calc(100% - 32px - 24px - 10px + 32px);
+        height: 24px;
+        line-height: 24px;
+        color: rgba(111, 111, 111, 1);
+        font-size: 13px;
+        + h1, + h2, + h3, + h4, + b {
+          top: calc(100% - 32px - 24px - 10px / 2);
+
+          + figure {
+            height: calc(100% - 32px - 24px - 10px);
+            &:after { display: inline-block; }
+          }
+        }
+      }
+      @include range-width(0, 450px) { height: 200px; width: calc(100% / 1 - 16px * 0 / 1); margin-left: 0; &:nth-child(n + 2) { margin-top: 16px; } };
+      @include range-width(450px, 600px) { height: 200px; width: calc(100% / 2 - 16px * 1 / 2); &:nth-child(2n + 1) { margin-left: 0; } &:nth-child(n + 3) { margin-top: 16px; } };
+      @include range-width(600px, 950px) { height: 200px; width: calc(100% / 3 - 16px * 2 / 3); &:nth-child(3n + 1) { margin-left: 0; } &:nth-child(n + 4) { margin-top: 16px; } };
+      @include range-width(950px) { height: 200px; width: calc(100% / 4 - 16px * 3 / 4); &:nth-child(4n + 1) { margin-left: 0; } &:nth-child(n + 5) { margin-top: 16px; } };
+    }
+  }
+}
+.cn2 {
+  @include centerPanel2(false);
+  @include clearfix();
+  > * {
+    float: left;
+    
+    @include range-width(0, 750px) {
+      width: 100%;
+    };
+    @include range-width(750px) {
+      width: calc(50% - 16px / 2);
+
+      &:nth-child(2n + 2) {
+        margin-left: 16px
+      }
+    };
+  }
+}
+.list {
+  @include centerPanel(false) {
+    position: relative;
+    background-color: rgba(255, 255, 255, 1);
+    @include box-shadow(0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.1));
+    padding: 2px;
+
+    &:empty, &.e {
+      &:before {
+        content: '目前沒有任何資料。';
+        display: inline-block;
+        padding: 16px 0;
+        color: rgba(180, 180, 180, 1);
+      }
+      &[title] {
+        &:before {
+          content: attr(title);
+        }  
+      }
+    }
+
+    > a {
+      $h: 64px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: $h;
+      text-align: left;
+      @include clearfix();
+
+      &:before, &:after {
+        position: absolute;
+        display: inline-block;
+      }
+      &:before {
+        content: '';
+        top: -1px;
+        left: $h + 2px;
+        display: none;
+        width: calc(100% - #{$h});
+        height: 1px;
+        background-color: rgba(230, 230, 230, 1);
+      }
+      &:after {
+        content: "\e315";
+        font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+        @include font-smoothing(antialiased);
+        color: rgba(175, 175, 175, 1);
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: $h;
+        line-height: $h;
+        text-align: center;
+        font-size: 24px;
+        z-index: 1;
+        @include transition(color .3s);
+      }
+      + a:before {
+        display: inline-block;
+      }
+      figure {
+        position: relative;
+        float: left;
+        margin-top: 10px;
+        margin-left: 10px;
+        width: $h - 10px * 2;
+        height: $h - 10px * 2;
+        overflow: hidden;
+
+        // @include box-shadow(0 0 1px rgba(180, 180, 180, 1));
+        @include border-radius(2px);
+
+        figcaption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          @include overflow-docx3();
+          @include opacity(0);
+        }
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          border: 1px solid rgba(0, 0, 0, .15);
+        }
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      b, span {
+        float: right;
+        width: calc(100% - #{$h});
+        padding-left: 8px;
+        padding-right: 40px;
+        @include overflow-docx3();
+        @include transition(color .3s);
+      }
+      i {
+        float: left;
+        width: 80px - 8px;
+        text-align: center;
+        font-style: normal;
+        font-size: 10px;
+        display: inline-block;
+        height: 17px;
+        line-height: 17px - 2px;
+        margin-top: 10px + (25px - 17px) / 2;
+        margin-left: 10px;
+        padding: 0 8px;
+        background-color: rgba(39, 40, 34, 1.00);
+        color: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(0, 0, 0, .10);
+        @include overflow-docx3();
+        @include border-radius(2px);
+        @include opacity(.75);
+
+        &:empty {
+          display: none;
+        }
+        &:not(:empty) {
+          + b {
+            width: calc(100% - #{$h} - (80px - 8px));
+            float: left;
+          }
+        }
+      }
+      b {
+        margin-top: 10px;
+        height: 25px;
+        line-height: 25px;
+        color: rgba(65, 65, 65, .850);
+
+        &[data-tip]:not([data-tip='']) {
+          &:before {
+            content: attr(data-tip);
+            // font-weight: normal;
+            font-size: 10px;
+            display: inline-block;
+            height: 17px;
+            line-height: 17px - 2px;
+            margin-top: (25px - 17px) / 2;
+            padding: 0 8px;
+            margin-right: 4px;
+            color: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(0, 0, 0, .10);
+            // @include text-shadow(0 1px 1px rgba(0, 0, 0, .3));
+            @include border-radius(18px / 2);
+            @include opacity(.75);
+            
+            background-color: rgba(39, 40, 34, 1.00);
+          }
+          &.c1 {
+            display: none;
+          }
+          &.c2:before {
+          }
+          @for $i from 1 through length($tagColors) {
+            &.c#{$i + 1}:before {
+              $b: nth($tagColors, $i);
+              @include contrasted($b, rgba(55, 55, 55, 1.00), rgba(255, 255, 255, 1.00));
+              background-color: $b;
+            }
+          }
+        }
+      }
+      span {
+        margin-top: -4px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        color: rgba(65, 65, 65, .750);
+      }
+      &:hover {
+        &:after {
+          color: rgba(155, 155, 155, 1);
+        }
+        b { color: rgba(65, 65, 65, 1); }
+        span { color: rgba(65, 65, 65, .9); }
+      }
+    }
+  };
+}
+
+.index-sponsor {
+  margin-top: 40px;
+  @include centerPanel{
+    text-align: left;
+    @include clearfix();
+
+    > div {
+      float: left;
+      display: inline-block;
+      width: calc(100% / 4);
+      // padding-right: 32px;
+
+      > * {
+        display: block;
+        word-break: break-all;
+      }
+      b {
+        font-size: 16px;
+        min-height: 25px;
+        line-height: 25px;
+        color: rgba(75, 75, 75, 1);
+      }
+      a {
+        font-size: 14px;
+        min-height: 20px;
+        line-height: 20px;
+        color: rgba(75, 75, 75, .75);
+        padding-left: 20px;
+        position: relative;
+
+        &:before {
+          font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+          @include font-smoothing(antialiased);
+          content: '\e900';
+          position: absolute;
+          left: 0;
+          top: 0;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          color: rgba(0, 0, 0, .3);
+          text-align: center;
+          font-size: 18px;
+        }
+      }
+      margin-left: 16px;
+      @include range-width(0, 450px) { width: calc(100% / 1 - 16px * 0 / 1); margin-left: 0; &:nth-child(n + 2) { margin-top: 16px; } };
+      @include range-width(450px, 750px) { width: calc(100% / 2 - 16px * 1 / 2); &:nth-child(2n + 1) { margin-left: 0; } &:nth-child(n + 3) { margin-top: 16px; } };
+      @include range-width(750px) { width: calc(100% / 4 - 16px * 3 / 4); &:nth-child(4n + 1) { margin-left: 0; } &:nth-child(n + 5) { margin-top: 16px; } };
+    }
+  }
+}
+
+#footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: rgba(46, 59, 62, 1.00);
+  
+  @include centerPanel{
+    color: white;
+    text-align: left;
+
+    > span {
+      float: left;
+      display: inline-block;
+      width: 100%;
+
+      + span {
+        font-size: 10px;
+        margin-top: 4px;
+        color: rgba(255, 255, 255, .75);
+      }
+    }
+  }
+}
+
+#contact_btn {
+  position: fixed;
+  bottom: 16px;
+  right: calc(50% - #{$maxWidth / 2} - (52px + 16px));
+  z-index: 100 + 5;
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  line-height: 52px;
+  font-size: 30px;
+  @include border-radius(50%);
+  background-color: rgba(53, 151, 104, 1.00);
+  color: white;
+  @include box-shadow(0 1px 6px rgba(0,0,0,.06),0 2px 32px rgba(0,0,0,.16));
+  @include range-width(0, 1200px) {
+    right: 16px;
+  };
+}
+#contact {
+  left: calc(50% - 320px / 2);
+  top: calc(50% - 350px / 2);
+  width: 320px;
+  height: 350px;
+  @include border-radius(3px);
+  @include box-shadow(0 2px 10px rgba(0,0,0,0.2));
+  &[data-tip]:not([data-tip='']) {
+    top: calc(50% - (350px + 30px + 16px) / 2);
+    height: (350px + 30px + 16px);
+    > span {
+      display: block;
+    }
+  }
+  > * {
+    display: block;
+    text-align: left;
+    padding: 0 16px;
+  }
+  header {
+    height: 45px;
+    line-height: 45px;
+    background-color: rgba(237, 239, 240, 1.00);
+    border-bottom: 1px solid rgba(0, 0, 0, .07);
+  }
+  span {
+    display: none;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 16px;
+    @include overflow-docx3();
+    width: calc(100% - 16px * 2);
+    margin-left: 16px;
+    color: white;
+    background-color: rgba(246, 114, 128, 1.00);
+    @include border-radius(2px);
+  }
+  b {
+    height: 30px;
+    line-height: 30px;
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  input {
+    @include input;
+    width: calc(100% - 16px * 2);
+    font-size: 14px;
+  }
+  textarea {
+    @include textarea;
+    width: calc(100% - 16px * 2);
+    margin-left: 16px;
+    line-height: 20px;
+    height: 20px * 4;
+    font-size: 14px;
+  }
+  div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    @include clearfix();
+    border-top: 1px solid rgba(222, 222, 222, 1);
+
+    > * {
+      float: left;
+      width: calc(50% - 1px);
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      @include transition(background-color .3s);
+      
+
+      + * {
+        border-left: 1px solid rgba(222, 222, 222, 1);
+        width: calc(50% + 1px);
+      }
+      &:hover {
+        background-color: rgba(240, 240, 240, 1.00);
+      }
+      &:active {
+        background-color: rgba(235, 235, 235, 1.00);
+      }
+    }
+  }
+}
+
+#contact_ckb {
+  &:checked {
+    ~ #contact {
+      z-index: 100 + 10;
+      display: inline-block;
+      @include opacity(1);
+      
+      + label._bc {
+        z-index: 100 + 10 - 1;
+        left: 0;
+        @include opacity(1);
+      }
+    }
+  }
+}
+
+#menu {
+  left: calc(50% - #{$maxWidth} / 2);
+  width: $leftWidth;
+  overflow: visible;
+
+  @include border-radius(3px);
+  @include box-shadow(0 2px 10px rgba(0,0,0,0.2));
+
+  &:before {
+    bottom: 100%;
+    left: 26px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-bottom-color: white;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+  @include range-width(0, $maxWidth + 16px * 2) {
+    left: 8px;
+    width: $leftWidth - 8px;
+    &:before {
+      left: 20px;
+    }
+  };
+
+  $h: 45px;
+  @for $i from 1 through 5 {
+    &.n#{$i} {
+      height: $h * $i;      
+    }
+  }
+
+  > * {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: $h;
+    line-height: $h;
+    text-align: left;
+    padding: 0;
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      display: inline-block;
+      width: 40px;
+      height: $h;
+      line-height: $h;
+      text-align: center;
+    }
+    &:before {
+      left: 4px;
+      font-size: 20px;
+      color: rgba(180, 180, 180, 1.00);
+      @include transition(color .3s);
+    }
+    &:after {
+      content: '\e315';
+      font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+      @include font-smoothing(antialiased);
+      right: 0;
+      
+      color: rgba(175, 175, 175, 1);
+      font-size: 30px;
+      z-index: 1;
+      @include transition(color .3s);
+    }
+    span {
+      position: relative;
+      display: block;
+      color: rgba(28, 28, 28, 1.00);
+      height: $h;
+      line-height: $h - 15px;
+      padding: 0 40px;
+      padding-left: 40px + 8px;
+      @include overflow-docx3();
+      @include transition(color .3s);
+
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: inline-block;
+        color: rgba(36, 36, 36, 1.00);
+      }
+      &:before {
+        left: 40px;
+        width: calc(100% - #{40px});
+        height: 1px;
+        background-color: rgba(231, 232, 233, 1.00);
+      }
+      &:after {
+        content: attr(title);
+        left: 40px + 8px;
+        font-size: 10px;
+        color: rgba(120, 120, 120, 1.00);
+        @include transition(color .3s);
+      }
+      &.icon-gi:before {
+        font-size: 15px;
+      }
+    }
+
+    &:last-child span:before {
+      display: none;
+    }
+    &:hover {
+      span {
+        color: rgba(16, 16, 16, 1);
+        &:after {
+          color: rgba(75, 75, 75, 1);
+        }
+      }
+      &:before {
+        color: rgba(150, 150, 150, 1.00);
+      }
+      &:after {
+        color: rgba(145, 145, 145, 1);
+      }
+    }
+  }
+
+
+  @include range-width(0, 450px) {
+    top: auto;
+    right: 8px;
+    z-index: 100 + 10;
+    width: calc(100% - 8px * 2);
+    @include border-radius(16px);
+    @include transition(opacity .3s, bottom .3s);
+    
+    &:before {
+      display: none;
+    }
+
+    $h: 45px;
+    @for $i from 1 through 5 {
+      &.n#{$i} {
+        bottom: -$h * $i;      
+      }
+    }
+  };
+}
+#menu_ckb {
+  &:checked {
+    ~ #menu {
+      z-index: 100 + 20;
+      display: inline-block;
+      @include opacity(1);
+      
+      + label._bc {
+        z-index: 100 + 10 - 5;
+        left: 0;
+        @include opacity(1);
+      }
+      @include range-width(0, 450px) {
+        bottom: 8px;
+      };
+      @include range-width(450px) {
+        top: $headerHeight + 5px;
+      }
+    }
   }
 }
