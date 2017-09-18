@@ -814,12 +814,12 @@ figure {
 #contact_ckb {
   &:checked {
     ~ #contact {
-      z-index: 100 + 10;
+      z-index: 100 + 20;
       display: inline-block;
       @include opacity(1);
       
       + label._bc {
-        z-index: 100 + 10 - 1;
+        z-index: 100 + 20 - 1;
         left: 0;
         @include opacity(1);
       }
@@ -995,5 +995,246 @@ figure {
         top: $headerHeight + 5px;
       }
     }
+  }
+}
+
+#ntf {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  display: inline-block;
+  width: 320px;
+  z-index: 100 + 15;
+
+  $h: 85px;
+  > div {
+    position: absolute;
+    bottom: -$h;
+    right: -100%;
+
+    display: inline-block;
+    width: 100%;
+    height: $h;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 1.00);
+    overflow: hidden;
+    
+    @include border-radius(1px);
+    @include opacity(0);
+    @include box-shadow(0 1px 8px -4px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.3), 0 2px 4px rgba(0, 0, 0, .15));
+    @include transition(bottom .3s, right .3s, opacity .3s);
+    @include clearfix();
+
+    &.p {
+      cursor: pointer;
+    }
+
+    &.s {
+      right: 0;
+      @include opacity(1);
+    }
+    &:hover {
+      > span + span {
+        color: rgba(105, 105, 105, 1);
+      }
+      > div + span, > span:first-child {
+        color: rgba(85, 85, 85, 1);
+      }
+      > div {
+        background-color: rgba(240, 240, 240, 1.00);
+        
+        &.i {
+          &:before {
+            color: rgba(135, 135, 135, 1.00);
+          }
+        }
+      }
+    }
+
+    > a {
+      position: absolute;
+      right: 4px;
+      top: 8px;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      color: rgba(175, 175, 175, 1.00);
+      @include transition(color .3s);
+      font-weight: bold;
+      &:hover {
+        color: rgba(105, 105, 105, 1.00);
+      }
+    }
+    > span {
+      width: 100%;
+      float: right;
+      display: inline-block;
+      text-align: left;
+      padding: 0 12px;
+      @include transition(color .3s);
+      
+      + span {
+        height: $h - 30px - 8px - 8px;
+        line-height: 19px;
+        font-size: 10px;
+        word-break: break-all;
+        overflow: hidden;
+        color: rgba(135, 135, 135, 1);
+      }
+
+      &:first-child {
+        width: calc(100% - 20px);
+      }
+    }
+    > div {
+      float: left;
+      display: inline-block;
+      height: $h;
+      width: $h;
+      overflow: hidden;
+      background-color: rgba(245, 245, 245, 1.00);
+      border-right: 1px solid rgba(240, 240, 240, 1.00);
+      @include transition(background-color .3s);
+      
+      img {
+        width: 100%;
+      }
+      &:before {
+        line-height: $h;
+        font-size: $h / 3;
+        @include text-shadow(1px 1px rgba(255, 255, 255, 1));
+        @include transition(color .3s);
+      }
+      &.i {
+        &:before {
+          color: rgba(145, 145, 145, 1.00);
+        }
+      }
+      ~ span {
+        width: calc(100% - #{$h});
+      }
+      + span {
+        width: calc(100% - #{$h} - 20px);
+      }
+    }
+    > div + span, > span:first-child {
+      color: rgba(110, 110, 110, 1);
+      height: 30px;
+      line-height: 30px;
+      margin-top: 8px;
+      font-size: 16px;
+      @include overflow-docx3();
+      margin-right: 20px;
+      font-weight: bold;
+    }
+  }
+
+  @include range-width(450px) {
+    > div {
+      @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+          bottom: ($h + 12px) * ($i - 1);
+          z-index: 20 - $i;
+        }
+      }
+    }
+  }
+  @include range-width(0, 450px) {
+    bottom: auto;
+    right: auto;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 255, 0.2);
+    width: 100%;
+    z-index: 100 + 3;
+
+    > div {
+      right: auto;
+      bottom: auto;
+      top: -$h;
+      left: 8px;
+      width: calc(100% - 8px * 2);
+      @include opacity(1);
+      @include border-radius(3px);
+      @include box-shadow(0 7px 8px -4px rgba(0,0,0,0.2), 0 13px 19px 2px rgba(0,0,0,0.14), 0 5px 24px 4px rgba(0,0,0,0.12));
+      @include transition(top .3s);
+      
+      &.s {
+        top: 8px;
+        @for $i from 1 through 20 {
+          &:nth-last-child(#{$i}) {
+            top: 8px + ($i - 1) * 4px;
+          }
+        }
+      }
+      &:nth-last-child(n + 4) {
+        display: none;
+      }
+    }
+  };
+}
+#loading {
+  width: 220px;
+  height: 220px;
+  line-height: 220px * 2 - 80px;
+  font-size: 14px;
+  @include scale(0);
+  @include overflow-docx3();
+  @include border-radius(10px);
+  @include box-shadow(0 7px 8px -4px rgba(0,0,0,0.2), 0 13px 19px 2px rgba(0,0,0,0.14), 0 5px 24px 4px rgba(0,0,0,0.12));
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    @include border-radius(50%);
+  }
+
+  &:before {
+    left: calc(50% - 120px / 2);
+    top: calc(50% - 120px / 2 - 16px);
+    width: 120px;
+    height: 120px;
+
+    @include background-image(linear-gradient(
+      rgba(250, 186, 22, 1.00) 0%,
+      rgba(255, 237, 120, 1.00) 100%));
+    @include animation(rotate 1s linear infinite);
+    @include box-shadow(inset 0 0 2px rgba(0, 0, 0, .3));
+  }
+  &:after {
+    left: calc(50% - 100px / 2);
+    top: calc(50% - 100px / 2 - 16px);
+    width: 100px;
+    height: 100px;
+    @include box-shadow(0 0 3px rgba(0, 0, 0, .3));
+  }
+
+  &.s {
+    top: calc(50% - 220px / 2);
+    left: calc(50% - 220px / 2);
+    z-index: 200;
+    @include opacity(1);
+    @include transition(transform .3s cubic-bezier(.68, -0.275, .825, 0.115));
+    
+    + label._bc {
+      z-index: 200 - 5;
+      left: 0;
+      @include opacity(1);
+    }
+    
+    &.a {
+      @include transition(transform .3s cubic-bezier(.175, .885, .32, 1.275));
+      @include scale(1);
+    }
+  }
+}
+
+@include keyframes(rotate){
+  100% {
+    @include rotate(360deg);
   }
 }
