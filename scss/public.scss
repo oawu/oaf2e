@@ -44,8 +44,14 @@ html {
   margin: 0 auto;
   @include clearfix();
   $d: 16px;
-  width: $d * 38;
-  height: $d * 8;
+  @for $i from 1 through 50 {
+    &.w#{$i} {
+      width: $d * $i;
+    }
+    &.h#{$i} {
+      height: $d * $i;
+    }
+  }
   background-color: rgba(0, 0, 255, 0.2);
   background-color: white;
   margin: 16px;
@@ -59,6 +65,7 @@ html {
     position: relative;
     background-color: rgba(255, 255, 255, 1);
     @include transition(background-color .3s);
+    // @include opacity(.7);
     
     &:before {
       content: '';
