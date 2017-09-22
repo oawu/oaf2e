@@ -38,3 +38,54 @@ html {
     @include font-smoothing(antialiased);
   }
 }
+
+#lametric-time {
+  display: inline-block;
+  margin: 0 auto;
+  @include clearfix();
+  $d: 16px;
+  width: $d * 38;
+  height: $d * 8;
+  background-color: rgba(0, 0, 255, 0.2);
+  background-color: white;
+  margin: 16px;
+  @include box-shadow(0 0 3px rgba(0, 0, 0, .3));
+  
+  > * {
+    float: left;
+    display: inline-block;
+    width: $d;
+    height: $d;
+    position: relative;
+    background-color: rgba(255, 255, 255, 1);
+    @include transition(background-color .3s);
+    
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      @include box-shadow(0 0 1px rgba(0, 0, 0, .1));
+    }
+    &.c-1 {
+      background-color: rgba(242, 123, 18, 1.00);
+    }
+    &.c1 {
+      background-color: rgba(246, 155, 23, 1.00);
+    }
+    &.c2 {
+      background-color: rgba(249, 171, 26, 1.00);
+    }
+    &.c3 {
+      background-color: rgba(248, 166, 31, 1.00);
+    }
+    &.c4 {
+      background-color: rgba(248, 167, 34, 1.00);
+    }
+    &.c5 {
+      background-color: rgba(242, 123, 18, 1.00);
+    }
+  }
+}
