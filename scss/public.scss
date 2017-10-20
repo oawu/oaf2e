@@ -47,6 +47,9 @@ a {
   // color: rgba(173, 220, 228, 1.00);
   cursor: pointer;
 }
+.switch {
+  @include switch(rgba(49, 183, 164, 1.00));
+}
 ._ckbh {
   position: fixed;
   left: -9999;
@@ -184,6 +187,28 @@ a {
         }
       }
     }
+    &.finished {
+      > * {
+        // @include opacity(.5);
+      }
+      h3 {
+        &:before {
+          content: '已完成';
+          display: inline-block;
+          height: 20px;
+          line-height: 20px;
+          padding: 0 8px;
+          background-color: rgba(49, 183, 164, 1.00);
+          color: white;
+          // border: 1px solid rgba(255, 0, 0, .3);
+          margin-right: 4px;
+          margin-top: 8px;
+          font-weight: normal;
+          font-size: 12px;
+          @include border-radius(20px / 2);
+        }
+      }
+    }
     > * {
       float: left;
       display: inline-block;
@@ -226,8 +251,7 @@ a {
         float: right;
         padding-left: 4px;
       }
-      &:before {
-        content: '?';
+      figure, &:before {
         position: absolute;
         top: 8px;
         left: 8px;
@@ -237,10 +261,21 @@ a {
         line-height: ($h + $m) - 8px * 2;
         font-size: 20px;
         font-weight: bold;
+        margin: 0;
         @include border-radius(50%);
         background-color: rgba(173, 220, 228, 1.00);
         color: rgba(255, 255, 255, 1.00);
         @include text-shadow(0 0 1px rgba(88, 107, 143, .300));
+        overflow: hidden;
+
+        > img {
+          width: 100%;
+        }
+      }
+      &:empty {
+        &:before {
+          content: '?';
+        }
       }
     }
     span {
@@ -434,311 +469,7 @@ a {
     }
   }
 }
-.article {
-  display: inline-block;
-  width: 100%;
-  background-color: white;
-  text-align: left;
-  border: 1px solid rgba(0, 0, 0, .1);
-  padding: 20px 32px;
-  @include range-width(0, 750px) {
-    padding: 16px;
-  };
-  + .ci {
-    margin-top: -1px !important;
-  }
 
-  > header {
-    display: inline-block;
-    width: 100%;
-
-    > * {
-      display: block;
-    }
-    > h1, > h2, > h3 {
-      margin: 0;
-      font-size: 23px;
-      height: 35px;
-      line-height: 35px;
-      @include overflow-docx3();
-    }
-  }
-  > .info {
-    margin-top: 16px;
-    height: 30px;
-    @include clearfix();
-    
-    &:last-child {
-      padding-top: 10px;      
-      margin-top: 32px;
-      // border-top: 1px solid rgba(235, 235, 235, 1);
-    }
-    > * {
-      float: left;
-      display: inline-block;
-      width: 50%;
-      height: 100%;
-
-      + * {
-        text-align: right;
-      }
-    }
-    > .fblike {
-      padding-top: 4px;
-    }
-    > time {
-      line-height: 30px;
-      font-size: 13px;
-      color: rgba(100, 100, 100, 1);
-      position: relative;
-
-      &:before {
-        content: attr(data-time);
-        position: absolute;
-        top: -18px;
-        right: 0;
-        display: inline-block;
-        width: 100%;
-        height: 20px;
-        font-size: 10px;
-        color: rgba(150, 150, 150, 1);
-      }
-    }
-    > span {
-      font-size: 13px;
-      color: rgba(145, 145, 145, 1);
-      height: 20px;
-      line-height: 20px;
-
-      &:before {
-        display: inline-block;
-        margin-top: 1px;
-        margin-right: 4px;
-        @include opacity(.75);
-      }
-    }
-  }
-  > section {
-    display: inline-block;
-    width: 100%;
-    margin-top: 16px;
-    font-size: 14px;
-    word-break: break-all;
-
-    > p {
-      display: inline-block;
-      width: 100%;
-      margin-top: 8px;
-      margin-bottom: 0;
-      line-height: 20px;
-    }
-  }
-}
-.create {
-  display: inline-block;
-  width: 100%;
-  background-color: white;
-  text-align: center;
-  border: 1px solid rgba(0, 0, 0, .1);
-  padding: 20px 32px;
-  @include range-width(0, 750px) {
-    padding: 16px;
-  }; 
-  > * {
-    display: inline-block;
-    width: 100%;
-    max-width: 512px;
-    margin: 0 auto;
-  }
-  > span {
-    position: relative;
-    text-align: left;
-    font-size: 13px;
-    min-height: 35px;
-    line-height: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    padding-left: 30px + 8px;
-    padding-right: 8px;
-    
-    font-weight: bold;
-    @include border-radius(2px);
-    overflow: hidden;
-
-    margin-bottom: 16px;
-    &:empty {
-      display: none;
-      margin-bottom: 0;
-    }
-
-    &:before, &:after {
-      position: absolute;
-      display: inline-block;
-    }
-    &:before {
-      content: '';
-      left: 0;
-      top: 0;
-      width: 30px;
-      height: 100%;
-    }
-    &:after {
-      content: '！';
-
-      left: (30px - 18px) / 2;
-      top: (35px - 18px) / 2;
-      width: 18px;
-      height: 18px;
-      line-height: 18px - 2px;
-      text-align: center;
-
-      font-weight: bold;
-      color: white;
-
-      font-size: 14px;
-      border: 1px solid rgba(255, 255, 255 , .75);
-      @include border-radius(50%);
-    }
-    &, &.r {
-      color: adjust-lightness(rgba(246, 114, 128, 1.00), -10%);
-      border: 1px solid rgba(246, 114, 128, 1.00);
-
-      &:before {
-        background-color: rgba(246, 114, 128, 1.00);
-      }
-    }
-    &.g {
-      color: adjust-lightness(rgba(121, 209, 195, 1.00), -10%);
-      border: 1px solid rgba(121, 209, 195, 1.00);
-      
-      &:before {
-        background-color: rgba(121, 209, 195, 1.00);
-      }
-    }
-    &.b {
-      color: adjust-lightness(rgba(121, 169, 247, 1.00), -10%);
-      border: 1px solid rgba(121, 169, 247, 1.00);
-      
-      &:before {
-        background-color: rgba(121, 169, 247, 1.00);
-      }
-    }
-  }
-  label {
-    text-align: left;
-    b {
-      display: inline-block;
-      width: 100%;
-      height: 25px;
-      line-height: 25px;
-      font-size: 14px;
-      &:before {
-        content: '※';
-        display: none;
-        font-weight: normal;
-        color: rgba(245, 98, 98, 1.00);
-        margin-right: 3px;
-        font-size: 14px;
-        margin-top: -1px;
-      }
-      &.need {
-        &:before {
-          display: inline-block;
-        }
-      }
-    }
-    input, select, textarea {
-      display: inline-block;
-      width: 100%;
-
-    }
-    input, select {
-      @include input;
-      font-size: 14px;
-    }
-    select {
-
-    }
-    input, textarea {
-      -webkit-appearance: none;
-    }
-    textarea {
-      @include textarea;
-      line-height: 20px;
-      font-size: 14px;
-      min-height: 20px * 4;
-    }
-    + label {
-      margin-top: 16px;
-    }
-  }
-
-  > div {
-    // min-height: 40px;
-    // line-height: 40px;
-    margin-top: 24px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(222, 222, 222, 1);
-    @include clearfix();
-
-    > * {
-      float: left;
-      display: inline-block;
-    }
-    div {
-      width: (86px * 2 + 8px);
-      @include clearfix();
-      button {
-        float: right;
-        width: 86px;
-        height: 30px !important;
-        line-height: 30px !important;
-        &[type='submit'] {
-          @include button(rgba(49, 183, 164, 1.00));
-        }
-        &[type='reset'] {
-          @include button(rgba(253, 99, 120, 1.00));
-        }
-        + button {
-          margin-right: 8px;
-        }
-      }
-    }
-    span {
-      width: calc(100% - (86px * 2 + 8px));
-
-      padding: 0;
-      padding-top: 6px;
-      line-height: 18px;
-      font-size: 10px;
-      text-align: left;
-      color: rgba(100, 100, 100, 1);
-      
-      &:before {
-        content: '※';
-        display: inline-block;
-        font-weight: bold;
-        color: rgba(245, 98, 98, 1.00);
-        margin-right: 3px;
-        font-size: 14px;
-        margin-top: -1px;
-      }
-    }
-    @include range-width(0, 550px) {
-      span, div {
-        width: 100%;
-      }
-      div {
-        margin-top: 16px;
-        button {
-          width: calc(50% - 8px / 2);
-          height: 35px !important;
-          line-height: 35px !important;
-        }
-      }
-    };
-  }
-}
 #header {
   $headH: 60px;
   $h: 32px;

@@ -67,4 +67,55 @@ $(function () {
     return false;
   });
 
+
+
+  function mutiCol ($obj) {
+    $obj.each (function () {
+      var that = this, $row = $(this), $span = $row.find ('>span'), $b = $row.find ('>b');
+      $row.data ('i', 0);
+
+      that.fm = function (i, t) {
+        return $('<div />').append (
+          $('<div />').append (
+            $('<a />').click (function () {
+              var $p = $(this).parent ().parent ();
+              $p.clone (true).insertBefore ($p.index () == 1 ? $span : $p.prev ());
+              $p.remove ();
+            })).append (
+            $('<a />').click (function () {
+              var $p = $(this).parent ().parent (), $x = $p.next (), $n = $p.clone (true);
+              if ($x.is ('span')) $n.insertAfter ($b); else $n.insertAfter ($x);
+              $p.remove ();
+            }))).append (Array.apply (null, Array ($row.data ('cnt'))).map (function (_, j) {
+              if ($row.data ('attrs')[j].el == 'select') {
+                return $('<select />').attr ('name', $row.data ('attrs')[j].name + '[' + i + ']' + ($row.data ('attrs')[j].key ? '[' + $row.data ('attrs')[j].key + ']' : '')).attr ('class', $row.data ('attrs')[j].class ? $row.data ('attrs')[j].class : null).append ($row.data ('attrs')[j].options ? Array.apply (null, Array ($row.data ('attrs')[j].options.length)).map (function (_, k) { return $('<option />').attr ('value', $row.data ('attrs')[j].options[k].value).prop ('selected', (t ? $row.data ('attrs')[j].key && typeof t[$row.data ('attrs')[j].key] !== 'undefined' ? t[$row.data ('attrs')[j].key] : (typeof t === 'object' ? 1 : t) : 1) == $row.data ('attrs')[j].options[k].value).text ($row.data ('attrs')[j].options[k].text); }) : null);
+              } else if ($row.data ('attrs')[j].el == 'input') {
+                return $('<input />').attr ('type', $row.data ('attrs')[j].type ? $row.data ('attrs')[j].type : null).attr ('name', $row.data ('attrs')[j].name + '[' + i + ']' + ($row.data ('attrs')[j].key ? '[' + $row.data ('attrs')[j].key + ']' : '')).attr ('placeholder', $row.data ('attrs')[j].placeholder ? $row.data ('attrs')[j].placeholder : null).attr ('accept', $row.data ('attrs')[j].accept ? $row.data ('attrs')[j].accept : null).attr ('class', $row.data ('attrs')[j].class ? $row.data ('attrs')[j].class : null).val (t ? $row.data ('attrs')[j].key && typeof t[$row.data ('attrs')[j].key] !== 'undefined' ? t[$row.data ('attrs')[j].key] : (typeof t === 'object' ? '' : t) : '');
+              } else {
+                return null;
+              }
+            })).append (
+          $('<a />').click (function () { $(this).parent ().remove (); }));
+      };
+
+      $span.find ('a').click (function () {
+        var $t = that.fm ($row.data ('i')).insertBefore ($span);
+        $row.data ('i', parseInt ($row.data ('i'), 10) + 1);
+        setTimeout (function () { $t.find ('input').first ().focus (); }, 100);
+      });
+
+      if ($row.data ('vals') && $row.data ('vals').length)
+        $row.data ('vals').forEach (function (t) {
+          that.fm ($row.data ('i'), t).insertBefore ($span);
+          $row.data ('i', parseInt ($row.data ('i'), 10) + 1);
+        });
+      else
+        that.fm ($row.data ('i')).insertBefore ($span);
+
+      $row.data ('i', parseInt ($row.data ('i'), 10) + 1);
+    });
+  }
+
+  mutiCol ($('form .row.muti'));
+
 });
