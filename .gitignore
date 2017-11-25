@@ -2,6 +2,6 @@
 sftp-config*
 
 cmd/.sass-cache/*
-
+cmd/package-lock.json
 cmd/node_modules/*
 cmd/npm-debug.log
