@@ -63,11 +63,10 @@ if (!$argv) {
   if (count ($argv) < 2)
     exit;
 
-  if ($argv[0] == 'c1')
-    cho1 ($argv[1]);
+  if (!is_callable ($func = array_shift ($argv)))
+    exit;
 
-  if ($argv[0] == 'c2')
-    cho1 ($argv[1]);
+  $func (array_shift ($argv));
 }
 
 function cho2 ($argv = null) {
@@ -81,7 +80,7 @@ function cho2 ($argv = null) {
     
     $cmds = array (
         "sudo osascript",
-        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"npm install . && php teresa c2 all\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"npm install . && php teresa cho2 all\"'",
         "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
       );
     system (implode (' ', $cmds));
@@ -121,7 +120,7 @@ function cho1 ($argv = null) {
     
     $cmds = array (
         "sudo osascript",
-        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"npm install . && php teresa c1 all\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"npm install . && php teresa cho1 all\"'",
         "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
       );
     system (implode (' ', $cmds));
@@ -153,7 +152,7 @@ function cho1 ($argv = null) {
         "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"d\" using {shift down, command down}'",
         "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd " . PATH_CMD . "\"'",
         "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
-        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"php teresa c1 compass\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"php teresa cho1 compass\"'",
         "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
       );
   }
