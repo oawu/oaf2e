@@ -89,9 +89,10 @@ function cho2 ($argv = null) {
   }
 
   exec ('git branch', $shellOutput);
-  $hasGhPages = in_array ('gh-pages', array_map ('trim', $shellOutput));
+  $hasGhPages = in_array ('gh-pages', $branches = array_map ('trim', $shellOutput));
   $cmds = array ();
-
+var_dump ($branches);
+exit ();
   if ($argv == 'all') {
     $cmds = $hasGhPages ? array (
       "osascript",
