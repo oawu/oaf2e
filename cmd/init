@@ -33,7 +33,7 @@ if (!$argv) {
     echo ' ' . cc (str_repeat ('═', 6), 'N') . "\n";
     echo '   ' . cc ('1.', 'W') . ' ' . '幫我建立開發環境 ' . "\n";
     echo '   ' . cc ('2.', 'W') . ' ' . '部署到 GitHub gh-pages Demo ' . "\n";
-    echo '   ' . cc ('2.', 'W') . ' ' . '部署到 Amazon Web Services S3 ' . "\n";
+    echo '   ' . cc ('3.', 'W') . ' ' . '部署到 Amazon Web Services S3 ' . "\n";
     echo '   ' . cc ('4.', 'W') . ' ' . '沒事，按錯.. ' . "\n";
     echo "\n";
     echo ' ' . cc ('➜', 'G') . ' 請問你要幹嘛？' . cc ('(4)', 'N') . '：';
