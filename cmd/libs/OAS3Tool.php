@@ -174,7 +174,7 @@ class OAS3Tool {
     $s2 = memoryUnit (array_sum ($this->startMs));
 
     return $this->logAppend (' ' . color ('➜', 'W') . ' ' . color ('累積使用記憶體量', 'R') . '：' . str_repeat (' ', 49) . color ($s2[0], 'W') . ' ' . $s2[1] . "\n")
-                ->logAppend (color (str_repeat ('-', CLI_LEN), 'N'), "\n")
+                ->logAppend (color (str_repeat ('─', CLI_LEN), 'N'), "\n")
                 ->logAppend (' ' . color ('➜', 'W') . ' ' . color ('目前使用記憶體量', 'R') . '：' . str_repeat (' ', 49) . color ($s1[0], 'W') . ' ' . $s1[1] . "\n");
   }
   public function url () {

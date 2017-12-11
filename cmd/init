@@ -1,0 +1,165 @@
+<?php
+
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2017 OA Wu Design
+ * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
+ */
+
+include_once 'libs' . DIRECTORY_SEPARATOR . 'Define.php';
+include_once 'libs' . DIRECTORY_SEPARATOR . 'Func' . PHP;
+include_once 'libs' . DIRECTORY_SEPARATOR . 'Logger' . PHP;
+
+use function color as cc;
+
+$file = array_shift ($argv);
+
+define ('FILENAME', str_replace (__DIR__ . DIRECTORY_SEPARATOR, '', __FILE__));
+
+if (!function_exists ('headerText')) {
+  function headerText () {
+    system ('clear');
+    echo cc (str_repeat ('═', CLI_LEN)) . "\n\n";
+    echo " 【 " . cc ('歡迎使用 OAF2E 個人工具', 'y') . " 】" . str_repeat (' ', CLI_LEN - 48) . cc ('v 1.0', 'N') . '    ' . cc ('by', 'N') . ' ' . cc ('OA Wu', 'W') . "\n\n";
+    echo cc (str_repeat ('═', CLI_LEN)) . "\n\n";
+  }
+}
+
+if (!$argv) {
+  headerText ();
+  do {
+    headerText ();
+    echo ' ' . cc ('※', 'r') . " 選單\n";
+    echo ' ' . cc (str_repeat ('═', 6), 'N') . "\n";
+    echo '   ' . cc ('1.', 'W') . ' ' . '幫我建立開發環境 ' . "\n";
+    echo '   ' . cc ('2.', 'W') . ' ' . '部署到 GitHub gh-pages Demo ' . "\n";
+    echo '   ' . cc ('2.', 'W') . ' ' . '部署到 Amazon Web Services S3 ' . "\n";
+    echo '   ' . cc ('4.', 'W') . ' ' . '沒事，按錯.. ' . "\n";
+    echo "\n";
+    echo ' ' . cc ('➜', 'G') . ' 請問你要幹嘛？' . cc ('(4)', 'N') . '：';
+
+    ($cho = trim (fgets (STDIN))) || $cho = '4';
+  } while (!in_array (strtolower ($cho), array ('1', '2', '3', '4')));
+
+  if ($cho == '1')
+    cho1 ('all');
+  
+  if ($cho == '2')
+    cho2 ('all');
+  
+  if ($cho == '3')
+    cho3 ('all');
+
+} else {
+  if (count ($argv) < 2)
+    exit;
+
+  if (!is_callable ($func = array_shift ($argv)))
+    exit;
+
+  $func (array_shift ($argv));
+}
+
+function cho3 ($argv = null) {
+  $cmds = array ();
+  if ($argv == 'all') {
+    $cmds = array (
+      "osascript",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"php demo.php\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+    );
+  }
+  $cmds && system (implode (' ', $cmds));
+  exit;
+}
+function cho2 ($argv = null) {
+  if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'gulp.js')) {
+    echo "\n";
+    echo cc (str_repeat ('─', CLI_LEN)) . "\n";
+    echo "\n";
+    echo ' ' . cc ('◎', 'R') . " 您還沒有執行過 " . cc (' sudo npm install . ', 'W', 'R') . "\n";
+    echo ' ' . cc ('◎', 'R') . " 請輸入管理員" . cc ('密碼', 'R') . "，系統將為您自動完成安裝。\n";
+    echo "\n";
+    
+    $cmds = array (
+        "sudo osascript",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"npm install . && php " . FILENAME . " cho2 all\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+      );
+    system (implode (' ', $cmds));
+    exit;
+  }
+
+  exec ('git branch', $shellOutput);
+  $hasGhPages = in_array ('gh-pages', $branches = array_map ('trim', $shellOutput));
+  $nowBranch = array_values (array_map (function ($branch) { return preg_replace ('/^\* /', '', $branch); }, array_filter ($branches, function ($branch) { return preg_match ('/^\* /', $branch); })));
+  ($nowBranch && $nowBranch = $nowBranch[0]) || $nowBranch = 'master';
+
+  $cmds = array ();
+
+  if ($argv == 'all') {
+    $cmds = $hasGhPages ? array (
+      "osascript",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd .. && git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout " . $nowBranch . " && cd cmd\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+    ) : array (
+      "osascript",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd .. && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout " . $nowBranch . " && cd cmd\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+    );
+  }
+  $cmds && system (implode (' ', $cmds));
+  exit;
+}
+
+function cho1 ($argv = null) {
+  if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'gulp.js')) {
+    echo "\n";
+    echo cc (str_repeat ('─', CLI_LEN)) . "\n";
+    echo "\n";
+    echo ' ' . cc ('◎', 'R') . " 您還沒有執行過 " . cc (' sudo npm install . ', 'W', 'R') . "\n";
+    echo ' ' . cc ('◎', 'R') . " 請輸入管理員" . cc ('密碼', 'R') . "，系統將為您自動完成安裝。\n";
+    echo "\n";
+    
+    $cmds = array (
+        "sudo osascript",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"npm install . && php " . FILENAME . " cho1 all\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+      );
+    system (implode (' ', $cmds));
+    exit;
+  }
+
+  system ("clear");
+  $cmds = array ();
+
+  if ($argv == 'compass') {
+    echo ' ' . cc ('◎', 'R') . " 請稍候 " . cc ('3', 'W') . " 秒鐘，讓系統先執行完 " . cc ('gulp', 'W') . " ";
+    sleep (1); echo ".";
+    sleep (1); echo ".";
+    sleep (1); echo ".\n\n 開始執行 Compass！\n\n";
+    $cmds = array (
+      "compass watch"
+    );
+  }
+
+  if ($argv == 'all') {
+    $cmds = array (
+        "osascript",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"d\" using command down'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd " . PATH_CMD . "\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"gulp watch --silent\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"d\" using {shift down, command down}'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd " . PATH_CMD . "\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"php " . FILENAME . " cho1 compass\"'",
+        "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+      );
+  }
+
+  $cmds && system (implode (' ', $cmds));
+  exit;
+}
