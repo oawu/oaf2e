@@ -57,7 +57,7 @@ if (!$argv) {
     cho1 ('all');
   
   if ($cho == '2')
-    cho2 ();
+    cho2 ('all');
 
 } else {
   if (count ($argv) < 2)
@@ -70,7 +70,7 @@ if (!$argv) {
     cho1 ($argv[1]);
 }
 
-function cho2 () {
+function cho2 ($argv = null) {
   if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'gulp.js')) {
     echo "\n";
     echo cc (str_repeat ('─', CLI_LEN)) . "\n";
@@ -90,19 +90,19 @@ function cho2 () {
 
   exec ('git branch', $shellOutput);
   $hasGhPages = in_array ('gh-pages', array_map ('trim', $shellOutput));
+  $cmds = array ();
 
   if ($argv == 'all') {
     $cmds = $hasGhPages ? array (
       "osascript",
-      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout master\"'",
       "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
     ) : array (
       "osascript",
-      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout master\"'",
       "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
     );
   }
-
   $cmds && system (implode (' ', $cmds));
   exit;
 }
