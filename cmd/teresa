@@ -90,17 +90,19 @@ function cho2 ($argv = null) {
 
   exec ('git branch', $shellOutput);
   $hasGhPages = in_array ('gh-pages', $branches = array_map ('trim', $shellOutput));
+  $nowBranch = array_map (function ($branch) { return preg_replace ('/^\* /', '', $branch); }, array_filter ($branches, function ($branch) { return preg_match ('/^\* /', $branch); }));
+  $nowBranch || $nowBranch = 'master';
+
   $cmds = array ();
-var_dump ($branches);
-exit ();
+
   if ($argv == 'all') {
     $cmds = $hasGhPages ? array (
       "osascript",
-      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd .. && git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout master && cd cmd\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd .. && git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout " . $nowBranch . " && cd cmd\"'",
       "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
     ) : array (
       "osascript",
-      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd .. && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout master && cd cmd\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"cd .. && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m \\\"Minify js、html, fix gh-pages path bug.\\\" && git push origin gh-pages --force && git checkout " . $nowBranch . " && cd cmd\"'",
       "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
     );
   }
