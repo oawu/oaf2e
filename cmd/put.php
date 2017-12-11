@@ -23,9 +23,9 @@ $argv = params ($argv, array (
 
 $log = new Logger ();
 if (!(isset ($argv['-b'][0]) && ($bucket = trim ($argv['-b'][0], '/')) && isset ($argv['-a'][0]) && ($access = trim ($argv['-a'][0])) && isset ($argv['-s'][0]) && ($secret = trim ($argv['-s'][0])))) {
-  $log->append ("\n", str_repeat ('=', 80), "\n\n",
+  $log->append ("\n", str_repeat ('═', 80), "\n\n",
       ' ' . color ('◎', 'R') . ' ' . color ('錯誤囉！', 'r') . color ('請確認參數是否正確，分別需要', 'p') . ' ' . color ('-b', 'W') . '、' . color ('-a', 'W') . '、' . color ('-s', 'W') . color (' 的參數！', 'p') . ' ' . color ('◎', 'R'),
-      "\n\n" . str_repeat ('=', 80) . "\n\n"
+      "\n\n" . str_repeat ('═', 80) . "\n\n"
     );
   exit ();
 }

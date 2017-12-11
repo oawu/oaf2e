@@ -14,20 +14,6 @@ use function color as cc;
 
 $file = array_shift ($argv);
 
-
-//     $stringfromfile = file (PATH . '.git' . DIRECTORY_SEPARATOR . 'HEAD', FILE_USE_INCLUDE_PATH);
-
-//     $firstLine = $stringfromfile[0]; //get the string from the array
-
-//     $explodedstring = explode("/", $firstLine, 3); //seperate out by the "/" in the string
-
-//     $branchname = $explodedstring[2]; //get the one that is always the branch name
-// echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" /><pre>';
-// var_dump ($branchname);
-// exit ();
-    // echo "<div style='clear: both; width: 100%; font-size: 14px; font-family: Helvetica; color: #30121d; background: #bcbf77; padding: 20px; text-align: center;'>Current branch: <span style='color:#fff; font-weight: bold; text-transform: uppercase;'>" . $branchname . "</span></div>"; //show it on the page
-
-
 if (!function_exists ('headerText')) {
   function headerText () {
     system ('clear');
@@ -58,6 +44,9 @@ if (!$argv) {
   
   if ($cho == '2')
     cho2 ('all');
+  
+  if ($cho == '3')
+    cho3 ('all');
 
 } else {
   if (count ($argv) < 2)
@@ -69,6 +58,18 @@ if (!$argv) {
   $func (array_shift ($argv));
 }
 
+function cho3 ($argv = null) {
+  $cmds = array ();
+  if ($argv == 'all') {
+    $cmds = array (
+      "osascript",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to keystroke \"php demo.php\"'",
+      "-e 'tell application \"System Events\" to tell process \"iTerm2\" to key code 52'",
+    );
+  }
+  $cmds && system (implode (' ', $cmds));
+  exit;
+}
 function cho2 ($argv = null) {
   if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'gulp.js')) {
     echo "\n";
