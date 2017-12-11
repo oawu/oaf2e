@@ -65,7 +65,10 @@ class OAS3Tool {
     return $this;
   }
 
-  public function addDirFiles ($dir, $exts = array (), $rec = true, $hidden = false) { $this->lfs[$dir] = array ('dir' => $dir, 'exts' => $exts, 'rec' => $rec, 'hidden' => $hidden); return $this; }
+  public function addDirFiles ($dir, $exts = array (), $rec = true, $hidden = false) {
+    $this->lfs[$dir] = array ('dir' => $dir, 'exts' => $exts, 'rec' => $rec, 'hidden' => $hidden);
+    return $this;
+  }
 
   public function setDirFiles ($dirs) {
     foreach ($dirs as $key => $dir)
