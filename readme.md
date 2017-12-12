@@ -85,6 +85,6 @@ git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && p
 * 作者 - [OA Wu](https://www.ioa.tw/)
 * E-mail - <comdan66@gmail.com>
 * 作品名稱 - OA's F2E Framework
-* 最新版本 - 4.2.1
+* 最新版本 - 4.3.1
 * GitHub - [OA's F2E Framework](https://github.com/comdan66/oaf2e/)
 * 更新日期 - 2017/12/13
