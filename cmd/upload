@@ -116,11 +116,9 @@ if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRE
   echo cc ('║' . str_repeat (' ', CLI_LEN - 2) . '║', 'W', 'r') . "\n";
   echo cc ('╚' . str_repeat ('═', CLI_LEN - 2) . '╝', 'W', 'r') . "\n";
   echo "\n";
-  echo ' ' . cc ('※', 'r') . " 請先執行 " . cc (' npm install . ', 'W', 'r') . ' 後再來執行本程式吧！' . "\n";
-  echo "            " . cc ('^^^^^^^^^^^^^^^', 'R') . "\n";
-  echo ' ' . cc ('※', 'r') . " 若是失敗的話可以改換執行 " . cc (' sudo npm install . ', 'W', 'r') . " 試試吧！\n";
-  echo "                            " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
-  echo ' ' . cc ('※', 'r') . " 如果都失敗的話，請確認您是否有安裝 Node.js 與 Gulp" . "\n";
+  echo ' ' . cc ('※', 'r') . " 請先執行 " . cc (' sudo npm install . ', 'W', 'r') . ' 後再來執行本程式吧！' . "\n";
+  echo "            " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+  echo ' ' . cc ('※', 'r') . " 如果都失敗的話，請確認您是否有安裝 " . cc ('Node.js', 'W') . " 與 " . cc ('Gulp', 'W') . "" . "\n";
   echo "\n";
   echo ' ' . cc ('※', 'r') . " 試著聯絡作者 " . cc ('OA Wu', 'W') . cc (' https://www.ioa.tw/', 'w') . ' 吧！' . "\n" . '                      ' . cc ('‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾', 'N');
   echo "\n";
