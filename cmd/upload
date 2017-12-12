@@ -122,11 +122,11 @@ if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRE
     echo ' ' . cc ('※', 'r') . " 請先刪除 " . cc ('cmd', 'W') . " 內的 " . cc (' package-lock.json ', 'W', 'r') . ' 檔案。' . "\n";
     echo "            " . cc ('   ', 'N') . cc ('      ^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
 
-    echo ' ' . cc ('※', 'r') . " 然後再執行指令 " . cc (' sudo npm install . ', 'W', 'r') . "\n";
-    echo "                  " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+    echo ' ' . cc ('※', 'r') . " 然後再執行指令 " . cc (' npm install . ', 'W', 'r') . "，若失敗則改試 " . cc (' sudo npm install . ', 'W', 'r') . "\n";
+    echo "                  " . cc ('^^^^^^^^^^^^^^^' . '               ^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
   } else {
-    echo ' ' . cc ('※', 'r') . " 請先執行指令 " . cc (' sudo npm install . ', 'W', 'r') . "\n";
-    echo "                " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+    echo ' ' . cc ('※', 'r') . " 請先執行指令 " . cc (' npm install . ', 'W', 'r') . "，若失敗則改試 " . cc (' sudo npm install . ', 'W', 'r') . "\n";
+    echo "                " . cc ('^^^^^^^^^^^^^^^' . '               ^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
   }
   echo ' ' . cc ('※', 'r') . ' 完成後請重新執行 ' . cc (' php ' . FILENAME . ' ', 'W', 'r') . ' 吧！' . "\n";
   echo "                    " . cc ('^^^^^^^^^^^^', 'R') . "\n";
