@@ -89,6 +89,8 @@ if (!function_exists ('noAnyModify')) {
     return false;
   }
 }
+if (file_exists ('package-lock.json'))
+  @unlink ('package-lock.json');
 
 if (!noAnyModify()) {
   system ("clear");
@@ -116,8 +118,18 @@ if (!file_exists (PATH_CMD . 'node_modules' . DIRECTORY_SEPARATOR . 'gulp'. DIRE
   echo cc ('║' . str_repeat (' ', CLI_LEN - 2) . '║', 'W', 'r') . "\n";
   echo cc ('╚' . str_repeat ('═', CLI_LEN - 2) . '╝', 'W', 'r') . "\n";
   echo "\n";
-  echo ' ' . cc ('※', 'r') . " 請先執行 " . cc (' sudo npm install . ', 'W', 'r') . ' 後再來執行本程式吧！' . "\n";
-  echo "            " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+  if (file_exists ('package-lock.json')) {
+    echo ' ' . cc ('※', 'r') . " 請先刪除 " . cc ('cmd', 'W') . " 內的 " . cc (' package-lock.json ', 'W', 'r') . ' 檔案。' . "\n";
+    echo "            " . cc ('   ', 'N') . cc ('      ^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+
+    echo ' ' . cc ('※', 'r') . " 然後再執行指令 " . cc (' sudo npm install . ', 'W', 'r') . "\n";
+    echo "                  " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+  } else {
+    echo ' ' . cc ('※', 'r') . " 請先執行指令 " . cc (' sudo npm install . ', 'W', 'r') . "\n";
+    echo "                " . cc ('^^^^^^^^^^^^^^^^^^^^', 'R') . "\n";
+  }
+  echo ' ' . cc ('※', 'r') . ' 完成後請重新執行 ' . cc (' php ' . FILENAME . ' ', 'W', 'r') . ' 吧！' . "\n";
+  echo "                    " . cc ('^^^^^^^^^^^^', 'R') . "\n";
   echo ' ' . cc ('※', 'r') . " 如果都失敗的話，請確認您是否有安裝 " . cc ('Node.js', 'W') . " 與 " . cc ('Gulp', 'W') . "" . "\n";
   echo "\n";
   echo ' ' . cc ('※', 'r') . " 試著聯絡作者 " . cc ('OA Wu', 'W') . cc (' https://www.ioa.tw/', 'w') . ' 吧！' . "\n" . '                      ' . cc ('‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾', 'N');
