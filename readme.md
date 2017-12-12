@@ -21,42 +21,47 @@ OA 個人常用的前端開發工具！
 * Font icon 參考網站：[https://icomoon.io/](https://icomoon.io/)。
 
 ## 部署
-### GitHub Pages
+類型有兩種 1. 部署到 GitHub Pages 2. 部署到 Amazon Web Services(AWS) S3，若是不知道該選擇什麼語法建議使用 `php` 部署工具，使用方式是在 `cmd` 資料夾下執行指令 **`php upload`** 即可依據步驟上傳部署。
+
+### 部署到 GitHub Pages
 主要分兩大類狀況，**尚未執行過 sudo npm install .** 與 **已經執行過 sudo npm install .**，並且要注意本機是否已經有 gh-pages 分支，以下分別是各種狀況下所使用的語法。
 
-* 尚**未執行**過 `sudo npm install .`，並且本機**尚未有** gh-pages 分支，請至專案目錄下執行以下指令：
+* 尚**未執行**過 `sudo npm install .`，並且本機**尚未有** gh-pages 分支，請至**專案目錄**下執行以下指令：
 ```
 git branch -v gh-pages && git checkout gh-pages && cd cmd && sudo npm install .  && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 
-* 尚**未執行**過 `sudo npm install .`，並且本機**已經有** gh-pages 分支，請至專案目錄下執行以下指令：
+* 尚**未執行**過 `sudo npm install .`，並且本機**已經有** gh-pages 分支，請至**專案目錄**下執行以下指令：
 ```
 git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && sudo npm install . && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 
-* **已經執行**過 `sudo npm install .`，並且本機**尚未有** gh-pages 分支，請至專案目錄下執行以下指令：
+* **已經執行**過 `sudo npm install .`，並且本機**尚未有** gh-pages 分支，請至**專案目錄**下執行以下指令：
 ```
 git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
 
-* **已經執行**過 `sudo npm install .`，本機**已經有** gh-pages 分支，請至專案目錄下執行以下指令：
+* **已經執行**過 `sudo npm install .`，本機**已經有** gh-pages 分支，請至**專案目錄**下執行以下指令：
 ```
 git branch -D gh-pages && git branch -v gh-pages && git checkout gh-pages && cd cmd && gulp minify && gulp gh-pages && cd ../ && git add -A && git commit -m 'Minify js、html, fix gh-pages path bug.' && git push origin gh-pages --force && git checkout master
 ```
+
+> 若是都不知道該怎麼選擇，則直接在 `cmd` 資料夾下執行指令 **`php upload`** 即可依據步驟上傳部署。
 	
-### AWS S3
+### 部署到 Amazon Web Services(AWS) S3
 主要是藉由執行 `cmd/put.php` 將檔案上傳至 S3，請確保本機能執行 php 版本 5.6 或以上版本才可以使用，指令中的 {bucket}、{access}、{secret} 請置換成自己的值
 
-* **要**壓縮檔案，請至專案目錄下執行以下指令
+* **要**壓縮檔案，請至**專案目錄**下執行以下指令
 ```
 git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} -m 0 && cd .. && git checkout .
 ```
 
-* **不要**壓縮檔案，請至專案目錄下執行以下指令：
+* **不要**壓縮檔案，請至**專案目錄**下執行以下指令：
 ```
 git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && php put.php -b {bucket} -a {access} -s {secret} && cd .. && git checkout .
 ```
 
+> 若是都不知道該怎麼選擇，則直接在 `cmd` 資料夾下執行指令 **`php upload`** 即可依據步驟上傳部署。
 
 
 參數說明：  
@@ -77,9 +82,9 @@ git add -A && git commit -m 'Fix code.' && git push origin master && cd cmd && p
 
 
 ## 關於
-* 作者 - [OA Wu](http://www.ioa.tw/)
+* 作者 - [OA Wu](https://www.ioa.tw/)
 * E-mail - <comdan66@gmail.com>
 * 作品名稱 - OA's F2E Framework
-* 最新版本 - 4.1.2
+* 最新版本 - 4.2
 * GitHub - [OA's F2E Framework](https://github.com/comdan66/oaf2e/)
-* 更新日期 - 2017/07/12
+* 更新日期 - 2017/12/13
