@@ -162,7 +162,7 @@ if (!$argv) {
   if ($cho == 'q') {
     echo "\n";
     echo cc (str_repeat ('═', CLI_LEN), 'N') . "\n\n";
-    echo "  😊  好的！下次別再按錯囉，期待您下次再使用，👋  " . cc ('掰掰', 'W') . "～  \n\n";
+    echo "  好的！下次別再按錯囉，期待您下次再使用，" . cc ('掰掰', 'W') . "～  \n\n";
     echo cc (str_repeat ('═', CLI_LEN), 'N') . "\n\n";
   }
 
@@ -229,7 +229,7 @@ function cho1 ($argv = null, $nowBranch = 'master') {
       ($cmd = 'git checkout ' . $nowBranch . ' --quiet') && exec ($cmd, $shellOutput);
     echo cc ('完成', 'g') . "\n";
     
-    echo cc (str_repeat ('═', CLI_LEN), "N") . "\n" . ' ' . cc ('◎ 🎉  完成部署 🍺  ◎', 'P') . "\n" . cc (str_repeat ('═', CLI_LEN), "N") . "\n\n";
+    echo cc (str_repeat ('═', CLI_LEN), "N") . "\n" . ' ' . cc ('◎ 完成部署 ◎', 'P') . "\n" . cc (str_repeat ('═', CLI_LEN), "N") . "\n\n";
     
     echo ' ' . cc ('➜', 'R') . ' ' . cc ('您的網址是', 'G') . '：' . (($acc = acc ()) ? 'https://' . $acc . '.github.io/' . FNAME . '/' . (file_exists (PATH . 'index.html') ? 'index.html' : '') : '');
     echo "\n\n";
