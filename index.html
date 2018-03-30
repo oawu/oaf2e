@@ -7,13 +7,136 @@
 
     <title></title>
 
+    <link href="css/icon.css" rel="stylesheet" type="text/css" />
     <link href="css/public.css" rel="stylesheet" type="text/css" />
 
     <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
+    <script src="js/underscore-min.js" language="javascript" type="text/javascript" ></script>
     <script src="js/public.js" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw">
-    Hi, 世界你好！
+    <script id="_loading" type="text/x-handlebars-template">
+      <div>
+        <h1><%= name %></h1>
+        <p><%= description %></p>
+        <div><i></i><i></i><i></i></div>
+        <span>版本：v<%= version %></span>
+      </div>
+    </script>
+
+
+    <!-- <div id="loading"></div> -->
+    <div id='menu'>
+      <!-- <header>wqweqwe</header> -->
+      <div id='search'>
+        <input placeholder='你想找什麼？' />
+        <button class='icon-01'></button>
+      </div>
+
+      <b data-cnt='5'>User</b>
+      <a href="" data-type='Get' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+      <a href="" class='active' data-type='delete' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+      <a href="" class='last' data-type='post' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="" data-type='put' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+      <a href="" data-type='get' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+      <a href="" data-type='gwet' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+      <a href="" data-type='get' data-url='/users/index/:id/users/index/:id'>取得使用者資訊</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="">取得使用者資訊</a>
+      <a href="">取得使用者資訊</a>
+      <a href="">取得使用者資訊</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="">asdad</a>
+      <a href="">asdad</a>
+      <a href="">asdad</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="">取得使用者資訊</a>
+      <a href="">取得使用者資訊</a>
+      <a href="">取得使用者資訊</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="">asdad</a>
+      <a href="">asdad</a>
+      <a href="">asdad</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="">取得使用者資訊</a>
+      <a href="">取得使用者資訊</a>
+      <a href="">取得使用者資訊</a>
+
+      <b data-cnt='5'>User</b>
+      <a href="">asdad</a>
+      <a href="">asdad</a>
+      <a href="">asdad</a>
+    </div>
+
+    <main id='main'>
+      <div>
+        <header>
+          <h1 data-title='DeleteUser'>取得使用者資訊</h1>
+          <p>取得使用者相關敘述 取得使用者相關敘述 取得使用者相關敘述</p> <p>取得使用者相關敘述 取得使用者相關敘述</p>
+        </header>
+
+        <div class='url' data-type='get'>
+          <pre>/users/index/:id</pre>
+        </div>
+
+        <div class='format'>
+          <div class='tabs'>
+            <a data-cnt='10'>Header</a>
+            <a data-cnt='10'>參數</a>
+            <a data-cnt='10'>Success</a>
+            <a data-cnt='10'>Error</a>
+          </div>
+
+          <div class='panels'>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class='center is-need'>必須</th>
+                    <th>Key</th>
+                    <th>類型</th>
+                    <th>敘述</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class='center is-need'><span class='need'></span></td>
+                    <td>Key</td>
+                    <td>類型</td>
+                    <td>敘述</td>
+                  </tr>
+                  <tr>
+                    <td class='center is-need'><span class='maybe'></span></td>
+                    <td>Key</td>
+                    <td>類型</td>
+                    <td>敘述</td>
+                  </tr>
+                  <tr>
+                    <td class='center is-need'><span class='need'></span></td>
+                    <td>Key</td>
+                    <td>類型</td>
+                    <td>敘述</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
   </body>
 </html>

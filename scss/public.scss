@@ -16,6 +16,13 @@
   }
 }
 
+$type: rgba(153, 153, 153, 1.00);
+$typeGet: rgba(55, 125, 34, 1.00);
+$typePost: rgba(71, 114, 228, 1.00);
+$typePut: rgba(225, 197, 66, 1.00);
+$typeDelet: rgba(234, 68, 59, 1.00);
+$c: 5;
+
 html {
   min-height: 100%;
 
@@ -33,9 +40,630 @@ html {
     font-size: medium;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
 
-    background: $mainBackgroundColor;
-    background-image: $mainBackgroundImage;
-
     @include font-smoothing(antialiased);
+  }
+}
+
+
+#loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+
+  z-index: 99999;
+  background-color: rgba(229, 107, 103, 1.00);
+  @include opacity(1);
+  @include transition(opacity .3s);
+  
+  > div {
+    position: absolute;
+    top: calc(50% - #{(350px / 2)});
+    height: 350px;
+    left: calc(50% - #{(500px / 2)});
+    width: 500px;
+    display: inline-block;
+    color: rgba(255, 255, 255, 1.00);
+
+    h1 {
+      @include text-shadow(0 0 3px 1px rgba(110, 22, 11, .300));
+    }
+    > p {
+      display: block;
+      @include opacity(.85);
+      @include clearfix();
+    }
+    > span {
+      display: block;
+      margin-top: 45px;
+      @include opacity(.55);
+      font-size: 13px;
+    }
+    > div {
+      display: inline-block;
+      margin: 0 auto;
+      margin-top: 35px;
+      @include clearfix();
+      
+      i {
+        float: left;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        @include border-radius(50%);
+        background-color: rgba(255, 255, 255, 0.6);
+        @include animation(l 1.4s infinite ease-in-out both);
+        margin: 2px;
+        @for $i from 1 through 2 {
+          &:nth-child(#{($i + 1)}) {
+            @include animation-delay(0.16s * $i);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include keyframes(l) { 0%, 80%, 100% { @include scale(0); } 40% { @include scale(1); } }
+
+#menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  padding-bottom: 16px;
+  width: 320px;
+  height: 100%;
+  // border-right: 1px solid rgba(222, 222, 222, 1);
+    border-right: 1px solid rgba(220, 220, 220, 1);
+
+  z-index: 10;
+  overflow: hidden;
+  background-color: rgba(245, 245, 245, 1.00);
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+
+
+  // @include box-shadow(0 0 5px rgba(200, 200, 200, .5));
+
+
+  > * {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    @include overflow-docx3();
+    padding: 0 12px;
+    padding-left: 8px;
+    // z-index: 1;
+  }
+  > b {
+    // height: 44px;
+    // line-height: 44px;
+    // margin-top: 32px;
+    padding-top: 32px;
+    padding-bottom: 12px;
+    color: rgba(130, 130, 130, 1);
+    + a {
+      border-top: 1px solid rgba(237, 237, 237, 1.00);
+    }
+
+    &[data-cnt]:not([data-cnt='0']) {
+      padding-right: #{8px + 32px + 8px};
+
+      &:after {
+        content: attr(data-cnt);
+        position: absolute;
+        right: 8px;
+        top: 32px;
+        display: inline-block;
+        min-width: 32px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        background-color: rgba(0, 0, 255, 0.2);
+        font-weight: normal;
+        color: white;
+        font-size: 14px;
+        background-color: rgba(80, 186, 235, 1.00);
+        @include scale(.9);
+        @include border-radius(20px / 2);
+      }
+    }
+  }
+  > a {
+    height: 50px;
+    padding-top: (40px - 24px) / 2 + 7px;
+    // line-height: 60px;
+    padding-left: 8px + 50px + 8px;
+    text-decoration: none;
+    color: rgba(111, 111, 111, 1);
+    @include transition(color .3s);
+    
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+
+    + b {
+      border-top: 1px solid rgba(225, 225, 225, 1.00);
+    }
+    &:last-child {
+      border-bottom: 1px solid rgba(225, 225, 225, 1.00);
+    }
+    &:hover {
+      color: rgba(65, 65, 65, 1);
+    }
+    &:after, &:before {
+      position: absolute;
+      display: inline-block;
+      display: block;
+      @include overflow-docx3();
+    }
+    &:after {
+      content: '';
+      bottom: 0;
+      left: 8px + 50px + 4px;
+
+      width: calc(100% - (8px + 50px + 4px));
+      height: 22px;
+      font-size: 10px;
+      padding-left: 4px;
+      color: rgba(180, 180, 180, 1);
+      border-bottom: 1px solid rgba(240, 240, 240, 1.00);
+    }
+    &:before {
+      left: 8px;
+      top: (50px - 30px) / 2;
+
+      text-transform: uppercase;
+      
+      width: 50px;
+      height: 30px;
+      line-height: 30px;
+
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      color: white;
+      @include scale(.85);
+      @include border-radius(3px);
+    }
+    &[data-url]:not([data-url='']) {
+      padding-top: (40px - 24px) / 2;
+      &:after {
+        content: attr(data-url);
+      }
+    }
+    &[data-type]:not([data-type='']) {
+      &:before { content: attr(data-type); background-color: $type; }
+      &[data-type='get' i]:before { content: 'Get'; background-color: $typeGet; }
+      &[data-type='post' i]:before { content: 'Post'; background-color: $typePost; }
+      &[data-type='put' i]:before { content: 'Put'; background-color: $typePut; }
+      &[data-type='delete' i]:before { content: 'Del'; background-color: $typeDelet; }
+    }
+    &.last:after {
+      border-bottom: 0;
+    }
+    &.active {
+      font-weight: bold;
+      color: rgba(50, 50, 50, 1);
+      &:after {
+        color: rgba(100, 100, 100, 1);
+        font-weight: normal;
+      }
+    }
+  }
+}
+#search {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  $p: 12px;
+  padding: $p;
+  background-color: rgba(200, 200, 200, 0.2);
+    border-bottom: 1px solid rgba(200, 200, 200, 1);
+  + b {
+    padding-top: 12px !important;
+    &:after {
+      top: 12px !important;
+    }
+  }
+  // &:after {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  //   display: inline-block;
+  //   width: 100%;
+  //   height: 1px;
+  //   border-top: 1px solid rgba(255, 255, 255, .5);
+  //   border-bottom: 1px solid rgba(200, 200, 200, 1);
+  //   @include opacity(.5);
+  // }
+
+  input {
+    @include input;
+    width: 100%;  
+  }
+  button {
+    position: absolute;
+    right: $p + 1px;
+    top: $p + 1px;
+
+    display: inline-block;
+    width: 30px - 2px;
+    height: 30px - 2px;
+
+    border: 0; 
+    cursor: pointer;
+    font-size: 14px;
+    color: rgba(100, 100, 100, 1.00);
+    @include transition(color .3s);
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      display: inline-block;
+      width: 1px;
+      height: calc(100% - 4px * 2);
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    &:hover {
+      color: rgba(80, 80, 80, 1.00);
+    }
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+#main {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding-left: 320px;
+  z-index: 5;
+  text-align: left;
+  > div {
+    padding: 20px 32px;
+    > * {
+      &:first-child {
+        margin-top: 0;
+      }
+      + * {
+        margin-top: 32px;
+      }
+    }
+    > header {
+      &, > * {
+        display: inline-block;
+        width: 100%;
+      }
+      > h1 {
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        margin: 0;
+        font-size: 22px;
+        @include overflow-docx3();
+        // color: rgba(120, 120, 120, 1);
+        &:before {
+          display: inline-block;
+          margin-right: 8px;
+          // color: rgba(80, 80, 80, 1);
+        }
+        &[data-title]:not([data-title='']) {
+          &:before {
+            content: attr(data-title);
+          }
+        }
+      }
+      > p {
+        margin: 0;
+        margin-top: 3px;
+        color: rgba(128, 128, 128, 1.00);
+        font-size: 14px;
+      }
+    }
+
+    .url {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      padding-left: 70px + 8px;
+
+      &:before {
+        content: 'get';
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: inline-block;
+        width: 70px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        background-color: rgba(0, 0, 255, 0.2);
+        @include border-radius(3px);
+        color: white;
+      }
+
+      &:before {
+        content: attr(data-type);
+        text-transform: uppercase;
+      }
+      
+      &[data-type]:not([data-type='']) {
+        &:before { content: attr(data-type); background-color: $type; }
+        &[data-type='get' i]:before { content: 'Get'; background-color: $typeGet; }
+        &[data-type='post' i]:before { content: 'Post'; background-color: $typePost; }
+        &[data-type='put' i]:before { content: 'Put'; background-color: $typePut; }
+        &[data-type='delete' i]:before { content: 'Del'; background-color: $typeDelet; }
+      }
+      > pre {
+        margin: 0;
+        display: inline-block;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        background-color: rgba(0, 0, 0, 1.00);
+        color: white;
+        padding: 0 8px;
+        font-size: 16px;
+        border: 1px solid rgba(255, 0, 0, .3);
+        @include overflow-docx3();
+        @include border-radius(2px);
+      }
+    }
+    .format {
+      display: inline-block;
+      width: 100%;
+      
+      .tabs {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 44px;
+        
+        padding: 0 8px;
+        @include clearfix();
+        overflow: hidden;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          display: inline-block;
+          width: 100%;
+          height: 1px;
+          z-index: 2;
+          background-color: rgba(222, 222, 222, 1);
+          @include box-shadow(0 -1px 3px rgba(200, 200, 200, .5));
+        }
+        > * {
+          position: relative;
+          z-index: 1;
+          float: left;
+          display: inline-block;
+          padding: 0 12px;
+          height: 32px;
+          line-height: 32px;
+          border: 1px solid rgba(220, 220, 220, 1);
+          border-bottom: 0;
+          margin-top: 44px - 32px;
+          cursor: pointer;
+          border-right-width: 0;
+          font-size: 14px;
+          background-color: white;
+          background-color: rgba(250, 250, 250, 1);
+          @include transition(margin-top .3s, height .3s, border-radius .3s);
+          
+
+          &:first-child {
+            @include border-top-left-radius(3px);
+          }
+          &:last-child {
+            @include border-top-right-radius(3px);
+            border-right-width: 1px;
+          }
+          &[data-cnt]:not([data-cnt='0']) {
+            &:after {
+              content: attr(data-cnt);
+              display: inline-block;
+              height: 24px;
+              line-height: 24px;
+              font-size: 10px;
+              color: white;
+              margin-top: (32px - 24px) / 2;
+              margin-left: 6px;
+              padding: 0 8px;
+              text-align: center;
+              background-color: rgba(200, 200, 200, 1.00);
+              @include border-radius(24px / 2);
+              @include scale(.8);
+              @include transition(background-color .3s);
+              
+            }
+          }
+        }
+      }
+      .panels {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        margin-top: 8px;
+
+        > * {
+          position: absolute;
+          left: 0;
+          top: 0;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          padding: 16px;
+          @include transition(left .3s, opacity .3s);
+          @include opacity(0);
+          
+          @for $i from 1 through $c {
+            &:nth-child(#{$i}) {
+              left: ($i - 1) * 100%;
+              @if ($i == 1) {
+                position: relative;
+                @include opacity(1);
+              }
+            }
+          }
+        }
+
+        table {
+          display: table;
+          width: 100%;
+          border-spacing: 0;
+          border-collapse: collapse;
+          font-size: 14px;
+          table-layout: fixed;
+          border: 1px solid rgba(224, 224, 224, 1.00);
+
+          th, td {
+            &.left { text-align: left; }
+            &.center { text-align: center; }
+            &.edit, &.right { text-align: right; }
+            @include overflow-docx3();
+            &.is-need {
+              width: 60px;
+            }
+            span.need, span.maybe {
+              display: inline-block;
+              width: 50px;
+              height: 20px;
+              line-height: 20px;
+              @include border-radius(20px / 2);
+              font-size: 10px;
+              font-weight: bold;
+              color: white;
+              background-color: rgba(234, 68, 59, 1.00);
+
+              &:before {
+                content: '必要';
+              }
+            }
+            span.maybe {
+              background-color: rgba(128, 128, 128, 1.00);
+              &:before {
+                content: '非必要';
+              }
+            }
+          }
+
+          thead {
+            tr {
+              th {
+                padding: 0 5px;
+                height: 32px;
+                line-height: 32px;
+                border-bottom: 1px solid rgba(222, 222, 222, 1);
+                background-color: rgba(245, 245, 245, 1.00);
+                
+                + * {
+                  border-left: 1px solid rgba(224, 224, 224, 1.00);
+                }
+              }
+            }
+          }
+
+          tbody {
+            tr {
+              td {
+                padding: 6px 4px;
+                min-height: 32px;
+
+                + * {
+                  border-left: 1px solid rgba(224, 224, 224, 1.00);
+                }
+                a {
+                  @include a(1px, false);
+                }
+
+                &:empty {
+                  &:before {
+                    content: '-';
+                    @include opacity(.4);
+                  }
+                }
+
+                &[colspan] {
+                  text-align: center;
+                  padding: 10px;
+                  font-weight: bold;
+                  background-color: white !important;
+
+                  &:empty {
+                    &:before {
+                      content: '沒有資料。';
+                    }
+                  }
+                }
+              }
+
+              + tr {
+                td {
+                  border-top: 1px solid rgba(222, 222, 222, 1);
+                }
+              }
+              // &:nth-child(2n + 1) {
+              //   td {
+              //     background-color: rgba(248, 248, 248, 1.00);
+              //   }
+              // }
+            }
+          }
+        }
+      }
+      @for $i from 1 through $c {
+        &[data-i='#{$i}'] {
+          .panels > * {
+            @for $j from 1 through $c {
+              &:nth-child(#{$j}) {
+                left: ($j - $i) * 100%;
+                @if ($i == $j) {
+                  position: relative;
+                  @include opacity(1);
+                } @else {
+                  position: absolute;
+                  @include opacity(0);
+                }
+              }
+            }
+          }
+          .tabs > *:nth-child(#{$i}) {
+            @include border-top-radius(3px);
+            height: 36px;
+            line-height: 36px;
+            margin-top: 44px - 36px;
+            border-right-width: 1px;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 3;
+            background-color: rgba(255, 255, 255, 1);
+            + * {
+              border-left: 0;
+            }
+            &:after {
+              margin-top: (36px - 24px) / 2;
+              background-color: rgba(180, 180, 180, 1.00);
+            }
+          }
+        }
+      }
+    }
   }
 }
