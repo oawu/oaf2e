@@ -11,7 +11,8 @@
   &, &:after, &:before {
     vertical-align: top;
     @include box-sizing(border-box);
-    @include selection(rgba(150, 200, 255, 1), rgba(255, 255, 255, 1));
+    // @include selection(rgba(150, 200, 255, 1), rgba(255, 255, 255, 1));
+  // @include selection(red, #49483e);
     @include font-smoothing(antialiased);
   }
 }
@@ -31,11 +32,114 @@ html {
     color: rgba(90, 90, 90, 1.00);
     text-align: center;
     font-size: medium;
-    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
+    font-family: Hack, Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
 
-    background: $mainBackgroundColor;
-    background-image: $mainBackgroundImage;
+    
 
     @include font-smoothing(antialiased);
   }
 }
+
+#box {
+  display: inline-block;
+  width: 1000px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  margin: 32px;
+  @include border-radius(3px);
+  text-align: left;
+  padding: 8px 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #494949;
+    @include border-radius(5px);  
+    border: 1px solid #1d1d1d;
+  }
+  &::-webkit-scrollbar {
+
+    border-top: 1px solid #1d1d1d;
+    background-color: #2b2b2b;
+    height: 10px;
+  }
+
+  > div {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 4px;
+    color: #f8f8f2;
+    font-size: 20px;
+    white-space:nowrap;
+  }
+}
+
+.背 {
+  background: #1f2125;
+}
+.空 {
+  border-left: 1px solid #2f302a;
+}
+.青 {
+  color: #41ceb7;
+}
+.黃 {
+  color: #e0b481;
+}
+.紅 {
+  color: #d82f5a;
+}
+.綠 {
+  color: #9cb753;
+}
+.紫 {
+  color: #7f57ca;
+}
+.灰 {
+  color: #75715e;
+}
+.選 {
+  background-color: #49483e;
+}
+.白 {
+  color: #c6c7be;
+}
+.桃 {
+  background-color: #833654;
+  color: #e0b3c3;
+}
+
+// .背 {
+//   background: #1f2125;
+// }
+// .空 {
+//   border-left: 1px solid #2f302a;
+// }
+// .青 {
+//   color: #67d9ef;
+// }
+// .黃 {
+//   color: #e6db74;
+// }
+// .紅 {
+//   color: #f92672;
+// }
+// .綠 {
+//   color: #a7e22d;
+// }
+// .紫 {
+//   color: #a97ef8;
+// }
+// .灰 {
+//   color: #75715e;
+// }
+// .選 {
+//   background-color: #49483e;
+// }
+// .白 {
+//   color: #f8f8f2;
+// }
+// .桃 {
+//   background-color: #f92672;
+// }

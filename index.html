@@ -13,7 +13,44 @@
     <script src="js/public.js" language="javascript" type="text/javascript" ></script>
 
   </head>
-  <body lang="zh-tw">
-    Hi, 世界你好！
+  <body lang="zh-tw" class='背'>
+    
+    <div id='box'>
+      <div><span class='白'>&lt;?php</span> <span class='青'>defined</span><span class='白'>(</span><span class='黃'>'MAPLE'</span><span class='白'>)</span> <span class='紅'>||</span> <span class='紅'>exit</span><span class='白'>(</span><span class='黃'>'此檔案不允許讀取！'</span><span class='白'>);</span></div>
+      <div></div>
+      <div><span class='青'>class</span> <span class='白'>Product</span> <span class='紅'>extends</span> <span class='綠'>ApiLoginController</span> <span class='白'>{</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='紅'>private</span> <span class='白'>$product</span> <span class='紅'>=</span> <span class='紫'>null</span>;</div>
+      <div><span class='空'>&nbsp;&nbsp;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='灰'>/**</span></div>
+      <div class='桃'><span class='空'>&nbsp;&nbsp;</span> 警告</div>
+      <div class='桃'><span class='空'>&nbsp;&nbsp;</span> 警告</div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='灰'>*/</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='紅 選'>public</span> <span class='青'>function</span> <span class='青'>__construct</span><span class='白'>() {</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='青'>parent</span><span class='紅'>::</span><span class='白'>__construct();</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='紅'>if</span> (<span class='青'>in_array</span><span class='白'>(</span><span class='青'>Router</span><span class='紅'>::</span><span class='白'>methodName(), [</span><span class='黃'>'update'</span><span class='白'>,</span> <span class='黃'>'delete'</span><span class='白'>,</span> <span class='黃'>'show'</span><span class='白'>]))</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='紅'>if</span> <span class='白'>(</span><span class='紅'>!</span><span class='白'>(($id</span> <span class='紅'>=</span> <span class='青'>Router</span><span class='紅'>::</span><span class='白'>params(</span><span class='黃'>'id'</span><span class='白'>))</span> <span class='紅'>&&</span> <span class='白'>($this</span><span class='紅'>-></span><span class='白'>product</span> <span class='紅'>=</span> <span class='白'>\</span><span class='紫'>M</span><span class='白'>\</span><span class='青'>Product</span><span class='紅'>::</span><span class='白'>one(</span><span class='黃'>'id = ?'</span><span class='白'>, $id))))</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='白'>$this</span><span class='紅'>-></span><span class='白'>constructError</span> <span class='紅'>=</span> <span class='黃'>'此商品不存在！'</span><span class='白'>;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span>}</div>
+      <div><span class='空'>&nbsp;&nbsp;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='灰'>// 首頁</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='紅'>public</span> <span class='青'>function</span> <span class='綠'>index</span><span class='白'>() {</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='白'>$validator</span> <span class='紅'>=</span> <span class='青'>function</span>(<span class='紅'>&</span><span class='白'>$params) {</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='青'>Validator</span><span class='紅'>::</span><span class='白'>maybe($params,</span> <span class='黃'>'offset'</span>, <span class='黃'>'位移'</span>, <span class='紫'>0</span><span class='白'>)</span><span class='紅'>-></span><span class='白'>isNum()</span><span class='紅'>-></span><span class='白'>trim()</span><span class='紅'>-></span><span class='白'>stripTags()</span><span class='紅'>-></span><span class='白'>greaterEqual(</span><span class='紫'>0</span><span class='白'>);</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='青'>Validator</span><span class='紅'>::</span><span class='白'>maybe($params,</span> <span class='黃'>'limit'</span>, <span class='黃'>'長度'</span>, <span class='紫'>20</span><span class='白'>)</span><span class='紅'>-></span><span class='白'>isNum()</span><span class='紅'>-></span><span class='白'>trim()</span><span class='紅'>-></span><span class='白'>stripTags()</span><span class='紅'>-></span><span class='白'>greaterEqual(</span><span class='紫'>0</span><span class='白'>);</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='白'>}</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='白'>$params</span> <span class='紅'>=</span> <span class='青'>Input</span><span class='紅'>::</span><span class='白'>get();</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='白'>$error</span> <span class='紅'>=</span> <span class='黃'>''</span>;</div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='白'>$error</span> <span class='紅'>||</span> <span class='白'>$error</span> <span class='紅'>=</span> <span class='白'>validator($validator, $params);</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='空'>&nbsp;&nbsp;</span><span class='紅'>return</span> <span class='白'>\</span><span class='紫'>M</span><span class='白'>\</span><span class='青'>Product</span><span class='紅'>::</span><span class='白'>all([</span><span class='黃'>'toArray'</span> <span class='紅'>=></span> <span class='紫'>true</span>, <span class='黃'>'offset'</span> <span class='紅'>=></span> <span class='白'>$params[</span><span class='黃'>'offset'</span><span class='白'>],</span> <span class='黃'>'limit'</span> <span class='紅'>=></span> <span class='白'>$params[</span><span class='黃'>'limit'</span><span class='白'>]]);</span></div>
+      <div><span class='空'>&nbsp;&nbsp;</span><span class='白'>}</span></div>
+      <div><span class='白'>}</span></div>
+    </div>
+
+
+
   </body>
 </html>
