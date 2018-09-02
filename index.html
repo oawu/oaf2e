@@ -8,12 +8,54 @@
     <title></title>
 
     <link href="css/public.css" rel="stylesheet" type="text/css" />
+    <link href="css/icon.css" rel="stylesheet" type="text/css" />
 
     <script src="js/jquery_v1.10.2/jquery-1.10.2.min.js" language="javascript" type="text/javascript" ></script>
     <script src="js/public.js" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw">
-    Hi, 世界你好！
+    <header id='header'>
+      <div class='container'>
+        <label class='icon-1'></label>
+        
+        <a href=''>
+          <b>Maple</b>
+          <span>OA's php framework</span>
+        </a>
+        
+        <form method='get' action=''>
+          <input type="text" id="q" name="q" placeholder="關鍵字搜尋 Maple.." value="" pattern=".{1,}" required="" title="搜尋 Maple 文件">
+          <button type="submit" class="icon-2"></button>
+        </form>
+
+        <a href='' class='icon-3'></a>
+
+      </div>
+    </header>
+    
+    <div id='menu'>
+      <header>
+        <div>iOA.tw</div>
+        <div>OA Wu 個人作品</div>
+      </header>
+
+      <a href="" class='icon-1 a' data-cnt='3'>基本簡介</a>
+      <div>
+        <a href="">基本簡介</a>
+        <a href="">基本簡介</a>
+        <a href="" class='a'>基本簡介</a>
+      </div>
+      <a href="" class='icon-2'>首先開始</a>
+      <a href="" class='icon-3'>建立專案</a>
+    </div>
+
+    <main id='main'>
+      <div>
+        <div class='panel'></div>
+      </div>
+    </main>
+
+
   </body>
 </html>
